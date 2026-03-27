@@ -2,7 +2,7 @@
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
 <title>Toni Lima — Senior Graphic Designer</title>
 <meta name="description" content="Toni Lima — Senior Graphic Designer com experiência em motion graphics, 3D, branding e design esportivo. Veja o portfólio completo.">
 <meta property="og:type" content="website">
@@ -13,6 +13,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { overflow-x: hidden; }
+  img, video { max-width: 100%; height: auto; }
 
   :root {
     --bg: #F5F0E8;
@@ -65,6 +67,12 @@
   body.cursor-hover #cursor-ring { width: 52px; height: 52px; opacity: 1; border-color: var(--green-mid); }
   body.cursor-card #cursor-ring  { width: 60px; height: 60px; opacity: 1; border-color: #E3EF26; }
   body.cursor-card #cursor-dot   { background: #E3EF26; }
+  @media (hover: none) and (pointer: coarse) {
+    #cursor-dot, #cursor-ring { display: none !important; }
+    body { cursor: auto !important; }
+    * { cursor: auto !important; }
+  }
+  .btn-primary, .btn-whatsapp, .nav-cta, .form-submit { min-height: 44px; }
 
   /* NAV */
   nav {
@@ -116,6 +124,50 @@
     box-shadow: 0 4px 14px rgba(45,106,79,0.3);
   }
   .nav-cta:hover { background: #235840; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,106,79,0.4); }
+  /* Hamburger */
+  .nav-hamburger {
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    gap: 5px; background: none; border: none; cursor: pointer;
+    width: 44px; height: 44px; padding: 0; flex-shrink: 0;
+  }
+  .nav-hamburger span {
+    display: block; width: 22px; height: 2px;
+    background: #E2FBCE; border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  /* Mobile overlay */
+  .nav-mobile {
+    display: none; position: fixed; inset: 0; z-index: 998;
+    background: rgba(6,35,29,0.98); backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    flex-direction: column; align-items: center; justify-content: center;
+  }
+  .nav-mobile.open { display: flex; animation: navFadeIn 0.3s ease; }
+  @keyframes navFadeIn {
+    from { opacity: 0; transform: translateY(-16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .nav-mobile-links { list-style: none; text-align: center; padding: 0; margin: 0 0 36px; }
+  .nav-mobile-links li a {
+    display: flex; align-items: center; justify-content: center;
+    height: 56px; min-width: 200px;
+    font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500;
+    color: #E2FBCE; text-decoration: none; letter-spacing: 0.04em;
+    transition: color 0.2s;
+  }
+  .nav-mobile-links li a:hover, .nav-mobile-links li a:active { color: #E3EF26; }
+  .nav-cta-mobile {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 14px 40px; min-height: 52px;
+    background: var(--green-dark); color: #fff; border-radius: 100px;
+    text-decoration: none; font-family: 'Inter', sans-serif;
+    font-size: 16px; font-weight: 600; letter-spacing: 0.02em;
+    transition: background 0.2s;
+  }
+  .nav-cta-mobile:hover { background: #235840; }
 
   /* HERO */
   #hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 120px 60px 80px; }
@@ -530,6 +582,34 @@
   .nav-links a.active { color: #E3EF26; }
   .nav-links a.active::after { width: 100%; }
 
+  /* ─── MOBILE GLOBAL ──────────────────────────────────── */
+  @media (max-width: 768px) {
+    #hero { padding: 100px 20px 60px; }
+    .hero-title { font-size: clamp(36px, 9vw, 52px) !important; }
+    .hero-sub { font-size: 15px; max-width: 100%; }
+    .hero-badge { display: inline-flex; }
+    .hero-actions { flex-direction: column; gap: 12px; align-items: stretch; }
+    .btn-primary, .btn-whatsapp { width: 100%; justify-content: center; text-align: center; }
+    .about-img-card { max-width: 280px; aspect-ratio: 1/1 !important; margin: 0 auto; border-radius: 20px; }
+    .about-img-wrap { display: flex; justify-content: center; }
+    .btn-cv { width: 100%; justify-content: center; }
+    .contact-link { min-height: 56px; }
+    .form-group input,
+    .form-group textarea,
+    .form-group select { font-size: 16px !important; }
+    .form-group input { height: 52px; }
+    .form-submit { width: 100% !important; height: 52px !important; justify-content: center; }
+    footer { padding: 40px 20px; }
+  }
+  @media (max-width: 480px) {
+    .section-inner { padding: 60px 16px !important; }
+    .hero-title { font-size: clamp(32px, 9vw, 44px) !important; }
+    .skills-grid { grid-template-columns: 1fr !important; }
+  }
+  @media (min-width: 481px) and (max-width: 768px) {
+    .skills-grid { grid-template-columns: 1fr 1fr !important; }
+  }
+
   /* SCROLL REVEAL */
   .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s ease, transform 0.7s ease; }
   .reveal.visible { opacity: 1; transform: translateY(0); }
@@ -811,11 +891,13 @@
   }
 
   @media (max-width: 900px) {
-    nav { padding: 20px 24px; }
-    nav.scrolled { padding: 14px 24px; }
+    nav { padding: 16px 20px; }
+    nav.scrolled { padding: 12px 20px; }
     .nav-links { display: none; }
-    .hero-inner { grid-template-columns: 1fr; gap: 48px; }
-    .hero-svg-wrap { width: 300px; height: 300px; margin: 0 auto; }
+    .nav-cta { display: none; }
+    .nav-hamburger { display: flex; }
+    .hero-inner { grid-template-columns: 1fr; gap: 32px; }
+    .hero-svg-wrap { width: 280px; height: 280px; margin: 0 auto; }
     .section-inner { padding: 72px 24px; }
     .about-grid, .contact-grid { grid-template-columns: 1fr; }
     .about-float-card { right: 0; }
@@ -1699,11 +1781,26 @@ footer { background: #06231D !important; }
         <button class="lang-option" data-lang="en">🇺🇸 EN — English</button>
         <button class="lang-option" data-lang="es">🇪🇸 ES — Español</button>
         <button class="lang-option" data-lang="zh">🇹🇼 繁中 — 中文</button>
+        <button class="lang-option" data-lang="zhs">🇨🇳 简体 — 中文</button>
       </div>
     </div>
     <a href="#contact" class="nav-cta" data-i18n="nav.cta">Me Contrate</a>
+    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
+<div class="nav-mobile" id="navMobile" role="dialog" aria-label="Menu mobile">
+  <ul class="nav-mobile-links">
+    <li><a href="#about"      data-i18n="nav.about">Sobre</a></li>
+    <li><a href="#skills"     data-i18n="nav.skills">Habilidades</a></li>
+    <li><a href="#portfolio"  data-i18n="nav.portfolio">Portfólio</a></li>
+    <li><a href="#experience" data-i18n="nav.experience">Experiência</a></li>
+    <li><a href="#services"   data-i18n="nav.services">Serviços</a></li>
+    <li><a href="#contact"    data-i18n="nav.contact">Contato</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta-mobile" data-i18n="nav.cta">Me Contrate</a>
+</div>
 
 <!-- HERO -->
 <section id="hero">
@@ -2520,15 +2617,84 @@ const t = {
     'form.submit':'送出訊息','form.sending':'發送中…','form.sent':'訊息已送出 ✓',
     'footer.copy':'© 2026 Toni Lima. 版權所有。',
     'typewriter': ['交付.', '執行.', '啟發.', '連結.']
+  },
+  zhs: {
+    'nav.about':'关于我','nav.skills':'技能','nav.portfolio':'作品集',
+    'nav.experience':'工作经历','nav.services':'服务','nav.contact':'联系我','nav.cta':'雇用我',
+    'hero.badge':'接受项目委托',
+    'hero.title.l1':'我的创作，','hero.title.em':'在你阅读之前就已开口。','hero.title.l3':'',
+    'hero.sub':'你好，我是 <strong>Toni Lima</strong> — 高级平面设计师，专注于创作兼具美学精准与技术卓越的视觉体验。',
+    'hero.btn1':'查看作品','hero.btn2':'WhatsApp 联系','hero.btn3':'查看完整作品集',
+    'about.label':'关于我','about.title':'以目的驱动视觉叙事',
+    'about.tag':'✦ 高级平面设计师 · 8+ 年','about.float':'完成项目',
+    'about.p1':'我是 Toni Lima — 富有创意的专业人士，在视听行业拥有超过8年的经验，专注于视频和图像编辑。我将技术专长与创意敏感性结合，交付视觉冲击力强的项目。',
+    'about.p2':'我的工作涵盖吸引眼球的缩略图、视频博客、广告活动及完整视觉识别。每个项目都以战略思维和严谨的细节关注来对待。',
+    'about.c1':'年工作经验','about.c2':'完成项目','about.c3':'服务客户','about.c4':'% 满意度',
+    'skills.label':'专业技能','skills.title':'技能与工具',
+    'skill.banners':'横幅设计','skill.motion':'动态图形',
+    'skill.photo':'摄影与构图','skill.drone':'无人机驾驶（UAV）',
+    'portfolio.label':'精选作品','portfolio.title':'作品集',
+    'filter.all':'全部','filter.banner':'横幅设计','filter.video':'视频',
+    'filter.motion':'动态图形','filter.identity':'视觉识别',
+    'pf.b1':'Blender 动画 01','pf.b2':'Blender 动画 02','pf.b3':'Blender 动画 03',
+    'filter.3d':'3D / Blender',
+    'filter.cassino':'赌场','pf.c1':'Casino Design 01','pf.c2':'Casino Design 02',
+    'filter.esportes':'体育','pf.e1':'Sports Design 01','pf.e2':'Sports Design 02','pf.e3':'Sports Design 03',
+    'filter.blender':'Blender','filter.videos':'视频','filter.lives':'直播','filter.artes':'个人艺术',
+    'pf.bl1':'Blender 图形 01','pf.bl2':'Blender 图形 02',
+    'pf.v1':'无声电之歌','pf.v2':'视频制作 01','pf.v3':'视频制作 02',
+    'pf.l1':'直播录像','pf.a1':'个人艺术 01','pf.a2':'杀死比尔','pf.a3':'Pequi do Capetoni',
+    'exp.label':'职业轨迹','exp.title':'工作经历',
+    'exp.locent.period':'2024年8月 – 2025年9月','exp.locent.role':'高级平面设计师 · iGaming',
+    'exp.locent.i1':'为 iGaming 平台和社交媒体设计横幅广告',
+    'exp.locent.i2':'制作互动动画以提升用户互动',
+    'exp.locent.i3':'制作和剪辑企业宣传及推广视频',
+    'exp.locent.i4':'与 iGaming 市场战略对齐的内容创作',
+    'exp.seeds.period':'2025年10月 – 现职','exp.seeds.role':'平面设计师 — 付费流量与转化',
+    'exp.seeds.i1':'开发战略视觉素材，用于付费流量广告活动，聚焦用户注意力与转化',
+    'exp.seeds.i2':'制作广告优化创意，具备强烈视觉构图与直接沟通',
+    'exp.seeds.i3':'缩略图、创意及视觉识别，与广告目标和客户获取目标一致',
+    'exp.seeds.i4':'构建现代设计、高易用性和高性能的网站，以最大化转化率',
+    'exp.free.period':'2018年2月 – 2025年9月','exp.free.company':'自由职业',
+    'exp.free.role':'自由平面设计师',
+    'exp.free.i1':'Los Frango：视觉识别 + 营销 + 付费流量',
+    'exp.free.i2':'Bellys Brechó：社交媒体视觉内容',
+    'exp.free.i3':'Point do Crepe：菜单及数字促销材料',
+    'exp.free.i4':'Outthe Clouds：视觉识别与传播材料',
+    'exp.free.i5':'Planeta Celular & Lima Imports：社交媒体图形',
+    'exp.free.i6':'Out The Clouds — 为服装品牌开发视觉识别与传播素材',
+    'exp.free.i7':'BBC（Boff Boy Chique）— 为服装品牌制作社交媒体视觉内容（2025年中）',
+    'srv.label':'我的服务','srv.title':'为影响力而生的服务',
+    'srv.1.title':'网站设计开发','srv.1.desc':'从零构建定制化、高性能网站，融合直觉式用户体验、精致美学与随业务扩展的简洁代码。',
+    'srv.2.title':'视觉设计','srv.2.desc':'视觉识别、营销材料和视觉系统，精准、一致且充满鲜明个性地传达品牌价值。',
+    'srv.3.title':'视频剪辑','srv.3.desc':'专业剪辑视频博客、企业视频、短视频及广告活动，吸引并留住目标受众的注意力。',
+    'srv.4.title':'动态图形','srv.4.desc':'互动动画与动态图形，提升参与度，以视觉化、令人难忘的方式传达复杂信息。',
+    'srv.5.title':'视觉识别','srv.5.desc':'完整品牌开发：标志、色板、排版、风格指南及所有必要材料，打造一致专业的视觉形象。',
+    'tst.label':'客户评价','tst.title':'客户怎么说',
+    'tst.1.text':'"Toni 彻底改变了我们的线上形象。网站超出了所有预期——美观、快速，与我们的品牌完美契合。"',
+    'tst.1.role':'CEO, Verdura Studio',
+    'tst.2.text':'"与 Toni 合作是一次启示。他对排版和细节的关注令人叹为观止。我们的视觉识别现在正是我们所想要的样子。"',
+    'tst.2.role':'创始人, Soleil Agency',
+    'tst.3.text':'"创意敏感性与技术能力的结合十分难得。Toni 交付了一个我们的用户喜爱、团队引以为傲的产品。"',
+    'tst.3.role':'产品总监, Archē',
+    'contact.label':'联系我','contact.title':'一起创造精彩',
+    'contact.intro':'有项目想合作？很乐意倾听。填写表单或直接联系我——我随时欢迎新的合作机会。',
+    'form.name':'姓名','form.name.ph':'您的姓名','form.email':'电子邮件','form.email.ph':'your@email.com',
+    'form.service':'服务','form.service.ph':'选择服务…',
+    'form.message':'消息','form.message.ph':'请告诉我您的项目…',
+    'form.submit':'发送消息','form.sending':'发送中…','form.sent':'消息已发送 ✓',
+    'footer.copy':'© 2026 Toni Lima. 版权所有。','footer.behance':'Behance',
+    'typewriter': ['交付.', '执行.', '启发.', '连接.']
   }
 };
 
 // ─── LANGUAGE SYSTEM ─────────────────────────────────────────────────────────
 const langMeta = {
-  pt: { flag: '🇧🇷', code: 'PT' },
-  en: { flag: '🇺🇸', code: 'EN' },
-  es: { flag: '🇪🇸', code: 'ES' },
-  zh: { flag: '🇹🇼', code: '繁中' }
+  pt:  { flag: '🇧🇷', code: 'PT'  },
+  en:  { flag: '🇺🇸', code: 'EN'  },
+  es:  { flag: '🇪🇸', code: 'ES'  },
+  zh:  { flag: '🇹🇼', code: '繁中' },
+  zhs: { flag: '🇨🇳', code: '简体' }
 };
 
 let currentLang = localStorage.getItem('lang') || 'pt';
@@ -2568,21 +2734,23 @@ if (langDropdown) {
   });
 }
 
-// ─── CUSTOM CURSOR ────────────────────────────────────────────────────────────
-const dot = document.getElementById('cursor-dot');
-const ring = document.getElementById('cursor-ring');
-let mx = 0, my = 0, rx = 0, ry = 0;
-document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
-(function animateCursor() {
-  dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-  rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
-  ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-  requestAnimationFrame(animateCursor);
-})();
-document.querySelectorAll('a, button, .portfolio-item, .service-card, .counter-item, .testimonial-card, .timeline-card').forEach(el => {
-  el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
-  el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
-});
+// ─── CUSTOM CURSOR (desktop only) ─────────────────────────────────────────────
+if (!('ontouchstart' in window) && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  const dot = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; });
+  (function animateCursor() {
+    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(animateCursor);
+  })();
+  document.querySelectorAll('a, button, .portfolio-item, .service-card, .counter-item, .testimonial-card, .timeline-card').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+}
 
 // ─── NAVBAR SCROLL ────────────────────────────────────────────────────────────
 window.addEventListener('scroll', () => {
@@ -2613,15 +2781,17 @@ function typeLoop() {
 }
 typeLoop();
 
-// ─── HERO PARALLAX ────────────────────────────────��───────────────────────────
-const heroVisual = document.getElementById('hero-visual');
-const aurora = document.getElementById('aurora');
-document.addEventListener('mousemove', e => {
-  const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
-  const dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
-  if (heroVisual) heroVisual.style.transform = `translate(${dx * 18}px, ${dy * 12}px)`;
-  if (aurora) aurora.style.transform = `translate(${dx * 24}px, ${dy * 16}px)`;
-});
+// ─── HERO PARALLAX (desktop/mouse only) ──────────��───────────────────────────
+if (!('ontouchstart' in window)) {
+  const heroVisual = document.getElementById('hero-visual');
+  const aurora = document.getElementById('aurora');
+  document.addEventListener('mousemove', e => {
+    const cx = window.innerWidth / 2, cy = window.innerHeight / 2;
+    const dx = (e.clientX - cx) / cx, dy = (e.clientY - cy) / cy;
+    if (heroVisual) heroVisual.style.transform = `translate(${dx * 18}px, ${dy * 12}px)`;
+    if (aurora) aurora.style.transform = `translate(${dx * 24}px, ${dy * 16}px)`;
+  });
+}
 
 // ─── SCROLL REVEAL ────────────────────────────────────────────────────────────
 const revealObs = new IntersectionObserver(entries => {
@@ -3082,6 +3252,29 @@ document.querySelectorAll('.service-card').forEach(card => {
     card.style.setProperty('--mouse-y', (e.clientY - r.top)  + 'px');
   });
 });
+
+// ─── HAMBURGER MENU ───────────────────────────────────────────────────────────
+(function() {
+  const hamburger  = document.getElementById('navHamburger');
+  const mobileMenu = document.getElementById('navMobile');
+  if (!hamburger || !mobileMenu) return;
+  function closeMenu() {
+    hamburger.classList.remove('open');
+    hamburger.setAttribute('aria-expanded', 'false');
+    mobileMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  hamburger.addEventListener('click', () => {
+    const opening = !hamburger.classList.contains('open');
+    hamburger.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', String(opening));
+    mobileMenu.classList.toggle('open', opening);
+    document.body.style.overflow = opening ? 'hidden' : '';
+  });
+  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
+  mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) closeMenu(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
+})();
 
 // ─── TIMELINE LINE DRAW ON SCROLL ─────────────────────────────────────────────
 (function () {
