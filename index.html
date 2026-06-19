@@ -1987,9 +1987,13 @@ footer { background: #06231D !important; }
       <button class="pf-filter-btn active" data-filter="all"      data-i18n="filter.all">Todos</button>
       <button class="pf-filter-btn"        data-filter="blender"  data-i18n="filter.blender">Blender</button>
       <button class="pf-filter-btn"        data-filter="esportes" data-i18n="filter.esportes">Esportes</button>
+      <button class="pf-filter-btn"        data-filter="cassino"  data-i18n="filter.cassino">Cassino</button>
       <button class="pf-filter-btn"        data-filter="videos"   data-i18n="filter.videos">Vídeos</button>
       <button class="pf-filter-btn"        data-filter="lives"    data-i18n="filter.lives">Lives</button>
       <button class="pf-filter-btn"        data-filter="artes"    data-i18n="filter.artes">Arte Pessoal</button>
+      <button class="pf-filter-btn"        data-filter="odontologia" data-i18n="filter.odontologia">Odontologia</button>
+      <button class="pf-filter-btn"        data-filter="seeds"    data-i18n="filter.seeds">Seeds</button>
+      <button class="pf-filter-btn"        data-filter="uisites"  data-i18n="filter.uisites">UI de Sites</button>
     </div>
     <!-- Animated subtitle -->
     <div class="fan-subtitle" id="fanSubtitle"></div>
@@ -2446,6 +2450,12 @@ const t = {
     'pf.bl1':'Arte Blender 01','pf.bl2':'Arte Blender 02',
     'pf.v1':'Sem o Som de Eletricidade','pf.v2':'Produção de Vídeo 01','pf.v3':'Produção de Vídeo 02',
     'pf.l1':'Live Recording','pf.a1':'Arte Pessoal 01','pf.a2':'Kill Bill','pf.a3':'Pequi do Capetoni',
+    'filter.odontologia':'Odontologia','filter.seeds':'Seeds','filter.uisites':'UI de Sites',
+    'pf.c3':'Casino Design 03','pf.c4':'Banner Halloween','pf.c5':'Anúncio Jaguar7','pf.c6':'Jaguar Hero',
+    'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
+    'pf.od1':'Odontologia 01','pf.od2':'Odontologia 02','pf.od3':'Odontologia 03','pf.od4':'Odontologia 04','pf.od5':'Odontologia 05',
+    'pf.sd1':'Seeds 01',
+    'pf.ui1':'UI de Site 01','pf.ui2':'UI de Site 02','pf.ui3':'UI de Site 03','pf.ui4':'Faísca Hero',
     'exp.label':'Trajetória','exp.title':'Experiência Profissional',
     'exp.locent.period':'Ago/2024 – Set/2025','exp.locent.role':'Senior Graphic Designer · iGaming',
     'exp.locent.i1':'Design de banners para plataformas iGaming e redes sociais',
@@ -2516,6 +2526,12 @@ const t = {
     'pf.bl1':'Blender Art 01','pf.bl2':'Blender Art 02',
     'pf.v1':'Sem o Som de Eletricidade','pf.v2':'Video Production 01','pf.v3':'Video Production 02',
     'pf.l1':'Live Recording','pf.a1':'Personal Art 01','pf.a2':'Kill Bill','pf.a3':'Pequi do Capetoni',
+    'filter.odontologia':'Dentistry','filter.seeds':'Seeds','filter.uisites':'Website UI',
+    'pf.c3':'Casino Design 03','pf.c4':'Halloween Banner','pf.c5':'Jaguar7 Ad','pf.c6':'Jaguar Hero',
+    'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
+    'pf.od1':'Dentistry 01','pf.od2':'Dentistry 02','pf.od3':'Dentistry 03','pf.od4':'Dentistry 04','pf.od5':'Dentistry 05',
+    'pf.sd1':'Seeds 01',
+    'pf.ui1':'Website UI 01','pf.ui2':'Website UI 02','pf.ui3':'Website UI 03','pf.ui4':'Faísca Hero',
     'exp.label':'Journey','exp.title':'Professional Experience',
     'exp.locent.period':'Aug/2024 – Sep/2025','exp.locent.role':'Senior Graphic Designer · iGaming',
     'exp.locent.i1':'Banner design for iGaming platforms and social media',
@@ -2837,6 +2853,8 @@ const cfAllData = [
   { type:'image', src:'esportes/390ef3cf-be20-4599-be11-4cac4bd4800a_rw_1200.png', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e1',  name:'Sports Design 01' },
   { type:'image', src:'esportes/7397d1e3-72d8-4f78-92ee-75857362c0bd_rw_1200.jpg', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e2',  name:'Sports Design 02' },
   { type:'image', src:'esportes/abe4c4bd-be0b-482a-9025-81c95b3a0bd6_rw_1200.png', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e3',  name:'Sports Design 03' },
+  { type:'video', src:'esportes/copa%20brasil%20e%20haiti.mp4',                                   filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e4',  name:'Copa Brasil x Haiti' },
+  { type:'image', src:'esportes/Dramatic_high-energy_photoreal_sports_betting_202606191241.jpeg', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e5',  name:'Sports Design 04' },
   // ── VIDEOS ───────────────────────────────────────────────────────────────────
   { type:'video', src:'videos/sem%20o%20som%20de%20eletricidade.mp4',              filterCat:'videos',   catKey:'filter.videos',   cat:'Vídeos',       nameKey:'pf.v1',  name:'Sem o Som de Eletricidade' },
   { type:'video', src:'videos/video5103114368254477486.mp4',                       filterCat:'videos',   catKey:'filter.videos',   cat:'Vídeos',       nameKey:'pf.v2',  name:'Video Production 01' },
@@ -2847,9 +2865,26 @@ const cfAllData = [
   { type:'image', src:'artes%20pessoais/5103114368710716720.jpg',                  filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a1',  name:'Arte Pessoal 01' },
   { type:'video', src:'artes%20pessoais/kill%20bill%201-2.mp4',                    filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a2',  name:'Kill Bill' },
   { type:'video', src:'artes%20pessoais/pequi%20do%20capeTONI%203-2.mp4',          filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a3',  name:'Pequi do Capetoni' },
-  // ── CASINO (appears in All) ───────────────────────────────────────────────────
+  // ── CASINO ───────────────────────────────────────────────────────────────────
   { type:'image', src:'cassino/37ab616b-126c-4ec7-ad65-c891e75578d0_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c1',  name:'Casino Design 01' },
   { type:'image', src:'cassino/e69f33a2-0699-4400-aaee-526ac4bd564e_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c2',  name:'Casino Design 02' },
+  { type:'image', src:'cassino/ChatGPT%20Image%2017%20de%20jun.%20de%202026,%2012_34_23.png',    filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c3',  name:'Casino Design 03' },
+  { type:'video', src:'cassino/Halloween_casino_banner_animation_202605191820.mp4',              filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c4',  name:'Halloween Banner' },
+  { type:'video', src:'cassino/JAGUAR7_ad_with_jaguar_202606061357.mp4',                         filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c5',  name:'Jaguar7 Ad' },
+  { type:'video', src:'cassino/Jaguar_character_in_hero_pose_202606061358.mp4',                  filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c6',  name:'Jaguar Hero' },
+  // ── ODONTOLOGIA ──────────────────────────────────────────────────────────────
+  { type:'image', src:'Odontologia/Premium_dental_clinic_Instagram_Feed_202606112025.jpeg',     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od1', name:'Dentistry 01' },
+  { type:'image', src:'Odontologia/Create_a_modern,_premium_Instagram_202605181614%20(1).jpeg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od2', name:'Dentistry 02' },
+  { type:'image', src:'Odontologia/Create_a_modern,_premium_Instagram_202605181641%20(1).jpeg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od3', name:'Dentistry 03' },
+  { type:'image', src:'Odontologia/Add_a_new_line_of_202606111740.jpeg',                         filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od4', name:'Dentistry 04' },
+  { type:'image', src:'Odontologia/Image_editing_task_on_the_202606111803.jpeg',                 filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od5', name:'Dentistry 05' },
+  // ── SEEDS ────────────────────────────────────────────────────────────────────
+  { type:'image', src:'seeds/Gemini_Generated_Image_eu7qkgeu7qkgeu7q.png',                       filterCat:'seeds',    catKey:'filter.seeds',    cat:'Seeds',        nameKey:'pf.sd1', name:'Seeds 01' },
+  // ── UI DE SITES ──────────────────────────────────────────────────────────────
+  { type:'image', src:'ui%20de%20sites/2330d67d-9bd9-43b9-a870-2b6752b46961.png',                filterCat:'uisites',  catKey:'filter.uisites',  cat:'UI de Sites',  nameKey:'pf.ui1', name:'Website UI 01' },
+  { type:'image', src:'ui%20de%20sites/af66d3a2-04ac-4a54-a3c0-5076100b1c58.png',                filterCat:'uisites',  catKey:'filter.uisites',  cat:'UI de Sites',  nameKey:'pf.ui2', name:'Website UI 02' },
+  { type:'image', src:'ui%20de%20sites/ChatGPT%20Image%204%20de%20mai.%20de%202026,%2023_39_30.png', filterCat:'uisites', catKey:'filter.uisites', cat:'UI de Sites', nameKey:'pf.ui3', name:'Website UI 03' },
+  { type:'image', src:'ui%20de%20sites/faisca-hero.png',                                          filterCat:'uisites',  catKey:'filter.uisites',  cat:'UI de Sites',  nameKey:'pf.ui4', name:'Faísca Hero' },
 ];
 
 // ── State ─────────────────────────────────────────────────────────────────────
