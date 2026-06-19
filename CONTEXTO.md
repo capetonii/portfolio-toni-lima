@@ -289,9 +289,13 @@ Apague os 3 blocos entre os marcadores `INTRO START`/`INTRO END` (HTML, CSS e JS
 Opcionalmente, apague a pasta `imagem inicial/`. O site continua idêntico.
 
 ### Trocar enquadramento do vídeo
-No CSS `.intro-video`, a propriedade `object-fit: cover` (preenche a tela, pode
-cortar borda) pode virar `contain` (mostra o vídeo inteiro, com faixas verdes
-`#0F2C22`). É a única linha a mudar.
+No CSS `.intro-video`, a propriedade `object-fit: contain` (mostra o vídeo
+inteiro, centralizado, sem cortes — pode deixar faixas) pode virar `cover`
+(preenche a tela, mas corta as bordas). É a única linha a mudar.
 
-Observação: `#0F2C22` é usado SOMENTE no fundo da intro — não faz parte da paleta
+O fundo do overlay e das faixas é `#DFDBD2` (bege claro amostrado do próprio
+fundo do vídeo), para as faixas ficarem imperceptíveis e o vídeo parecer
+flutuando centralizado.
+
+Observação: `#DFDBD2` é usado SOMENTE no fundo da intro — não faz parte da paleta
 do site (que permanece inalterada).

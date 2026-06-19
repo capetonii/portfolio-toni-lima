@@ -1757,7 +1757,7 @@ footer { background: #06231D !important; }
   position:fixed; inset:0;
   width:100vw; height:100vh; height:100dvh;
   z-index:99999;
-  background:#0F2C22;
+  background:#DFDBD2;        /* bege claro ~ fundo do vídeo (faixas do 'contain' ficam imperceptíveis) */
   display:none;
   align-items:center; justify-content:center;
   opacity:1; transition:opacity .6s ease;
@@ -1766,8 +1766,8 @@ footer { background: #06231D !important; }
 .intro-overlay.intro-hide{ opacity:0; pointer-events:none; }
 .intro-video{
   width:100%; height:100%;
-  object-fit:cover;          /* trocar para 'contain' p/ ver o vídeo inteiro (com faixas verdes) */
-  background:#0F2C22;
+  object-fit:contain;        /* vídeo inteiro, centralizado, sem cortes (trocar p/ 'cover' p/ preencher cortando a borda) */
+  background:#DFDBD2;
 }
 .intro-sound-btn{
   position:fixed; right:24px;
