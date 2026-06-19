@@ -260,3 +260,38 @@ Version: 1.0 | Last updated: current session
 - [ ] Optimize performance (lazy loading on images)
 - [ ] Add complete SEO meta tags
 - [ ] Create optional dark mode
+
+---
+
+## 🎬 INTRO / TELA DE ABERTURA (recurso opcional e reversível)
+
+Overlay em tela cheia que toca um vídeo ao abrir o site, começa mudo (com botão
+de som), e some com fade quando o vídeo termina. É uma ADIÇÃO isolada — o site
+funciona 100% com ela desligada ou removida.
+
+- Vídeo: `imagem inicial/Retro_computer_idle_animation_202606191622.mp4` (~10s)
+  - No HTML o caminho usa `%20` nos espaços: `imagem%20inicial/...`
+  - A pasta `imagem inicial/` precisa ir junto no commit/deploy (senão dá 404 →
+    a rede de segurança revela o site mesmo assim).
+- Tudo vive em 3 blocos marcados em `index.html`:
+  - HTML: `<!-- INTRO START -->` … `<!-- INTRO END -->` (logo após `<body>`)
+  - CSS:  `/* INTRO START */` … `/* INTRO END */` (no fim do `<style>`)
+  - JS:   `/* INTRO START */` … `/* INTRO END */` (no fim do `<script>`)
+
+### Como DESLIGAR (mantendo o código)
+No bloco JS da intro, troque o interruptor:
+`const INTRO_ENABLED = true;`  →  `const INTRO_ENABLED = false;`
+O overlay nasce `display:none`; com o interruptor em false ele nunca aparece e o
+site abre direto. Nada mais precisa ser mexido.
+
+### Como REMOVER de vez
+Apague os 3 blocos entre os marcadores `INTRO START`/`INTRO END` (HTML, CSS e JS).
+Opcionalmente, apague a pasta `imagem inicial/`. O site continua idêntico.
+
+### Trocar enquadramento do vídeo
+No CSS `.intro-video`, a propriedade `object-fit: cover` (preenche a tela, pode
+cortar borda) pode virar `contain` (mostra o vídeo inteiro, com faixas verdes
+`#0F2C22`). É a única linha a mudar.
+
+Observação: `#0F2C22` é usado SOMENTE no fundo da intro — não faz parte da paleta
+do site (que permanece inalterada).

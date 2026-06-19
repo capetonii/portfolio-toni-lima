@@ -1751,9 +1751,58 @@ footer { background: #06231D !important; }
   font-size: 15px; font-weight: 600; color: #FFFDEE;
   font-family: 'Playfair Display', serif;
 }
+
+/* INTRO START */
+.intro-overlay{
+  position:fixed; inset:0;
+  width:100vw; height:100vh; height:100dvh;
+  z-index:99999;
+  background:#0F2C22;
+  display:none;
+  align-items:center; justify-content:center;
+  opacity:1; transition:opacity .6s ease;
+}
+.intro-overlay.intro-show{ display:flex; }
+.intro-overlay.intro-hide{ opacity:0; pointer-events:none; }
+.intro-video{
+  width:100%; height:100%;
+  object-fit:cover;          /* trocar para 'contain' p/ ver o vídeo inteiro (com faixas verdes) */
+  background:#0F2C22;
+}
+.intro-sound-btn{
+  position:fixed; right:24px;
+  bottom:calc(env(safe-area-inset-bottom, 0px) + 24px);
+  z-index:100000;
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(15,44,34,.55);
+  -webkit-backdrop-filter:blur(8px); backdrop-filter:blur(8px);
+  border:1px solid rgba(255,255,255,.3);
+  cursor:pointer; padding:0; line-height:0;
+  transition:transform .2s ease, background .2s ease;
+}
+.intro-sound-btn:hover{ transform:scale(1.06); background:rgba(15,44,34,.75); }
+.intro-sound-btn svg{ width:24px; height:24px; display:block; }
+.intro-sound-btn .ico-on{ display:none; }
+.intro-sound-btn.is-on .ico-off{ display:none; }
+.intro-sound-btn.is-on .ico-on{ display:block; }
+body.intro-lock{ overflow:hidden; }
+/* INTRO END */
 </style>
 </head>
 <body>
+
+<!-- INTRO START -->
+<div id="introOverlay" class="intro-overlay" role="dialog" aria-label="Abertura">
+  <video id="introVideo" class="intro-video"
+         src="imagem%20inicial/Retro_computer_idle_animation_202606191622.mp4"
+         muted autoplay playsinline preload="auto"></video>
+  <button id="introSoundBtn" class="intro-sound-btn" type="button" aria-label="Ativar som">
+    <svg class="ico-off" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
+    <svg class="ico-on" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
+  </button>
+</div>
+<!-- INTRO END -->
 
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
@@ -3400,6 +3449,69 @@ document.querySelectorAll('.service-card').forEach(card => {
 
 // ─── INIT ─────────────────────────────────────────────────────────────────────
 applyLang(currentLang);
+
+/* INTRO START */
+(function () {
+  const INTRO_ENABLED = true;   // ← INTERRUPTOR ÚNICO: mude para false para desligar a intro inteira
+
+  if (!INTRO_ENABLED) return;
+
+  const overlay  = document.getElementById('introOverlay');
+  const video    = document.getElementById('introVideo');
+  const soundBtn = document.getElementById('introSoundBtn');
+  if (!overlay || !video) return;   // se algo faltar, não prende o visitante
+
+  const ABSOLUTE_FALLBACK = 14000;  // ms — só usado se os metadados nunca carregarem (~10s do vídeo + margem)
+  let done = false;
+  let safetyTimer = null;
+
+  function endIntro() {
+    if (done) return; done = true;
+    if (safetyTimer) clearTimeout(safetyTimer);
+    overlay.classList.add('intro-hide');            // fade de 0.6s
+    document.body.classList.remove('intro-lock');   // destrava o scroll
+    try { window.scrollTo(0, 0); } catch (e) {}      // revela o site no topo
+    setTimeout(function () {                         // remove do DOM após o fade
+      if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+    }, 700);
+  }
+
+  // Mostra o overlay e trava o scroll do site por trás
+  overlay.classList.add('intro-show');
+  document.body.classList.add('intro-lock');
+
+  // ── Rede de segurança ──
+  // Camada 3 (fallback absoluto): revela mesmo se os metadados nunca carregarem
+  safetyTimer = setTimeout(endIntro, ABSOLUTE_FALLBACK);
+  // Camada 2 (limite real): duração verdadeira do vídeo + 3s de margem
+  video.addEventListener('loadedmetadata', function () {
+    if (isFinite(video.duration) && video.duration > 0) {
+      if (safetyTimer) clearTimeout(safetyTimer);
+      safetyTimer = setTimeout(endIntro, (video.duration * 1000) + 3000);
+    }
+  });
+  // Camada 1 (principal): fim natural do vídeo
+  video.addEventListener('ended', endIntro);
+  // Camada 4a: erro de carregamento / 404
+  video.addEventListener('error', endIntro);
+
+  // Tenta tocar; camada 4b: se o autoplay for bloqueado, revela rápido (~2,5s)
+  const playPromise = video.play();
+  if (playPromise && typeof playPromise.catch === 'function') {
+    playPromise.catch(function () { setTimeout(endIntro, 2500); });
+  }
+
+  // Botão de som (só ícone + aria-label, sem PT/EN): mudo ⇄ som
+  if (soundBtn) {
+    soundBtn.addEventListener('click', function () {
+      video.muted = !video.muted;
+      soundBtn.classList.toggle('is-on', !video.muted);
+      soundBtn.setAttribute('aria-label', video.muted ? 'Ativar som' : 'Desativar som');
+      if (!video.muted) { video.play().catch(function () {}); }
+    });
+  }
+})();
+/* INTRO END */
 </script>
 </body>
 </html>
