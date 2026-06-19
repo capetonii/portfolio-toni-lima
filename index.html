@@ -3492,6 +3492,7 @@ applyLang(currentLang);
 /* INTRO START */
 (function () {
   const INTRO_ENABLED = true;   // ← INTERRUPTOR ÚNICO: mude para false para desligar a intro inteira
+  const INTRO_MAX_SECONDS = 5;  // ← toca só os primeiros N segundos do vídeo e então faz o fade (é "por enquanto")
 
   if (!INTRO_ENABLED) return;
 
@@ -3500,7 +3501,7 @@ applyLang(currentLang);
   const soundBtn = document.getElementById('introSoundBtn');
   if (!overlay || !video) return;   // se algo faltar, não prende o visitante
 
-  const ABSOLUTE_FALLBACK = 14000;  // ms — só usado se os metadados nunca carregarem (~10s do vídeo + margem)
+  const ABSOLUTE_FALLBACK = (INTRO_MAX_SECONDS * 1000) + 3000;  // ms — rede de segurança, alinhada aos N segundos
   let done = false;
   let safetyTimer = null;
 
@@ -3519,20 +3520,19 @@ applyLang(currentLang);
   overlay.classList.add('intro-show');
   document.body.classList.add('intro-lock');
 
-  // ── Rede de segurança ──
-  // Camada 3 (fallback absoluto): revela mesmo se os metadados nunca carregarem
-  safetyTimer = setTimeout(endIntro, ABSOLUTE_FALLBACK);
-  // Camada 2 (limite real): duração verdadeira do vídeo + 3s de margem
-  video.addEventListener('loadedmetadata', function () {
-    if (isFinite(video.duration) && video.duration > 0) {
-      if (safetyTimer) clearTimeout(safetyTimer);
-      safetyTimer = setTimeout(endIntro, (video.duration * 1000) + 3000);
-    }
+  // ── Corte aos primeiros INTRO_MAX_SECONDS (em vez de esperar o vídeo terminar) ──
+  // Principal: encerra quando a reprodução atinge N segundos (os "primeiros N segundos" reais do vídeo)
+  video.addEventListener('timeupdate', function () {
+    if (video.currentTime >= INTRO_MAX_SECONDS) endIntro();
   });
-  // Camada 1 (principal): fim natural do vídeo
-  video.addEventListener('ended', endIntro);
-  // Camada 4a: erro de carregamento / 404
+
+  // ── Rede de segurança (alinhada aos N segundos) ──
+  // Limite de relógio: garante o fade mesmo se o vídeo travar ou o timeupdate não avançar
+  safetyTimer = setTimeout(endIntro, ABSOLUTE_FALLBACK);
+  // Erro de carregamento / 404 → revela na hora
   video.addEventListener('error', endIntro);
+  // Backup: fim natural do vídeo (caso INTRO_MAX_SECONDS seja >= a duração)
+  video.addEventListener('ended', endIntro);
 
   // Tenta tocar; camada 4b: se o autoplay for bloqueado, revela rápido (~2,5s)
   const playPromise = video.play();
