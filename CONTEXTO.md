@@ -299,3 +299,36 @@ flutuando centralizado.
 
 Observação: `#DFDBD2` é usado SOMENTE no fundo da intro — não faz parte da paleta
 do site (que permanece inalterada).
+
+---
+
+## 🎥 VÍDEO 3D NO CABEÇALHO (hero) — reversível
+
+O objeto decorativo SVG do hero (grade + curvas, à direita do título) foi
+SUBSTITUÍDO por um vídeo em loop, na MESMA posição. É reversível.
+
+- Vídeo: `video 3d cabeçario/video para o cabeçario.mp4` (760×600, ~19 MB)
+  - No HTML o caminho é codificado: `video%203d%20cabe%C3%A7ario/...`
+  - Poster (1º frame): `video 3d cabeçario/poster.jpg`
+  - A pasta `video 3d cabeçario/` (vídeo + poster) precisa ir junto no commit/deploy.
+- Atributos: `muted autoplay loop playsinline preload="metadata"`.
+- O container `.hero-video-wrap` usa `aspect-ratio: 760/600` e o vídeo usa
+  `object-fit: contain` → mostra o quadro INTEIRO, sem cortar e sem distorcer.
+  `background: transparent` → objeto flutuando, sem card/borda.
+- Responsivo: mesma regra do elemento antigo (420px no desktop, 280px no mobile).
+- O parallax do mouse continua agindo sobre `#hero-visual` (intocado).
+
+### Marcadores
+- HTML: `<!-- HERO VIDEO START -->` … `<!-- HERO VIDEO END -->` (dentro de `#hero-visual`)
+- CSS:  `/* HERO VIDEO START */` … `/* HERO VIDEO END */` (logo após `.hero-svg`)
+- JS: nenhuma alteração foi necessária.
+
+### Como VOLTAR ao objeto decorativo antigo
+Dentro de `<!-- HERO VIDEO START/END -->` no HTML: descomente o bloco
+`<div class="hero-svg-wrap">…</div>` (que está logo acima do vídeo) e apague o
+`<div class="hero-video-wrap">…</div>`. A CSS antiga do SVG foi mantida intacta,
+então o original volta a funcionar na hora. (Opcional: apagar o bloco CSS
+`/* HERO VIDEO START/END */` e a pasta `video 3d cabeçario/`.)
+
+Nota de performance: o vídeo tem ~19 MB e fica acima da dobra (autoplay) → pode
+reduzir um pouco a nota de Performance até ser recomprimido.
