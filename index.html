@@ -1,8 +1,10 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230C342C'/><text x='32' y='45' font-family='Georgia,serif' font-size='32' font-weight='bold' text-anchor='middle' fill='%23E3EF26'>TL</text></svg>">
 <title>Toni Lima — Senior Graphic Designer</title>
 <meta name="description" content="Toni Lima — Senior Graphic Designer com experiência em motion graphics, 3D, branding e design esportivo. Veja o portfólio completo.">
 <meta property="og:type" content="website">
@@ -290,7 +292,7 @@
   .section-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
   .section-label {
     font-size: 11px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase;
-    color: var(--green-mid); margin-bottom: 14px; display: block;
+    color: var(--green-dark); margin-bottom: 14px; display: block;  /* contraste AA: verde escuro em vez de --green-mid */
   }
   .section-title {
     font-family: 'Playfair Display', serif; font-size: clamp(36px, 4vw, 48px);
@@ -1455,7 +1457,6 @@ footer { background: #06231D !important; }
 
 /* ─── PORTFOLIO: CAROUSEL ACTIVE, GRID HIDDEN ────────── */
 .cf-wrapper { display: block !important; }
-.portfolio-grid { display: none !important; }
 
 /* ═══════════════════════════════════════════════════════════
    TIMELINE — RESTORE VERTICAL LAYOUT + MOVEMENT EFFECTS
@@ -1793,10 +1794,19 @@ footer { background: #06231D !important; }
 }
 .intro-overlay.intro-show{ display:flex; }
 .intro-overlay.intro-hide{ opacity:0; pointer-events:none; }
+.intro-bg-blur{              /* fundo: extensão borrada do poster — preenche as faixas do 'contain' */
+  position:absolute; inset:0; z-index:0;
+  width:100%; height:100%;
+  object-fit:cover;
+  -webkit-filter:blur(60px); filter:blur(60px);
+  transform:scale(1.1);      /* esconde as bordas do blur */
+  pointer-events:none;
+}
 .intro-video{
+  position:relative; z-index:1;   /* POR CIMA da camada borrada (tamanho/posição/contain inalterados) */
   width:100%; height:100%;
   object-fit:contain;        /* vídeo inteiro, centralizado, sem cortes (trocar p/ 'cover' p/ preencher cortando a borda) */
-  background:#DFDBD2;
+  background:transparent;    /* transparente p/ as faixas mostrarem a camada borrada atrás */
 }
 .intro-sound-btn{
   position:fixed; right:24px;
@@ -1823,9 +1833,11 @@ body.intro-lock{ overflow:hidden; }
 
 <!-- INTRO START -->
 <div id="introOverlay" class="intro-overlay" role="dialog" aria-label="Abertura">
+  <img class="intro-bg-blur" src="imagem%20inicial/intro-poster.jpg" alt="" aria-hidden="true">
   <video id="introVideo" class="intro-video"
-         src="imagem%20inicial/Retro_computer_idle_animation_202606191622.mp4"
-         muted autoplay playsinline preload="auto"></video>
+         src="imagem%20inicial/Retro_computer_character%20after%202.mp4"
+         poster="imagem%20inicial/intro-poster.jpg"
+         muted autoplay playsinline preload="metadata"></video>
   <button id="introSoundBtn" class="intro-sound-btn" type="button" aria-label="Ativar som">
     <svg class="ico-off" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><line x1="22" y1="9" x2="16" y2="15"/><line x1="16" y1="9" x2="22" y2="15"/></svg>
     <svg class="ico-on" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/><path d="M19 5a9 9 0 0 1 0 14"/></svg>
@@ -1894,7 +1906,7 @@ body.intro-lock{ overflow:hidden; }
       </p>
       <div class="hero-actions">
         <a href="#portfolio" class="btn-primary" data-i18n="hero.btn1">Ver Projetos</a>
-        <a href="https://wa.me/5561996753348" target="_blank" class="btn-whatsapp">
+        <a href="https://wa.me/5561996753348" target="_blank" rel="noopener noreferrer" class="btn-whatsapp">
 
           <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span data-i18n="hero.btn2">WhatsApp</span>
@@ -1937,7 +1949,7 @@ body.intro-lock{ overflow:hidden; }
         <video class="hero-video"
                src="video%203d%20cabe%C3%A7ario/video%20para%20o%20cabe%C3%A7ario.mp4"
                poster="video%203d%20cabe%C3%A7ario/poster.jpg"
-               muted autoplay loop playsinline preload="metadata"></video>
+               muted loop playsinline preload="none"></video>
       </div>
       <!-- HERO VIDEO END -->
     </div>
@@ -1954,7 +1966,7 @@ body.intro-lock{ overflow:hidden; }
     <div class="about-grid">
       <div class="about-img-wrap reveal">
         <div class="about-img-card" style="padding:0;">
-          <img src="toni lima.jpeg" alt="Toni Lima" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:24px;display:block;">
+          <img src="toni lima.jpeg" alt="Toni Lima" width="960" height="1280" style="width:100%;height:100%;object-fit:cover;object-position:center top;border-radius:24px;display:block;">
           <div class="about-glass-tag" style="position:absolute;bottom:32px;left:32px;z-index:2;" data-i18n="about.tag">✦ Senior Graphic Designer · 8+ anos</div>
         </div>
         <div class="about-float-card">
@@ -2091,152 +2103,6 @@ body.intro-lock{ overflow:hidden; }
         <div class="fan-stage" id="fanStage"></div>
       </div>
       <div class="fan-dots" id="fanDots"></div>
-    </div>
-    <div class="portfolio-grid">
-      <div class="portfolio-item reveal" data-cat="banner">
-        <div class="portfolio-thumb pcolor-1">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" opacity="0.35"><rect x="8" y="8" width="56" height="42" rx="5" stroke="white" stroke-width="2"/><line x1="8" y1="22" x2="64" y2="22" stroke="white" stroke-width="2"/><circle cx="16" cy="15" r="2.5" fill="white"/><circle cx="23" cy="15" r="2.5" fill="white"/></svg>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.banner">Banner Design</div>
-          <div class="portfolio-name" data-i18n="pf.1">iGaming Campaigns</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-1" data-cat="identity">
-        <div class="portfolio-thumb pcolor-2">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" opacity="0.35"><circle cx="36" cy="36" r="26" stroke="white" stroke-width="2"/><path d="M24 36 L36 24 L48 36 L36 48 Z" stroke="white" stroke-width="2" fill="none"/></svg>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.identity">Identidade Visual</div>
-          <div class="portfolio-name" data-i18n="pf.2">Los Frango Branding</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-2" data-cat="motion">
-        <div class="portfolio-thumb pcolor-3">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" opacity="0.35"><rect x="12" y="12" width="48" height="48" rx="4" stroke="white" stroke-width="2"/><line x1="12" y1="36" x2="60" y2="36" stroke="white" stroke-width="1.5"/><line x1="36" y1="12" x2="36" y2="60" stroke="white" stroke-width="1.5"/></svg>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat">Motion Graphics</div>
-          <div class="portfolio-name" data-i18n="pf.3">Promo Animations</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal" data-cat="video">
-        <div class="portfolio-thumb pcolor-4">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" opacity="0.35"><path d="M16 56 L16 28 L36 18 L56 28 L56 56 Z" stroke="white" stroke-width="2" fill="none"/><rect x="29" y="42" width="14" height="14" rx="2" stroke="white" stroke-width="2"/></svg>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.video">Vídeo</div>
-          <div class="portfolio-name" data-i18n="pf.4">Institutional Videos</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-1" data-cat="identity">
-        <div class="portfolio-thumb pcolor-5">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" opacity="0.4"><path d="M36 12 L62 52 L10 52 Z" stroke="white" stroke-width="2" fill="none"/><circle cx="36" cy="38" r="10" stroke="white" stroke-width="2" fill="none"/></svg>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.identity">Identidade Visual</div>
-          <div class="portfolio-name" data-i18n="pf.5">Outthe Clouds</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-2" data-cat="banner">
-        <div class="portfolio-thumb pcolor-6">
-          <svg width="72" height="72" viewBox="0 0 72 72" fill="none" opacity="0.45"><circle cx="36" cy="36" r="18" stroke="#2D6A4F" stroke-width="2"/><circle cx="36" cy="36" r="28" stroke="#2D6A4F" stroke-width="1" stroke-dasharray="4 3"/></svg>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.banner">Banner Design</div>
-          <div class="portfolio-name" data-i18n="pf.6">Social Media Arts</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal" data-cat="3d">
-        <div class="portfolio-video-wrap">
-          <video src="blender/WhatsApp%20Video%202026-03-23%20at%2023.00.38.mp4" muted loop playsinline preload="metadata"></video>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat">3D / Blender</div>
-          <div class="portfolio-name" data-i18n="pf.b1">Blender Animation 01</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-1" data-cat="3d">
-        <div class="portfolio-video-wrap">
-          <video src="blender/WhatsApp%20Video%202026-03-23%20at%2023.04.02.mp4" muted loop playsinline preload="metadata"></video>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat">3D / Blender</div>
-          <div class="portfolio-name" data-i18n="pf.b2">Blender Animation 02</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-2" data-cat="3d">
-        <div class="portfolio-video-wrap">
-          <video src="blender/WhatsApp%20Video%202026-03-23%20at%2023.04.03.mp4" muted loop playsinline preload="metadata"></video>
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat">3D / Blender</div>
-          <div class="portfolio-name" data-i18n="pf.b3">Blender Animation 03</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-
-      <!-- CASSINO -->
-      <div class="portfolio-item reveal" data-cat="cassino">
-        <div class="portfolio-img-wrap">
-          <img src="cassino/37ab616b-126c-4ec7-ad65-c891e75578d0_rw_1200.png" alt="Casino Design 01" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.cassino">Cassino</div>
-          <div class="portfolio-name" data-i18n="pf.c1">Casino Design 01</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-1" data-cat="cassino">
-        <div class="portfolio-img-wrap">
-          <img src="cassino/e69f33a2-0699-4400-aaee-526ac4bd564e_rw_1200.png" alt="Casino Design 02" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.cassino">Cassino</div>
-          <div class="portfolio-name" data-i18n="pf.c2">Casino Design 02</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-
-      <!-- ESPORTES -->
-      <div class="portfolio-item reveal" data-cat="esportes">
-        <div class="portfolio-img-wrap">
-          <img src="esportes/390ef3cf-be20-4599-be11-4cac4bd4800a_rw_1200.png" alt="Sports Design 01" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.esportes">Esportes</div>
-          <div class="portfolio-name" data-i18n="pf.e1">Sports Design 01</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-1" data-cat="esportes">
-        <div class="portfolio-img-wrap">
-          <img src="esportes/7397d1e3-72d8-4f78-92ee-75857362c0bd_rw_1200.jpg" alt="Sports Design 02" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.esportes">Esportes</div>
-          <div class="portfolio-name" data-i18n="pf.e2">Sports Design 02</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
-      <div class="portfolio-item reveal reveal-delay-2" data-cat="esportes">
-        <div class="portfolio-img-wrap">
-          <img src="esportes/abe4c4bd-be0b-482a-9025-81c95b3a0bd6_rw_1200.png" alt="Sports Design 03" loading="lazy">
-        </div>
-        <div class="portfolio-overlay">
-          <div class="portfolio-cat" data-i18n="filter.esportes">Esportes</div>
-          <div class="portfolio-name" data-i18n="pf.e3">Sports Design 03</div>
-          <div class="portfolio-arrow"><svg viewBox="0 0 16 16" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8h10M9 4l4 4-4 4"/></svg></div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
@@ -2443,7 +2309,7 @@ body.intro-lock{ overflow:hidden; }
             </div>
             josealima.15@gmail.com
           </a>
-          <a href="https://wa.me/5561996753348" target="_blank" class="contact-link">
+          <a href="https://wa.me/5561996753348" target="_blank" rel="noopener noreferrer" class="contact-link">
             <div class="contact-link-icon whatsapp-icon">
               <svg viewBox="0 0 24 24" stroke-width="0" stroke-linecap="round" stroke-linejoin="round" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             </div>
@@ -2466,17 +2332,17 @@ body.intro-lock{ overflow:hidden; }
       <form class="contact-form reveal reveal-delay-1" onsubmit="handleSubmit(event)" action="mailto:josealima.15@gmail.com" method="POST" enctype="text/plain">
         <div class="form-row">
           <div class="form-group">
-            <label data-i18n="form.name">Nome</label>
-            <input type="text" data-i18n-ph="form.name.ph" placeholder="Seu nome" required>
+            <label for="f-name" data-i18n="form.name">Nome</label>
+            <input id="f-name" type="text" data-i18n-ph="form.name.ph" placeholder="Seu nome" required>
           </div>
           <div class="form-group">
-            <label data-i18n="form.email">E-mail</label>
-            <input type="email" data-i18n-ph="form.email.ph" placeholder="seu@email.com" required>
+            <label for="f-email" data-i18n="form.email">E-mail</label>
+            <input id="f-email" type="email" data-i18n-ph="form.email.ph" placeholder="seu@email.com" required>
           </div>
         </div>
         <div class="form-group">
-          <label data-i18n="form.service">Serviço</label>
-          <select>
+          <label for="f-service" data-i18n="form.service">Serviço</label>
+          <select id="f-service">
             <option value="" data-i18n="form.service.ph">Selecione um serviço…</option>
             <option data-i18n="srv.1.title">Criação de Sites</option>
             <option data-i18n="srv.2.title">Design Visual</option>
@@ -2486,8 +2352,8 @@ body.intro-lock{ overflow:hidden; }
           </select>
         </div>
         <div class="form-group">
-          <label data-i18n="form.message">Mensagem</label>
-          <textarea data-i18n-ph="form.message.ph" placeholder="Conte-me sobre seu projeto…" required></textarea>
+          <label for="f-message" data-i18n="form.message">Mensagem</label>
+          <textarea id="f-message" data-i18n-ph="form.message.ph" placeholder="Conte-me sobre seu projeto…" required></textarea>
         </div>
         <button type="submit" class="form-submit" id="submit-btn" data-i18n="form.submit">Enviar Mensagem</button>
       </form>
@@ -2527,10 +2393,7 @@ const t = {
     'skill.photo':'Fotografia & Composição','skill.drone':'Pilotagem de Drone (UAV)',
     'portfolio.label':'Trabalhos Selecionados','portfolio.title':'Portfólio',
     'filter.all':'Todos','filter.banner':'Banner Design','filter.video':'Vídeo',
-    'filter.motion':'Motion','filter.identity':'Identidade Visual',
-    'pf.1':'iGaming Campaigns','pf.2':'Los Frango Branding','pf.3':'Promo Animations',
-    'pf.4':'Institutional Videos','pf.5':'Outthe Clouds','pf.6':'Social Media Arts',
-    'pf.b1':'Animação Blender 01','pf.b2':'Animação Blender 02','pf.b3':'Animação Blender 03',
+    'filter.motion':'Motion','filter.identity':'Identidade Visual',    'pf.b1':'Animação Blender 01','pf.b2':'Animação Blender 02','pf.b3':'Animação Blender 03',
     'filter.3d':'3D / Blender',
     'filter.cassino':'Cassino','pf.c1':'Casino Design 01','pf.c2':'Casino Design 02',
     'filter.esportes':'Esportes','pf.e1':'Sports Design 01','pf.e2':'Sports Design 02','pf.e3':'Sports Design 03',
@@ -2603,10 +2466,7 @@ const t = {
     'skill.photo':'Photography & Composition','skill.drone':'Drone Piloting (UAV)',
     'portfolio.label':'Selected Work','portfolio.title':'Portfolio',
     'filter.all':'All Work','filter.banner':'Banner Design','filter.video':'Video',
-    'filter.motion':'Motion','filter.identity':'Visual Identity',
-    'pf.1':'iGaming Campaigns','pf.2':'Los Frango Branding','pf.3':'Promo Animations',
-    'pf.4':'Institutional Videos','pf.5':'Outthe Clouds','pf.6':'Social Media Arts',
-    'pf.b1':'Blender Animation 01','pf.b2':'Blender Animation 02','pf.b3':'Blender Animation 03',
+    'filter.motion':'Motion','filter.identity':'Visual Identity',    'pf.b1':'Blender Animation 01','pf.b2':'Blender Animation 02','pf.b3':'Blender Animation 03',
     'filter.3d':'3D / Blender',
     'filter.cassino':'Casino','pf.c1':'Casino Design 01','pf.c2':'Casino Design 02',
     'filter.esportes':'Sports','pf.e1':'Sports Design 01','pf.e2':'Sports Design 02','pf.e3':'Sports Design 03',
@@ -3199,8 +3059,11 @@ function cfBuildCarousel(data, instant) {
     // Dot
     const dot = document.createElement('div');
     dot.className = 'fan-dot';
+    dot.setAttribute('role', 'button');
+    dot.setAttribute('tabindex', '0');
     dot.setAttribute('aria-label', `Go to ${item.name}`);
     dot.addEventListener('click', () => cfGoTo(i));
+    dot.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); cfGoTo(i); } });
     fanDotsEl.appendChild(dot);
   });
 
@@ -3492,7 +3355,7 @@ applyLang(currentLang);
 /* INTRO START */
 (function () {
   const INTRO_ENABLED = true;   // ← INTERRUPTOR ÚNICO: mude para false para desligar a intro inteira
-  const INTRO_MAX_SECONDS = 5;  // ← toca só os primeiros N segundos do vídeo e então faz o fade (é "por enquanto")
+  const INTRO_MAX_SECONDS = 3.3;  // ← duração real do vídeo (~3,20s) + respiro → toca completo e então faz o fade
 
   if (!INTRO_ENABLED) return;
 
@@ -3551,6 +3414,35 @@ applyLang(currentLang);
   }
 })();
 /* INTRO END */
+
+/* HERO VIDEO START */
+(function () {
+  var hv = document.querySelector('.hero-video');
+  if (!hv) return;
+  var started = false;
+  function startHeroVideo() {
+    if (started) return; started = true;
+    hv.preload = 'auto';            // só baixa o vídeo agora — fora do caminho crítico do 1º carregamento
+    var p = hv.play();
+    if (p && typeof p.catch === 'function') p.catch(function () {});
+  }
+  function arm() {
+    if ('IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { startHeroVideo(); io.disconnect(); }
+        });
+      }, { threshold: 0.1 });
+      io.observe(hv);
+    } else {
+      startHeroVideo();
+    }
+  }
+  // Espera o load da página para não competir com o conteúdo principal (LCP = poster)
+  if (document.readyState === 'complete') arm();
+  else window.addEventListener('load', arm);
+})();
+/* HERO VIDEO END */
 </script>
 </body>
 </html>
