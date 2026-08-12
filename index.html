@@ -648,6 +648,7 @@
   .reveal-delay-2 { transition-delay: 0.2s; }
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
 
   /* PORTFOLIO COLORS */
   .pcolor-1 { background: linear-gradient(135deg, #2D6A4F 0%, #52B788 100%); }
@@ -867,7 +868,9 @@
     box-shadow: 0 20px 60px rgba(6,35,29,0.4), 0 4px 16px rgba(6,35,29,0.2);
     user-select: none;
   }
-  .fan-card-media { position: absolute; inset: 0; }
+  /* fundo da moldura: garante que nenhum card apareça BRANCO enquanto a mídia
+     não pintou (mesmos tons de .fan-card-fallback, dentro da paleta) */
+  .fan-card-media { position: absolute; inset: 0; background: linear-gradient(135deg,#0C342C,#06231D); }
   .fan-card-media img, .fan-card-media video {
     width: 100%; height: 100%; object-fit: cover; display: block;
   }
@@ -2031,6 +2034,14 @@ body.intro-lock{ overflow:hidden; }
           <div class="skill-header"><span class="skill-name">Adobe After Effects</span><span class="skill-pct">90%</span></div>
           <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="90"></div></div>
         </div>
+        <div class="skill-item reveal reveal-delay-4">
+          <div class="skill-header"><span class="skill-name">Blender</span><span class="skill-pct">55%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="55"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-delay-5">
+          <div class="skill-header"><span class="skill-name" data-i18n="skill.aimanip">Manipulação com IA</span><span class="skill-pct">80%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div>
+        </div>
       </div>
       <div>
         <div class="skill-item reveal">
@@ -2048,6 +2059,14 @@ body.intro-lock{ overflow:hidden; }
         <div class="skill-item reveal reveal-delay-3">
           <div class="skill-header"><span class="skill-name" data-i18n="skill.drone">Pilotagem de Drone (UAV)</span><span class="skill-pct">80%</span></div>
           <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="80"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-delay-4">
+          <div class="skill-header"><span class="skill-name" data-i18n="skill.aicode">Programando com IA</span><span class="skill-pct">78%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="78"></div></div>
+        </div>
+        <div class="skill-item reveal reveal-delay-5">
+          <div class="skill-header"><span class="skill-name" data-i18n="skill.aisites">Sites com IA</span><span class="skill-pct">67%</span></div>
+          <div class="skill-bar-bg"><div class="skill-bar-fill" data-width="67"></div></div>
         </div>
       </div>
     </div>
@@ -2094,6 +2113,7 @@ body.intro-lock{ overflow:hidden; }
       <button class="pf-filter-btn"        data-filter="odontologia" data-i18n="filter.odontologia">Odontologia</button>
       <button class="pf-filter-btn"        data-filter="seeds"    data-i18n="filter.seeds">Seeds</button>
       <button class="pf-filter-btn"        data-filter="uisites"  data-i18n="filter.uisites">UI de Sites</button>
+      <button class="pf-filter-btn"        data-filter="chefale"  data-i18n="filter.chefale">Chef Ale Monteiro</button>
     </div>
     <!-- Animated subtitle -->
     <div class="fan-subtitle" id="fanSubtitle"></div>
@@ -2178,6 +2198,8 @@ body.intro-lock{ overflow:hidden; }
             <li data-i18n="exp.free.i5">Planeta Celular &amp; Lima Imports: artes para redes sociais</li>
             <li data-i18n="exp.free.i6">Out The Clouds — desenvolvimento de identidade visual e materiais de comunicação para campanhas da marca de roupas</li>
             <li data-i18n="exp.free.i7">BBC (Boff Boy Chique) — criação de artes e criativos para redes sociais da marca de roupas (meados de 2025)</li>
+            <li data-i18n="exp.free.i8">BRDF Energia Solar — visualização 3D e conteúdo para redes sociais</li>
+            <li data-i18n="exp.free.i9">Chef Ale Monteiro | APP COMERBEM LABS — conteúdo visual e criativos para o aplicativo</li>
           </ul>
         </div>
       </div>
@@ -2391,6 +2413,7 @@ const t = {
     'skills.label':'Expertise','skills.title':'Habilidades & Ferramentas',
     'skill.banners':'Design de Banners','skill.motion':'Motion Graphics',
     'skill.photo':'Fotografia & Composição','skill.drone':'Pilotagem de Drone (UAV)',
+    'skill.aimanip':'Manipulação com IA','skill.aicode':'Programando com IA','skill.aisites':'Sites com IA',
     'portfolio.label':'Trabalhos Selecionados','portfolio.title':'Portfólio',
     'filter.all':'Todos','filter.banner':'Banner Design','filter.video':'Vídeo',
     'filter.motion':'Motion','filter.identity':'Identidade Visual',    'pf.b1':'Animação Blender 01','pf.b2':'Animação Blender 02','pf.b3':'Animação Blender 03',
@@ -2406,6 +2429,14 @@ const t = {
     'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
     'pf.od1':'Odontologia 01','pf.od2':'Odontologia 02','pf.od3':'Odontologia 03','pf.od4':'Odontologia 04','pf.od5':'Odontologia 05',
     'pf.sd1':'Seeds 01',
+    'filter.chefale':'Chef Ale Monteiro','pf.ch1':'Chef Ale Monteiro — Português','pf.ch2':'Chef Ale Monteiro — Espanhol',
+    'pf.b4':'Mercadinho EV','pf.b5':'Tour Solar BRDF',
+    'pf.a4':'Toni','pf.a5':'Toni Hunter','pf.a6':'AIGA 01',
+    'pf.l2':'GIROMAX — Logo',
+    'pf.c7':'Cassino 07','pf.c8':'Cassino 08','pf.c9':'Cassino 09','pf.c10':'Cassino 10',
+    'pf.c11':'Cassino 11','pf.c12':'Cassino 12','pf.c13':'Cassino 13','pf.c14':'Cassino 14',
+    'pf.c15':'Cassino 15','pf.c16':'Cassino 16','pf.c17':'Cassino 17','pf.c18':'Cassino 18',
+    'pf.c19':'Cassino 19','pf.c20':'Cassino 20','pf.c21':'Cassino 21','pf.c22':'Cassino 22','pf.c23':'Cassino 23',
     'pf.ui1':'UI de Site 01','pf.ui2':'UI de Site 02','pf.ui3':'UI de Site 03','pf.ui4':'Faísca Hero',
     'exp.label':'Trajetória','exp.title':'Experiência Profissional',
     'exp.locent.period':'Ago/2024 – Set/2025','exp.locent.role':'Senior Graphic Designer · iGaming',
@@ -2426,6 +2457,8 @@ const t = {
     'exp.free.i4':'Outthe Clouds: identidade visual e materiais de comunicação',
     'exp.free.i5':'Planeta Celular & Lima Imports: artes para redes sociais',
     'exp.free.i6':'Out The Clouds — desenvolvimento de identidade visual e materiais de comunicação para campanhas da marca de roupas',
+    'exp.free.i8':'BRDF Energia Solar — visualização 3D e conteúdo para redes sociais',
+    'exp.free.i9':'Chef Ale Monteiro | APP COMERBEM LABS — conteúdo visual e criativos para o aplicativo',
     'exp.free.i7':'BBC (Boff Boy Chique) — criação de artes e criativos para redes sociais da marca de roupas (meados de 2025)',
     'srv.label':'O Que Ofereço','srv.title':'Serviços feitos para impactar',
     'srv.1.title':'Criação de Sites','srv.1.desc':'Sites customizados e performáticos construídos do zero, combinando UX intuitivo, estética refinada e código limpo que escala com o seu negócio.',
@@ -2464,6 +2497,7 @@ const t = {
     'skills.label':'Expertise','skills.title':'Skills & Tools',
     'skill.banners':'Banner Design','skill.motion':'Motion Graphics',
     'skill.photo':'Photography & Composition','skill.drone':'Drone Piloting (UAV)',
+    'skill.aimanip':'AI Image & Video Manipulation','skill.aicode':'AI-Assisted Programming','skill.aisites':'AI-Built Websites',
     'portfolio.label':'Selected Work','portfolio.title':'Portfolio',
     'filter.all':'All Work','filter.banner':'Banner Design','filter.video':'Video',
     'filter.motion':'Motion','filter.identity':'Visual Identity',    'pf.b1':'Blender Animation 01','pf.b2':'Blender Animation 02','pf.b3':'Blender Animation 03',
@@ -2479,6 +2513,14 @@ const t = {
     'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
     'pf.od1':'Dentistry 01','pf.od2':'Dentistry 02','pf.od3':'Dentistry 03','pf.od4':'Dentistry 04','pf.od5':'Dentistry 05',
     'pf.sd1':'Seeds 01',
+    'filter.chefale':'Chef Ale Monteiro','pf.ch1':'Chef Ale Monteiro — Portuguese','pf.ch2':'Chef Ale Monteiro — Spanish',
+    'pf.b4':'Mercadinho EV','pf.b5':'Solar Tour BRDF',
+    'pf.a4':'Toni','pf.a5':'Toni Hunter','pf.a6':'AIGA 01',
+    'pf.l2':'GIROMAX — Logo',
+    'pf.c7':'Casino 07','pf.c8':'Casino 08','pf.c9':'Casino 09','pf.c10':'Casino 10',
+    'pf.c11':'Casino 11','pf.c12':'Casino 12','pf.c13':'Casino 13','pf.c14':'Casino 14',
+    'pf.c15':'Casino 15','pf.c16':'Casino 16','pf.c17':'Casino 17','pf.c18':'Casino 18',
+    'pf.c19':'Casino 19','pf.c20':'Casino 20','pf.c21':'Casino 21','pf.c22':'Casino 22','pf.c23':'Casino 23',
     'pf.ui1':'Website UI 01','pf.ui2':'Website UI 02','pf.ui3':'Website UI 03','pf.ui4':'Faísca Hero',
     'exp.label':'Journey','exp.title':'Professional Experience',
     'exp.locent.period':'Aug/2024 – Sep/2025','exp.locent.role':'Senior Graphic Designer · iGaming',
@@ -2499,6 +2541,8 @@ const t = {
     'exp.free.i4':'Outthe Clouds: visual identity and communication materials',
     'exp.free.i5':'Planeta Celular & Lima Imports: social media artwork and graphics',
     'exp.free.i6':'Out The Clouds — visual identity development and communication materials for the clothing brand campaigns',
+    'exp.free.i8':'BRDF Energia Solar — 3D visualization and social media content',
+    'exp.free.i9':'Chef Ale Monteiro | APP COMERBEM LABS — visual content and creatives for the app',
     'exp.free.i7':'BBC (Boff Boy Chique) — artwork and creatives for the clothing brand\'s social media (mid 2025)',
     'srv.label':'What I Offer','srv.title':'Services built for impact',
     'srv.1.title':'Website Creation','srv.1.desc':'Custom, performant websites built from scratch — combining intuitive UX, refined aesthetics, and clean code that scales with your business.',
@@ -2797,6 +2841,8 @@ const cfAllData = [
   { type:'video', src:'blender/WhatsApp%20Video%202026-03-23%20at%2023.00.38.mp4', filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b1',  name:'Blender Animation 01' },
   { type:'video', src:'blender/WhatsApp%20Video%202026-03-23%20at%2023.04.02.mp4', filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b2',  name:'Blender Animation 02' },
   { type:'video', src:'blender/WhatsApp%20Video%202026-03-23%20at%2023.04.03.mp4', filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b3',  name:'Blender Animation 03' },
+  { type:'video', src:'blender/mercadinho_ev_v1.mp4',                              filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b4',  name:'Mercadinho EV' },
+  { type:'video', src:'blender/tour_solar_BRDF_v1_1.mp4',                          filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b5',  name:'Tour Solar BRDF' },
   // ── SPORTS ───────────────────────────────────────────────────────────────────
   { type:'image', src:'esportes/390ef3cf-be20-4599-be11-4cac4bd4800a_rw_1200.png', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e1',  name:'Sports Design 01' },
   { type:'image', src:'esportes/7397d1e3-72d8-4f78-92ee-75857362c0bd_rw_1200.jpg', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e2',  name:'Sports Design 02' },
@@ -2809,10 +2855,14 @@ const cfAllData = [
   { type:'video', src:'videos/video5103114368254477488.mp4',                       filterCat:'videos',   catKey:'filter.videos',   cat:'Vídeos',       nameKey:'pf.v3',  name:'Video Production 02' },
   // ── LIVES ────────────────────────────────────────────────────────────────────
   { type:'video', src:'lives/IMG_3914.MP4',                                        filterCat:'lives',    catKey:'filter.lives',    cat:'Lives',        nameKey:'pf.l1',  name:'Live Recording' },
+  { type:'video', src:'lives/GIROMAX_logo.mp4',                                    filterCat:'lives',    catKey:'filter.lives',    cat:'Lives',        nameKey:'pf.l2',  name:'GIROMAX — Logo' },
   // ── PERSONAL ART ─────────────────────────────────────────────────────────────
   { type:'image', src:'artes%20pessoais/5103114368710716720.jpg',                  filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a1',  name:'Arte Pessoal 01' },
   { type:'video', src:'artes%20pessoais/kill%20bill%201-2.mp4',                    filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a2',  name:'Kill Bill' },
   { type:'video', src:'artes%20pessoais/pequi%20do%20capeTONI%203-2.mp4',          filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a3',  name:'Pequi do Capetoni' },
+  { type:'video', src:'artes%20pessoais/toni.mp4',                                 filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a4',  name:'Toni' },
+  { type:'video', src:'artes%20pessoais/toni%20hunter.mp4',                        filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a5',  name:'Toni Hunter' },
+  { type:'video', src:'artes%20pessoais/aiga%2001.mp4',                            filterCat:'artes',    catKey:'filter.artes',    cat:'Arte Pessoal', nameKey:'pf.a6',  name:'AIGA 01' },
   // ── CASINO ───────────────────────────────────────────────────────────────────
   { type:'image', src:'cassino/37ab616b-126c-4ec7-ad65-c891e75578d0_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c1',  name:'Casino Design 01' },
   { type:'image', src:'cassino/e69f33a2-0699-4400-aaee-526ac4bd564e_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c2',  name:'Casino Design 02' },
@@ -2820,6 +2870,23 @@ const cfAllData = [
   { type:'video', src:'cassino/Halloween_casino_banner_animation_202605191820.mp4',              filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c4',  name:'Halloween Banner' },
   { type:'video', src:'cassino/JAGUAR7_ad_with_jaguar_202606061357.mp4',                         filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c5',  name:'Jaguar7 Ad' },
   { type:'video', src:'cassino/Jaguar_character_in_hero_pose_202606061358.mp4',                  filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c6',  name:'Jaguar Hero' },
+  { type:'image', src:'cassino/1.jpeg',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c7',  name:'Cassino 07' },
+  { type:'video', src:'cassino/67.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c8',  name:'Cassino 08' },
+  { type:'video', src:'cassino/71.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c9',  name:'Cassino 09' },
+  { type:'video', src:'cassino/72.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c10', name:'Cassino 10' },
+  { type:'video', src:'cassino/76.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c11', name:'Cassino 11' },
+  { type:'video', src:'cassino/82.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c12', name:'Cassino 12' },
+  { type:'video', src:'cassino/85.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c13', name:'Cassino 13' },
+  { type:'video', src:'cassino/86.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c14', name:'Cassino 14' },
+  { type:'video', src:'cassino/87.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c15', name:'Cassino 15' },
+  { type:'video', src:'cassino/90.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c16', name:'Cassino 16' },
+  { type:'video', src:'cassino/92.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c17', name:'Cassino 17' },
+  { type:'video', src:'cassino/94.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c18', name:'Cassino 18' },
+  { type:'video', src:'cassino/94%20(2).mp4',                                      filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c19', name:'Cassino 19' },
+  { type:'video', src:'cassino/100.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c20', name:'Cassino 20' },
+  { type:'video', src:'cassino/102.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c21', name:'Cassino 21' },
+  { type:'video', src:'cassino/103.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c22', name:'Cassino 22' },
+  { type:'video', src:'cassino/109.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c23', name:'Cassino 23' },
   // ── ODONTOLOGIA ──────────────────────────────────────────────────────────────
   { type:'image', src:'Odontologia/Premium_dental_clinic_Instagram_Feed_202606112025.jpeg',     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od1', name:'Dentistry 01' },
   { type:'image', src:'Odontologia/Create_a_modern,_premium_Instagram_202605181614%20(1).jpeg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od2', name:'Dentistry 02' },
@@ -2833,6 +2900,9 @@ const cfAllData = [
   { type:'image', src:'ui%20de%20sites/af66d3a2-04ac-4a54-a3c0-5076100b1c58.png',                filterCat:'uisites',  catKey:'filter.uisites',  cat:'UI de Sites',  nameKey:'pf.ui2', name:'Website UI 02' },
   { type:'image', src:'ui%20de%20sites/ChatGPT%20Image%204%20de%20mai.%20de%202026,%2023_39_30.png', filterCat:'uisites', catKey:'filter.uisites', cat:'UI de Sites', nameKey:'pf.ui3', name:'Website UI 03' },
   { type:'image', src:'ui%20de%20sites/faisca-hero.png',                                          filterCat:'uisites',  catKey:'filter.uisites',  cat:'UI de Sites',  nameKey:'pf.ui4', name:'Faísca Hero' },
+  // ── CHEF ALE MONTEIRO ────────────────────────────────────────────────────────
+  { type:'video', src:'Chef%20Ale%20Monteiro/02%20PTBR.mp4',                       filterCat:'chefale',  catKey:'filter.chefale',  cat:'Chef Ale Monteiro', nameKey:'pf.ch1', name:'Chef Ale Monteiro — Português' },
+  { type:'video', src:'Chef%20Ale%20Monteiro/01%20ESP.mp4',                        filterCat:'chefale',  catKey:'filter.chefale',  cat:'Chef Ale Monteiro', nameKey:'pf.ch2', name:'Chef Ale Monteiro — Espanhol' },
 ];
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -2842,6 +2912,32 @@ let cfActiveData   = [];
 let cfCards        = [];
 let cfAutoTimer    = null;
 let cfBuilt        = false;
+
+// ── RITMO DO CARROSSEL — ajuste fino aqui ─────────────────────────────────────
+const CARD_HOLD_MS        = 2000;  // tempo que cada card fica PARADO no centro
+const CARD_TRANSITION_MS  = 800;   // duração do deslize de um card ao próximo
+const CARD_EASING         = 'cubic-bezier(.4,0,.2,1)';  // ease-in-out suave
+const MEDIA_PRELOAD_AHEAD = 2;     // cards extras pré-carregados à frente da rotação
+
+// Estados que pausam o autoplay
+let cfHover    = false;
+let cfDragging = false;
+function cfLightboxAberto() {
+  const lb = document.getElementById('lb');
+  return !!lb && lb.classList.contains('active');
+}
+function cfPausado() { return cfHover || cfDragging || cfLightboxAberto(); }
+
+function cfAutoStop() { clearTimeout(cfAutoTimer); cfAutoTimer = null; }
+function cfAutoStart() {
+  cfAutoStop();
+  if (fanRM || cfPausado() || cfActiveData.length < 2) return;
+  // 1º avanço após o repouso; depois cada ciclo = deslize + repouso
+  cfAutoTimer = setTimeout(function tick() {
+    cfNext();
+    cfAutoTimer = setTimeout(tick, CARD_TRANSITION_MS + CARD_HOLD_MS);
+  }, CARD_HOLD_MS);
+}
 
 const fanStage  = document.getElementById('fanStage');
 const fanDotsEl = document.getElementById('fanDots');
@@ -2870,28 +2966,36 @@ function fanDiff(idx) {
 
 // ── Position one card — ms=0 instant, ms>0 animated; easing optional ─────────
 function fanPos(card, diff, ms, hovered, centerHov, easing) {
-  const c = fanCfg(), ad = Math.abs(diff), sg = Math.sign(diff);
-  if (ad > c.half) {
-    card.style.willChange    = 'auto';
-    card.style.opacity       = '0';
-    card.style.pointerEvents = 'none';
-    card.style.zIndex        = '0';
-    return;
-  }
-  const tx  = sg * c.txStep[ad];
-  const ty  = c.tyStep[ad] + (hovered && ad > 0 ? -20 : 0);
-  const rot = sg * c.rotZ[ad];
-  const sc  = ad === 0 ? (centerHov ? 1.025 : 1) : c.scale[ad] * (hovered ? 1.05 : 1);
-  const dur = fanRM ? 0 : ms;
-  const ease = easing || 'cubic-bezier(.25,.46,.45,.94)';
+  const c   = fanCfg();
+  const sg  = Math.sign(diff);
+  const adR = Math.abs(diff);              // distância real do centro
+  const fora = adR > c.half;               // fora da faixa visível
+  const ad  = Math.min(adR, c.half);       // índice clampado nas tabelas de layout
+  // Os cards fora da faixa TAMBÉM recebem transform (antes não recebiam, e por
+  // isso "teleportavam" ao reentrar). Ficam estacionados logo além da borda.
+  const extra = fora ? 1 : 0;
+
+  const tx  = sg * (c.txStep[ad] + extra * 70);
+  const ty  = c.tyStep[ad] + (hovered && ad > 0 && !fora ? -20 : 0);
+  const rot = sg * (c.rotZ[ad] + extra * 6);
+  const sc  = fora
+    ? c.scale[c.half] * 0.9
+    : (ad === 0 ? (centerHov ? 1.025 : 1) : c.scale[ad] * (hovered ? 1.05 : 1));
+
+  // Só a primeira fileira fora da faixa anima (desliza para dentro/fora).
+  // Cards distantes são reposicionados na hora, para não atravessarem a tela.
+  const dur  = fanRM ? 0 : (adR > c.half + 1 ? 0 : ms);
+  const ease = easing || CARD_EASING;
+
   card.style.willChange  = dur > 0 ? 'transform, opacity' : 'auto';
   card.style.transition  = dur > 0
     ? `transform ${dur}ms ${ease}, opacity ${dur}ms ${ease}, box-shadow .3s, border-color .3s`
     : 'box-shadow .3s, border-color .3s';
   card.style.transform     = `translateX(${tx}px) translateY(${ty}px) rotateZ(${rot}deg) scale(${sc})`;
-  card.style.opacity       = ad === 0 ? '1' : ad === 1 ? '0.85' : '0.65';
-  card.style.zIndex        = String(10 - ad * 2);
-  card.style.pointerEvents = 'auto';
+  card.style.opacity       = fora ? '0' : (ad === 0 ? '1' : ad === 1 ? '0.85' : '0.65');
+  card.style.zIndex        = String(fora ? 0 : 10 - ad * 2);
+  card.style.pointerEvents = fora ? 'none' : 'auto';
+  if (fora) { card.setAttribute('data-center', 'false'); return; }
   if (hovered && ad > 0) {
     card.style.boxShadow   = '0 30px 80px rgba(6,35,29,.6),0 8px 24px rgba(6,35,29,.3)';
     card.style.borderColor = 'rgba(227,239,38,.6)';
@@ -2905,12 +3009,39 @@ function fanPos(card, diff, ms, hovered, centerHov, easing) {
   card.setAttribute('data-center', diff === 0 ? 'true' : 'false');
 }
 
+// ── PERF: janela de carregamento ──────────────────────────────────────────────
+// Os cards são posicionados por transform, então o loading="lazy" nativo não os
+// segura (o browser os considera todos na viewport) — por isso o src é adiado.
+// REGRA: todo card VISÍVEL (|d| <= half) sempre tem mídia carregada, mais uma
+// margem de MEDIA_PRELOAD_AHEAD à frente da rotação (e 1 atrás, para quem volta).
+// Vídeo visível precisa de preload='metadata' para pintar o 1º frame — senão o
+// card aparece vazio. Fora dessa janela nada é baixado.
+function fanEnsureMedia(card, d) {
+  const el = card.querySelector('img, video');
+  if (!el) return;
+  const half    = fanCfg().half;
+  const visivel = Math.abs(d) <= half;
+  const naJanela = d <= half + MEDIA_PRELOAD_AHEAD && d >= -(half + 1);
+
+  // 1) vídeo visível: metadata para renderizar o primeiro frame
+  if (el.tagName === 'VIDEO' && visivel && el.preload !== 'metadata') {
+    el.preload = 'metadata';
+    if (!el.dataset.src) el.load();   // já tinha src: força buscar o frame
+  }
+  // 2) atribui o src assim que o card entra na janela
+  if (el.dataset.src && naJanela) {
+    el.src = el.dataset.src;
+    delete el.dataset.src;
+  }
+}
+
 // ── Update all cards + dots + subtitle via RAF ────────────────────────────────
 function fanUpdate(ms) {
   requestAnimationFrame(() => {
     cfCards.forEach((card, i) => {
       const d = fanDiff(i);
       fanPos(card, d, ms, false, false);
+      fanEnsureMedia(card, d);
       const vid = card.querySelector('video');
       if (vid) { d === 0 ? vid.play().catch(()=>{}) : (vid.pause(), vid.currentTime = 0); }
     });
@@ -2939,7 +3070,7 @@ function fanUpdateSub() {
 function cfGoTo(idx) {
   const n = cfActiveData.length; if (!n) return;
   cfCurrent = ((idx % n) + n) % n;
-  fanUpdate(fanRM ? 0 : 500);
+  fanUpdate(fanRM ? 0 : CARD_TRANSITION_MS);
 }
 function cfNext() { cfGoTo(cfCurrent + 1); }
 function cfPrev() { cfGoTo(cfCurrent - 1); }
@@ -2964,6 +3095,7 @@ function fanEntrance() {
     cfCards.forEach((card, i) => {
       const abs   = Math.abs(fanDiff(i));
       const delay = abs === 0 ? 0 : abs <= 2 ? 150 + rand30() : 300 + rand30();
+      fanEnsureMedia(card, fanDiff(i));   // PERF: carrega a mídia da janela já na entrada
       setTimeout(() =>
         requestAnimationFrame(() => fanPos(card, fanDiff(i), 560, false, false, SPRING))
       , delay);
@@ -2974,7 +3106,7 @@ function fanEntrance() {
 
 // ── Build / rebuild carousel ──────────────────────────────────────────────────
 function cfBuildCarousel(data, instant) {
-  clearInterval(cfAutoTimer);
+  cfAutoStop();
   fanStage.innerHTML = ''; fanDotsEl.innerHTML = '';
   cfCards = []; cfActiveData = data; cfCurrent = 0;
   if (fanSubEl) fanSubEl.textContent = '';
@@ -2993,7 +3125,9 @@ function cfBuildCarousel(data, instant) {
     media.className = 'fan-card-media';
     if (item.type === 'image') {
       const img = document.createElement('img');
-      img.src = item.src; img.alt = item.name; img.loading = 'lazy';
+      // PERF: src só é atribuído quando o card entra na janela visível (ver fanEnsureMedia)
+      img.dataset.src = item.src; img.alt = item.name; img.loading = 'lazy';
+      img.width = 260; img.height = 360; img.decoding = 'async';
       img.addEventListener('error', function() {
         this.style.display = 'none';
         this.parentElement.classList.add('fan-card-fallback');
@@ -3008,8 +3142,10 @@ function cfBuildCarousel(data, instant) {
       media.appendChild(img);
     } else {
       const vid = document.createElement('video');
-      vid.src = item.src; vid.muted = true; vid.loop = true;
-      vid.setAttribute('playsinline',''); vid.preload = 'metadata';
+      // PERF: preload='none' + src adiado → nenhum vídeo baixa no carregamento da página
+      vid.dataset.src = item.src; vid.muted = true; vid.loop = true;
+      vid.setAttribute('playsinline',''); vid.preload = 'none';
+      vid.width = 260; vid.height = 360;
       media.appendChild(vid);
     }
 
@@ -3075,7 +3211,7 @@ function cfBuildCarousel(data, instant) {
   });
 
   if (instant) fanUpdate(0); else fanEntrance();
-  cfAutoTimer = setInterval(cfNext, 4000);
+  cfAutoStart();
 }
 
 // ── Filter buttons ────────────────────────────────────────────────────────────
@@ -3089,16 +3225,16 @@ document.querySelectorAll('.pf-filter-btn').forEach(btn => {
       card.style.transform  = 'translateX(0) translateY(0) rotateZ(0) scale(0.82)';
       card.style.opacity    = '0';
     });
-    clearInterval(cfAutoTimer);
+    cfAutoStop();
     setTimeout(() => {
       cfBuildCarousel(cfActiveFilter === 'all' ? cfAllData : cfAllData.filter(x => x.filterCat === cfActiveFilter));
     }, 300);
   });
 });
 
-// ── Autoplay + hover pause ────────────────────────────────────────────────────
-fanWrapEl.addEventListener('mouseenter', () => clearInterval(cfAutoTimer));
-fanWrapEl.addEventListener('mouseleave', () => { cfAutoTimer = setInterval(cfNext, 4000); });
+// ── Autoplay + pausa no hover ─────────────────────────────────────────────────
+fanWrapEl.addEventListener('mouseenter', () => { cfHover = true;  cfAutoStop();  });
+fanWrapEl.addEventListener('mouseleave', () => { cfHover = false; cfAutoStart(); });
 
 // ── Fan-card cursor state (yellow ring) ───────────────────────────────────────
 fanWrapEl.addEventListener('mouseover', e => {
@@ -3116,7 +3252,7 @@ let fanDragLastX  = 0, fanDragLastT = 0, fanDragVx = 0;
 fanWrapEl.addEventListener('mousedown', e => {
   fanDragStartX = fanDragLastX = e.clientX;
   fanDragLastT  = Date.now(); fanDragVx = 0; fanDragged = false;
-  clearInterval(cfAutoTimer);
+  cfDragging = true; cfAutoStop();
   e.preventDefault();
 });
 
@@ -3133,12 +3269,13 @@ document.addEventListener('mousemove', e => {
 function fanDragEnd(clientX) {
   if (fanDragStartX === null) return;
   const dx = clientX - fanDragStartX, wasD = fanDragged;
-  fanDragStartX = null; fanWrapEl.classList.remove('is-dragging');
+  fanDragStartX = null; cfDragging = false;
+  fanWrapEl.classList.remove('is-dragging');
   if (wasD && Math.abs(dx) > 20) {
-    const steps = Math.abs(fanDragVx) > 1.5 ? 2 : 1;
-    dx < 0 ? cfGoTo(cfCurrent + steps) : cfGoTo(cfCurrent - steps);
+    // sempre UMA posição por gesto — nunca pula cards
+    dx < 0 ? cfNext() : cfPrev();
   }
-  cfAutoTimer = setInterval(cfNext, 4000);
+  cfAutoStart();
 }
 
 document.addEventListener('mouseup', e  => fanDragEnd(e.clientX));
@@ -3151,7 +3288,7 @@ fanWrapEl.addEventListener('touchstart', e => {
   fanTX = fanTLastX = e.touches[0].clientX;
   fanTY = e.touches[0].clientY;
   fanTLastT = Date.now(); fanTVx = 0;
-  clearInterval(cfAutoTimer);
+  cfDragging = true; cfAutoStop();
 }, { passive: true });
 
 fanWrapEl.addEventListener('touchmove', e => {
@@ -3164,10 +3301,11 @@ fanWrapEl.addEventListener('touchend', e => {
   const dx = e.changedTouches[0].clientX - fanTX;
   const dy = e.changedTouches[0].clientY - fanTY;
   if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 30) {
-    const steps = Math.abs(fanTVx) > 1.5 ? 2 : 1;
-    dx < 0 ? cfGoTo(cfCurrent + steps) : cfGoTo(cfCurrent - steps);
+    // sempre UMA posição por swipe — nunca pula cards
+    dx < 0 ? cfNext() : cfPrev();
   }
-  cfAutoTimer = setInterval(cfNext, 4000);
+  cfDragging = false;
+  cfAutoStart();
 }, { passive: true });
 
 // ── Keyboard (skip when lightbox open) ────────────────────────────────────────
@@ -3321,12 +3459,14 @@ document.querySelectorAll('.service-card').forEach(card => {
     lbRender();
     lb.classList.add('active');
     document.body.style.overflow = 'hidden';
+    if (typeof cfAutoStop === 'function') cfAutoStop();   // pausa o carrossel
   };
 
   function lbClose() {
     lbStopVideo();
     lb.classList.remove('active');
     document.body.style.overflow = '';
+    if (typeof cfAutoStart === 'function') cfAutoStart(); // retoma o carrossel
   }
 
   document.getElementById('lbClose').addEventListener('click', lbClose);
