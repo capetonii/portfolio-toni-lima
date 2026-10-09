@@ -1455,6 +1455,9 @@ footer { background: #06231D !important; }
   left: 50% !important; top: 0 !important; bottom: 0 !important;
   width: 2px !important;
   background: #E3EF26 !important;
+  /* sinal luminoso: brilho lima + sombra escura deslocada (descola do creme) */
+  box-shadow: 0 0 6px rgba(227,239,38,0.8), 0 0 16px rgba(227,239,38,0.45), 0 0 32px rgba(227,239,38,0.2),
+              4px 4px 10px rgba(0,0,0,0.18) !important;
   transform: translateX(-50%) scaleY(0) !important;
   transform-origin: top center !important;
   transition: transform 1.5s ease-out !important;
@@ -1486,23 +1489,27 @@ footer { background: #06231D !important; }
   position: absolute !important;
   left: 50% !important; top: 28px !important;
   width: 14px !important; height: 14px !important;
-  background: #E3EF26 !important;
+  background: radial-gradient(circle, #FFFFFF 0%, #F6FA9A 30%, #E3EF26 65%) !important;  /* núcleo claro */
   border-radius: 50% !important;
   transform: translateX(-50%) !important;
   border: 3px solid #FFFDEE !important;
-  box-shadow: 0 0 0 2px #E3EF26 !important;
+  box-shadow: 0 0 0 2px #E3EF26, 0 0 8px rgba(227,239,38,0.9), 0 0 20px rgba(227,239,38,0.55),
+              0 0 40px rgba(227,239,38,0.25), 4px 4px 10px rgba(0,0,0,0.18) !important;
   z-index: 2 !important;
+  animation: pulse-tl-glow 3s ease-in-out infinite !important;   /* pulso lento do brilho (só nos nós) */
 }
 @keyframes pulse-tl-glow {
   0%, 100% {
-    box-shadow: 0 0 0 2px #E3EF26, 0 0 0 0 rgba(227,239,38,0.15);
+    box-shadow: 0 0 0 2px #E3EF26, 0 0 8px rgba(227,239,38,0.9), 0 0 20px rgba(227,239,38,0.55),
+                0 0 40px rgba(227,239,38,0.25), 4px 4px 10px rgba(0,0,0,0.18);
   }
   50% {
-    box-shadow: 0 0 0 2px #E3EF26, 0 0 0 8px rgba(227,239,38,0);
+    box-shadow: 0 0 0 2px #E3EF26, 0 0 12px rgba(227,239,38,1), 0 0 30px rgba(227,239,38,0.75),
+                0 0 56px rgba(227,239,38,0.4), 4px 4px 10px rgba(0,0,0,0.18);
   }
 }
-.timeline-dot.current {
-  animation: pulse-tl-glow 2s ease-in-out infinite !important;
+@media (prefers-reduced-motion: reduce) {
+  .timeline-dot { animation: none !important; }
 }
 
 /* ─── 3. CARD STYLE ─────────────────────────────────────── */
@@ -2373,15 +2380,19 @@ const t = {
     'pf.v1':'Sem o Som de Eletricidade','pf.v2':'Produção de Vídeo 01','pf.v3':'Produção de Vídeo 02',
     'pf.l1':'Live Recording','pf.a1':'Arte Pessoal 01','pf.a2':'Kill Bill','pf.a3':'Pequi do Capetoni',
     'filter.odontologia':'Odontologia','filter.seeds':'Seeds','filter.uisites':'UI de Sites',
-    'pf.c3':'Casino Design 03','pf.c4':'Banner Halloween','pf.c5':'Anúncio Jaguar7','pf.c6':'Jaguar Hero',
+    'pf.c3':'Casino Design 03','pf.c5':'Anúncio Jaguar7','pf.c6':'Jaguar Hero',
     'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
-    'pf.od1':'Odontologia 01','pf.od2':'Odontologia 02','pf.od3':'Odontologia 03','pf.od4':'Odontologia 04','pf.od5':'Odontologia 05',
+    'pf.od1':'Humanitá — Seu sorriso é seu cartão de visitas','pf.od2':'Humanitá — Prevenir custa menos',
+    'pf.od3':'Humanitá — Quanto tempo dura um implante?','pf.od4':'Humanitá — Facetas de resina: sorriso natural',
+    'pf.od5':'Humanitá — Nós devolvemos o seu sorriso','pf.od6':'Humanitá — Perdeu um dente? Implante dentário',
+    'pf.od7':'Humanitá — Facetas de resina para transformar o seu sorriso','pf.od8':'Humanitá — Seu sorriso mais branco',
+    'pf.od9':'Humanitá — Implante (personagem 3D)','pf.od10':'Humanitá — Implante dentário (vídeo)',
     'pf.sd1':'Seeds 01',
     'filter.chefale':'Chef Ale Monteiro','pf.ch1':'Chef Ale Monteiro — Português','pf.ch2':'Chef Ale Monteiro — Espanhol',
-    'pf.b4':'Mercadinho EV','pf.b5':'Tour Solar BRDF',
+    'pf.b4':'Mercadinho EV','pf.b5':'Tour Solar BRDF','pf.b6':'Hylo — Personagem 3D','pf.b7':'Poste — Animação 3D',
     'pf.a4':'Toni','pf.a5':'Toni Hunter','pf.a6':'AIGA 01',
     'pf.l2':'GIROMAX — Logo',
-    'pf.c7':'Cassino 07','pf.c8':'Cassino 08','pf.c9':'Cassino 09','pf.c10':'Cassino 10',
+    'pf.c7':'Cassino 07','pf.c9':'Cassino 09','pf.c10':'Cassino 10',
     'pf.c11':'Cassino 11','pf.c12':'Cassino 12','pf.c13':'Cassino 13','pf.c14':'Cassino 14',
     'pf.c15':'Cassino 15','pf.c16':'Cassino 16','pf.c17':'Cassino 17','pf.c18':'Cassino 18',
     'pf.c19':'Cassino 19','pf.c20':'Cassino 20','pf.c21':'Cassino 21','pf.c22':'Cassino 22','pf.c23':'Cassino 23',
@@ -2458,15 +2469,19 @@ const t = {
     'pf.v1':'Sem o Som de Eletricidade','pf.v2':'Video Production 01','pf.v3':'Video Production 02',
     'pf.l1':'Live Recording','pf.a1':'Personal Art 01','pf.a2':'Kill Bill','pf.a3':'Pequi do Capetoni',
     'filter.odontologia':'Dentistry','filter.seeds':'Seeds','filter.uisites':'Website UI',
-    'pf.c3':'Casino Design 03','pf.c4':'Halloween Banner','pf.c5':'Jaguar7 Ad','pf.c6':'Jaguar Hero',
+    'pf.c3':'Casino Design 03','pf.c5':'Jaguar7 Ad','pf.c6':'Jaguar Hero',
     'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
-    'pf.od1':'Dentistry 01','pf.od2':'Dentistry 02','pf.od3':'Dentistry 03','pf.od4':'Dentistry 04','pf.od5':'Dentistry 05',
+    'pf.od1':'Humanitá — Your smile is your business card','pf.od2':'Humanitá — Prevention costs less',
+    'pf.od3':'Humanitá — How long does an implant last?','pf.od4':'Humanitá — Resin veneers: a natural smile',
+    'pf.od5':'Humanitá — We give your smile back','pf.od6':'Humanitá — Lost a tooth? Dental implant',
+    'pf.od7':'Humanitá — Resin veneers to transform your smile','pf.od8':'Humanitá — A whiter smile',
+    'pf.od9':'Humanitá — Implant (3D character)','pf.od10':'Humanitá — Dental implant (video)',
     'pf.sd1':'Seeds 01',
     'filter.chefale':'Chef Ale Monteiro','pf.ch1':'Chef Ale Monteiro — Portuguese','pf.ch2':'Chef Ale Monteiro — Spanish',
-    'pf.b4':'Mercadinho EV','pf.b5':'Solar Tour BRDF',
+    'pf.b4':'Mercadinho EV','pf.b5':'Solar Tour BRDF','pf.b6':'Hylo — 3D Character','pf.b7':'Poste — 3D Animation',
     'pf.a4':'Toni','pf.a5':'Toni Hunter','pf.a6':'AIGA 01',
     'pf.l2':'GIROMAX — Logo',
-    'pf.c7':'Casino 07','pf.c8':'Casino 08','pf.c9':'Casino 09','pf.c10':'Casino 10',
+    'pf.c7':'Casino 07','pf.c9':'Casino 09','pf.c10':'Casino 10',
     'pf.c11':'Casino 11','pf.c12':'Casino 12','pf.c13':'Casino 13','pf.c14':'Casino 14',
     'pf.c15':'Casino 15','pf.c16':'Casino 16','pf.c17':'Casino 17','pf.c18':'Casino 18',
     'pf.c19':'Casino 19','pf.c20':'Casino 20','pf.c21':'Casino 21','pf.c22':'Casino 22','pf.c23':'Casino 23',
@@ -2778,6 +2793,8 @@ const cfAllData = [
   { type:'video', src:'blender/WhatsApp%20Video%202026-03-23%20at%2023.04.03.mp4', filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b3',  name:'Blender Animation 03' },
   { type:'video', src:'blender/mercadinho_ev_v1.mp4',                              filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b4',  name:'Mercadinho EV' },
   { type:'video', src:'blender/tour_solar_BRDF_v1_1.mp4',                          filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b5',  name:'Tour Solar BRDF' },
+  { type:'video', src:'blender/hylo_%20start.mp4',          poster:'posters/b6.jpg',  filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b6',  name:'Hylo — Personagem 3D' },
+  { type:'video', src:'blender/poste_%20agora%20vai-2.mp4', poster:'posters/b7.jpg',  filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b7',  name:'Poste — Animação 3D' },
   // ── SPORTS ───────────────────────────────────────────────────────────────────
   { type:'image', src:'esportes/390ef3cf-be20-4599-be11-4cac4bd4800a_rw_1200.png', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e1',  name:'Sports Design 01' },
   { type:'image', src:'esportes/7397d1e3-72d8-4f78-92ee-75857362c0bd_rw_1200.jpg', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e2',  name:'Sports Design 02' },
@@ -2802,11 +2819,9 @@ const cfAllData = [
   { type:'image', src:'cassino/37ab616b-126c-4ec7-ad65-c891e75578d0_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c1',  name:'Casino Design 01' },
   { type:'image', src:'cassino/e69f33a2-0699-4400-aaee-526ac4bd564e_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c2',  name:'Casino Design 02' },
   { type:'image', src:'cassino/ChatGPT%20Image%2017%20de%20jun.%20de%202026,%2012_34_23.png',    filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c3',  name:'Casino Design 03' },
-  { type:'video', src:'cassino/Halloween_casino_banner_animation_202605191820.mp4',              filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c4',  name:'Halloween Banner' },
   { type:'video', src:'cassino/JAGUAR7_ad_with_jaguar_202606061357.mp4',                         filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c5',  name:'Jaguar7 Ad' },
   { type:'video', src:'cassino/Jaguar_character_in_hero_pose_202606061358.mp4',                  filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c6',  name:'Jaguar Hero' },
   { type:'image', src:'cassino/1.jpeg',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c7',  name:'Cassino 07' },
-  { type:'video', src:'cassino/67.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c8',  name:'Cassino 08' },
   { type:'video', src:'cassino/71.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c9',  name:'Cassino 09' },
   { type:'video', src:'cassino/72.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c10', name:'Cassino 10' },
   { type:'video', src:'cassino/76.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c11', name:'Cassino 11' },
@@ -2823,11 +2838,16 @@ const cfAllData = [
   { type:'video', src:'cassino/103.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c22', name:'Cassino 22' },
   { type:'video', src:'cassino/109.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c23', name:'Cassino 23' },
   // ── ODONTOLOGIA ──────────────────────────────────────────────────────────────
-  { type:'image', src:'Odontologia/Premium_dental_clinic_Instagram_Feed_202606112025.jpeg',     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od1', name:'Dentistry 01' },
-  { type:'image', src:'Odontologia/Create_a_modern,_premium_Instagram_202605181614%20(1).jpeg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od2', name:'Dentistry 02' },
-  { type:'image', src:'Odontologia/Create_a_modern,_premium_Instagram_202605181641%20(1).jpeg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od3', name:'Dentistry 03' },
-  { type:'image', src:'Odontologia/Add_a_new_line_of_202606111740.jpeg',                         filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od4', name:'Dentistry 04' },
-  { type:'image', src:'Odontologia/Image_editing_task_on_the_202606111803.jpeg',                 filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od5', name:'Dentistry 05' },
+  { type:'image', src:'Odontologia/1%20A.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od1',  name:'Humanitá — Seu sorriso é seu cartão de visitas' },
+  { type:'image', src:'Odontologia/1%20B.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od2',  name:'Humanitá — Prevenir custa menos' },
+  { type:'image', src:'Odontologia/2%20A.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od3',  name:'Humanitá — Quanto tempo dura um implante?' },
+  { type:'image', src:'Odontologia/3%20A.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od4',  name:'Humanitá — Facetas de resina: sorriso natural' },
+  { type:'video', src:'Odontologia/A%2001.mp4',             poster:'posters/od5.jpg',  filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od5',  name:'Humanitá — Nós devolvemos o seu sorriso' },
+  { type:'image', src:'Odontologia/B-01.png',                                      filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od6',  name:'Humanitá — Perdeu um dente? Implante dentário' },
+  { type:'image', src:'Odontologia/C%2002.jpeg',                                   filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od7',  name:'Humanitá — Facetas de resina para transformar o seu sorriso' },
+  { type:'image', src:'Odontologia/C%2002.png',                                    filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od8',  name:'Humanitá — Seu sorriso mais branco' },
+  { type:'video', src:'Odontologia/humanita%20implante.mp4', poster:'posters/od9.jpg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od9',  name:'Humanitá — Implante (personagem 3D)' },
+  { type:'video', src:'Odontologia/video%20implante.mp4',   poster:'posters/od10.jpg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od10', name:'Humanitá — Implante dentário (vídeo)' },
   // ── SEEDS ────────────────────────────────────────────────────────────────────
   { type:'image', src:'seeds/Gemini_Generated_Image_eu7qkgeu7qkgeu7q.png',                       filterCat:'seeds',    catKey:'filter.seeds',    cat:'Seeds',        nameKey:'pf.sd1', name:'Seeds 01' },
   // ── UI DE SITES ──────────────────────────────────────────────────────────────
@@ -2852,9 +2872,24 @@ function cfShuffle(arr) {
   for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
   return a;
 }
-const cfAllOrder = cfShuffle(cfAllData.filter(x => !HIDDEN_FROM_ALL.includes(x.filterCat)));
+// ── DESTAQUES (por nameKey) ───────────────────────────────────────────────────
+// "Todos": o PRIMEIRO card ao carregar é um destes, sorteado; o resto segue
+// aleatório. Filtro de categoria: os destaques vêm primeiro (ordem sorteada
+// entre eles), depois as demais peças da categoria. O lightbox segue a mesma
+// sequência (usa cfActiveData).
+const FEATURED_FIRST = ['pf.b6', 'pf.b7'];
+const cfIsFeatured = x => FEATURED_FIRST.includes(x.nameKey);
+const cfAllOrder = (() => {
+  const order = cfShuffle(cfAllData.filter(x => !HIDDEN_FROM_ALL.includes(x.filterCat)));
+  const feats = order.filter(cfIsFeatured);
+  if (!feats.length) return order;
+  const first = feats[Math.floor(Math.random() * feats.length)];
+  return [first].concat(order.filter(x => x !== first));
+})();
 function cfDataFor(filter) {
-  return filter === 'all' ? cfAllOrder : cfAllData.filter(x => x.filterCat === filter);
+  if (filter === 'all') return cfAllOrder;
+  const list = cfAllData.filter(x => x.filterCat === filter);
+  return cfShuffle(list.filter(cfIsFeatured)).concat(list.filter(x => !cfIsFeatured(x)));
 }
 
 // ── State ─────────────────────────────────────────────────────────────────────
@@ -3100,6 +3135,7 @@ function cfBuildCarousel(data, instant) {
       const vid = document.createElement('video');
       // PERF: preload='none' + src adiado → nenhum vídeo baixa no carregamento da página
       vid.dataset.src = item.src; vid.muted = true; vid.loop = true;
+      if (item.poster) vid.poster = item.poster;   // capa JPG leve (campo opcional nos dados)
       vid.setAttribute('playsinline',''); vid.preload = 'none';
       vid.width = 260; vid.height = 360;
       media.appendChild(vid);
