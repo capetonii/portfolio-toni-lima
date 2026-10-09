@@ -1,5 +1,9 @@
 # TONI LIMA PORTFOLIO — MASTER CONTEXT DOCUMENT
-Version: 1.0 | Last updated: current session
+Version: 1.1 | Last updated: 09/10/2026 (branch `text-fixes` — só textos, sem mudança visual)
+
+> O código (`index.html`) é a fonte da verdade. O visual do site NÃO mudou nesta
+> versão; um redesign experimental existe no branch `redesign` e NÃO deve ser usado
+> sem pedido explícito do dono.
 
 ---
 
@@ -12,16 +16,27 @@ Version: 1.0 | Last updated: current session
 - Email: josealima.15@gmail.com
 - WhatsApp: +55 (61) 99675-3348
 - Experience: 8+ years in the audiovisual industry
+- Projects delivered: 67 (contador "Projetos Concluídos" e card flutuante "Projetos entregues")
 - Specialties: video editing, motion graphics,
   visual identity, iGaming banners, thumbnails
 
+### Links oficiais (https, nova aba, rel="noopener noreferrer")
+- LinkedIn: https://www.linkedin.com/in/jos%C3%A9-ant%C3%B4nio-lima-7a75862a3 (texto exibido: linkedin.com/in/josé-antônio-lima)
+- Behance: https://www.behance.net/eduardavesoarto (rodapé)
+- Instagram: https://www.instagram.com/cybertoni.com.br/ (rodapé)
+- Portfólio externo: https://tonilimaelesbao.myportfolio.com/work
+
 ---
 
-## 💼 WORK EXPERIENCE
+## 💼 WORK EXPERIENCE (como está no site)
+
+### SEEDS COMPANY
+- Role: Graphic Designer — Tráfego Pago & Conversão
+- Period: Set/2025 – presente (EN: Sep/2025 – Present)
 
 ### LOCENT TECHNOLOGY (iGaming)
-- Role: Senior Graphic Designer
-- Period: October/2022 – present
+- Role: Senior Graphic Designer · iGaming
+- Period: Ago/2024 – Set/2025
 - Activities:
   • Banners for iGaming platforms and social media
   • Interactive animations for engagement
@@ -29,14 +44,18 @@ Version: 1.0 | Last updated: current session
   • Strategic content aligned with iGaming market
 
 ### FREELANCER
-- Role: Graphic Designer
-- Period: February/2018 – October/2022
+- Role: Designer Gráfico Autônomo
+- Period: Fev/2018 – Set/2025
 - Clients:
   • Los Frango — visual identity + marketing + paid traffic
   • Bellys Brechó — social media content
   • Point do Crepe — menus and digital materials
-  • Outthe Clouds — visual identity and communication
-  • Planeta Celular e Lima Imports — artwork and graphics
+  • Outthe Clouds — identidade visual e materiais de comunicação para campanhas da
+    marca de roupas (as duas linhas antigas foram unificadas em `exp.free.i4`; `i6` saiu)
+  • Planeta Celular & Lima Imports — artwork and graphics
+  • BBC (Boff Boy Chique) — artes e criativos para redes sociais (meados de 2025)
+  • BRDF Energia Solar — visualização 3D e conteúdo para redes sociais
+  • Chef Ale Monteiro | APP COMERBEM LABS — conteúdo visual e criativos para o app
 
 ---
 
@@ -69,7 +88,7 @@ Version: 1.0 | Last updated: current session
 - Main background:   #F5F0E8  (warm beige)
 - Dark green:        #2D6A4F  (primary accent)
 - Medium green:      #52B788  (secondary accent)
-- Primary text:      #1A1A1A
+- Primary text:      #1A1A1A  (⚠️ desatualizado: no código o texto é #06231D; ver :root do index.html)
 - Secondary text:    #6B6B6B
 - Glassmorphism:     rgba(255,255,255,0.05)
 - Footer bg:         #1A1A1A
@@ -112,9 +131,11 @@ Version: 1.0 | Last updated: current session
 - Full professional summary
 - Animated counters on scroll enter:
   • 8+ Years of experience
-  • 50+ Projects delivered
-  • 10+ Clients served
-- "Download CV" button with icon
+  • 8 Anos de Experiência
+  • 67 Projetos Concluídos (+ card flutuante "67 Projetos entregues")
+  • 10 Clientes Atendidos
+  • 100 % Satisfação
+- (Não existe botão "Download CV" no site — a menção antiga estava errada.)
 
 ### 4. SKILLS
 - Cards grid with icon + tool name
@@ -162,10 +183,14 @@ Version: 1.0 | Last updated: current session
 - Scroll entrance animation
 
 ### 8. TESTIMONIALS
-- Cards with circular photo, name, role, stars
-- Testimonial text in italic
-- Smooth autoplay carousel
-- Placeholders ready for real testimonials
+- Cards in a 3-column grid with initials avatar, name, role, stars (sem carrossel)
+- 4 depoimentos REAIS — manter texto, nomes e cargos exatos:
+  1. Ana Monteiro — CEO, Verdura Studio
+  2. Hellen Elesbão — Sócia-fundadora, Seeds Company (EN: Co-founder, Seeds Company)
+  3. Cibele Haddad — Diretora de Produto, Archē
+  4. Henrique Brandão — Sócio-fundador, Seeds Company (EN: Co-founder, Seeds Company)
+     ⚠️ aguardando aprovação do Henrique antes do merge para produção
+- O 4º card é cópia exata da marcação do 3º; no desktop ele ocupa sozinho a 2ª linha do grid.
 
 ### 9. CONTACT
 - Animated float label inputs
@@ -252,7 +277,6 @@ Version: 1.0 | Last updated: current session
 ## 🚧 PLANNED IMPROVEMENTS
 
 - [ ] Add real project images to the carousel
-- [ ] Fill testimonials with real client reviews
 - [ ] Add more projects to the portfolio
 - [ ] Create individual project page (modal or new page)
 - [ ] Integrate contact form with backend or EmailJS
@@ -269,7 +293,7 @@ Overlay em tela cheia que toca um vídeo ao abrir o site, começa mudo (com bot�
 de som), e some com fade quando o vídeo termina. É uma ADIÇÃO isolada — o site
 funciona 100% com ela desligada ou removida.
 
-- Vídeo: `imagem inicial/Retro_computer_idle_animation_202606191622.mp4` (~10s)
+- Vídeo: `imagem inicial/Retro_computer_character after 2.mp4` (~3,2s; o fade ocorre aos 3,3s)
   - No HTML o caminho usa `%20` nos espaços: `imagem%20inicial/...`
   - A pasta `imagem inicial/` precisa ir junto no commit/deploy (senão dá 404 →
     a rede de segurança revela o site mesmo assim).
