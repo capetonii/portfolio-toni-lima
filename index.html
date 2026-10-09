@@ -76,100 +76,118 @@
   }
   .btn-primary, .btn-whatsapp, .nav-cta, .form-submit { min-height: 44px; }
 
-  /* NAV */
-  nav {
-    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
-    padding: 24px 60px; display: flex; align-items: center;
-    justify-content: space-between; background: #06231D;
-    transition: padding 0.4s, background 0.4s, backdrop-filter 0.4s, box-shadow 0.4s;
+  /* ═══ SIDEBAR NAV START ═══
+     Navegação lateral flutuante (desktop) · barra inferior + topo fino (≤900px).
+     O conteúdo da página é deslocado por --sb-offset; os containers internos
+     (max-width 1200px, grids) continuam iguais. */
+  :root { --sb-w: 72px; --sb-gap: 16px; --sb-offset: calc(var(--sb-w) + var(--sb-gap) * 2); }
+  body { padding-left: var(--sb-offset); }
+  .sb {
+    position: fixed; top: var(--sb-gap); bottom: var(--sb-gap); left: var(--sb-gap);
+    width: var(--sb-w); z-index: 1000;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 18px 0 16px; gap: 8px;
+    background: #06231D; border-radius: 24px;
+    border: 1px solid rgba(227,239,38,0.10);
+    box-shadow: 0 18px 48px rgba(6,35,29,0.28), 0 2px 8px rgba(6,35,29,0.18);
   }
-  nav.scrolled {
-    padding: 14px 60px;
-    background: rgba(6,35,29,0.96);
-    backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    box-shadow: var(--shadow-sm);
-    border-bottom: 1px solid rgba(227,239,38,0.12);
+  .sb a, .sb button, .sb-top a, .sb-top button { cursor: none; }
+  .sb-logo {
+    font-family: 'Playfair Display', serif; font-size: 20px; font-weight: 700;
+    letter-spacing: -0.02em; color: #E3EF26; text-decoration: none; line-height: 1; padding: 6px 0 10px;
   }
-  .nav-logo {
-    font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 700;
-    letter-spacing: -0.02em; color: #E3EF26; text-decoration: none;
+  .sb-nav { list-style: none; display: flex; flex-direction: column; gap: 6px; margin: auto 0; width: 100%; align-items: center; }
+  .sb-link {
+    position: relative; display: flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px; border-radius: 14px; color: rgba(226,251,206,0.72);
+    text-decoration: none; transition: color 0.2s, background 0.2s, filter 0.2s;
   }
-  .nav-links { display: flex; gap: 32px; list-style: none; }
-  .nav-links a {
-    font-size: 14px; font-weight: 500; color: #E2FBCE;
-    text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; position: relative;
+  .sb-link svg { width: 22px; height: 22px; stroke: currentColor; fill: none; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+  .sb-link:hover { color: #E3EF26; filter: drop-shadow(0 0 7px rgba(227,239,38,0.6)); }
+  .sb-link.active { color: #E3EF26; background: rgba(227,239,38,0.12); }
+  .sb-link.active::before {
+    content: ''; position: absolute; left: -13px; top: 50%; width: 3px; height: 18px;
+    border-radius: 2px; background: #E3EF26; transform: translateY(-50%);
   }
-  .nav-links a::after {
-    content: ''; position: absolute; bottom: -3px; left: 0;
-    width: 0; height: 1.5px; background: #E3EF26; transition: width 0.3s;
+  /* Tooltip com o nome da seção (PT/EN via data-i18n) */
+  .sb-tip {
+    position: absolute; left: calc(100% + 16px); top: 50%; transform: translateY(-50%) translateX(-6px);
+    background: #06231D; color: #E2FBCE; font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.03em; padding: 7px 11px; border-radius: 9px; white-space: nowrap; pointer-events: none; opacity: 0;
+    border: 1px solid rgba(227,239,38,0.22); box-shadow: 0 8px 24px rgba(6,35,29,0.3);
+    transition: opacity 0.18s, transform 0.18s;
   }
-  .nav-links a:hover { color: #E3EF26; }
-  .nav-links a:hover::after { width: 100%; }
-  .nav-right { display: flex; align-items: center; gap: 14px; }
-  .lang-toggle {
-    display: flex; align-items: center; gap: 4px;
-    background: transparent; border: 1.5px solid rgba(226,251,206,0.25);
-    border-radius: 100px; padding: 7px 14px; cursor: none;
-    font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
-    letter-spacing: 0.06em; transition: all 0.2s;
+  .sb-tip::before {
+    content: ''; position: absolute; left: -5px; top: 50%; width: 8px; height: 8px; background: #06231D;
+    border-left: 1px solid rgba(227,239,38,0.22); border-bottom: 1px solid rgba(227,239,38,0.22);
+    transform: translateY(-50%) rotate(45deg);
   }
-  .lang-toggle:hover { background: rgba(226,251,206,0.08); border-color: #E2FBCE; }
-  .lang-opt { color: rgba(226,251,206,0.65); transition: color 0.2s; }
-  .lang-opt.active { color: #E3EF26; }
-  .lang-sep { color: rgba(226,251,206,0.25); }
-  .nav-cta {
-    font-size: 13px; font-weight: 600; padding: 10px 22px;
-    background: var(--green-dark); color: #fff; border-radius: 100px;
-    text-decoration: none; letter-spacing: 0.03em;
-    transition: background 0.2s, transform 0.2s, box-shadow 0.2s;
-    box-shadow: 0 4px 14px rgba(45,106,79,0.3);
+  .sb-link:hover .sb-tip, .sb-link:focus-visible .sb-tip,
+  .sb-cta:hover .sb-tip, .sb-cta:focus-visible .sb-tip { opacity: 1; transform: translateY(-50%); }
+  .sb-bottom { display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .sb-lang { display: flex; flex-direction: column; align-items: center; border: 1px solid rgba(226,251,206,0.22); border-radius: 12px; overflow: hidden; }
+  .sb-lang .lang-option {
+    padding: 5px 0; width: 40px; text-align: center; font-family: 'Inter', sans-serif; font-size: 11px; font-weight: 700;
+    letter-spacing: 0.06em; color: rgba(226,251,206,0.55); background: transparent; border: 0; border-radius: 0;
+    transition: color 0.2s, background 0.2s;
   }
-  .nav-cta:hover { background: #235840; transform: translateY(-1px); box-shadow: 0 6px 20px rgba(45,106,79,0.4); }
-  /* Hamburger */
-  .nav-hamburger {
-    display: none; flex-direction: column; justify-content: center; align-items: center;
-    gap: 5px; background: none; border: none; cursor: pointer;
-    width: 44px; height: 44px; padding: 0; flex-shrink: 0;
+  .sb-lang .lang-option + .lang-option { border-top: 1px solid rgba(226,251,206,0.22); }
+  .sb-lang .lang-option:hover { color: #E2FBCE; }
+  .sb-lang .lang-option.active { color: #06231D; background: #E3EF26; }
+  .sb-cta {
+    position: relative; width: 46px; height: 46px; border-radius: 50%; background: #E3EF26; color: #06231D;
+    display: flex; align-items: center; justify-content: center; text-decoration: none;
+    box-shadow: 0 6px 18px rgba(227,239,38,0.35); transition: transform 0.2s, box-shadow 0.2s;
   }
-  .nav-hamburger span {
-    display: block; width: 22px; height: 2px;
-    background: #E2FBCE; border-radius: 2px;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+  .sb-cta svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+  .sb-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(227,239,38,0.5); }
+  /* Anel cromático girando ao redor do "Me Contrate": pseudo-elementos
+     mascarados numa faixa fina + brilho difuso. O botão continua lima sólido. */
+  @keyframes sb-ring-spin { to { transform: rotate(360deg); } }
+  .sb-cta::before, .sb-cta::after {
+    content: ''; position: absolute; border-radius: 50%; pointer-events: none;
+    background: conic-gradient(from 0deg, #22D3EE, #E040FB, #FFE62E, #FFFFFF, #22D3EE);
+    animation: sb-ring-spin 4s linear infinite;
   }
-  .nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-  .nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
-  .nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
-  /* Mobile overlay */
-  .nav-mobile {
-    display: none; position: fixed; inset: 0; z-index: 998;
-    background: rgba(6,35,29,0.98); backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    flex-direction: column; align-items: center; justify-content: center;
+  .sb-cta::before {   /* faixa de ~2px, um pouco fora do círculo */
+    inset: -5px;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
   }
-  .nav-mobile.open { display: flex; animation: navFadeIn 0.3s ease; }
-  @keyframes navFadeIn {
-    from { opacity: 0; transform: translateY(-16px); }
-    to   { opacity: 1; transform: translateY(0); }
+  .sb-cta::after {    /* rastro de luz: mesmas cores, desfocado, atrás do botão */
+    inset: -7px; z-index: -1; filter: blur(7px); opacity: 0.55;
   }
-  .nav-mobile-links { list-style: none; text-align: center; padding: 0; margin: 0 0 36px; }
-  .nav-mobile-links li a {
-    display: flex; align-items: center; justify-content: center;
-    height: 56px; min-width: 200px;
-    font-family: 'Inter', sans-serif; font-size: 18px; font-weight: 500;
-    color: #E2FBCE; text-decoration: none; letter-spacing: 0.04em;
-    transition: color 0.2s;
+  @media (prefers-reduced-motion: reduce) { .sb-cta::before, .sb-cta::after { animation: none; } }
+  .sb-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid rgba(227,239,38,0.5); display: block; }
+  .sb-top { display: none; }   /* barra fina do topo: só no mobile */
+  @media (max-width: 900px) {
+    body { padding-left: 0; padding-bottom: calc(96px + env(safe-area-inset-bottom, 0px)); }
+    .sb {
+      top: auto; bottom: calc(12px + env(safe-area-inset-bottom, 0px)); left: 12px; right: 12px;
+      width: auto; height: 64px; flex-direction: row; justify-content: space-around;
+      padding: 0 6px; gap: 0; border-radius: 22px;
+    }
+    .sb-logo, .sb-bottom, .sb-tip { display: none; }
+    .sb-nav { flex-direction: row; margin: 0; justify-content: space-around; gap: 0; }
+    .sb-link { width: 44px; height: 44px; }
+    .sb-link.active::before { left: 50%; top: auto; bottom: 3px; width: 18px; height: 3px; transform: translateX(-50%); }
+    .sb-top {
+      display: flex; position: fixed; top: 0; left: 0; right: 0; z-index: 1000; height: 56px;
+      align-items: center; justify-content: space-between; padding: 0 16px 0 20px;
+      background: #06231D; border-bottom: 1px solid rgba(227,239,38,0.12); box-shadow: 0 2px 16px rgba(0,0,0,0.25);
+    }
+    .sb-top .sb-logo { display: block; padding: 0; }
+    .sb-top-right { display: flex; align-items: center; gap: 10px; }
+    .sb-top .sb-lang { flex-direction: row; }
+    .sb-top .sb-lang .lang-option { width: 36px; padding: 7px 0; }
+    .sb-top .sb-lang .lang-option + .lang-option { border-top: 0; border-left: 1px solid rgba(226,251,206,0.22); }
+    .sb-top-cta {
+      display: inline-flex; align-items: center; min-height: 36px; padding: 0 16px; border-radius: 100px;
+      background: #E3EF26; color: #06231D; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 700;
+      text-decoration: none; letter-spacing: 0.02em;
+    }
   }
-  .nav-mobile-links li a:hover, .nav-mobile-links li a:active { color: #E3EF26; }
-  .nav-cta-mobile {
-    display: inline-flex; align-items: center; justify-content: center;
-    padding: 14px 40px; min-height: 52px;
-    background: var(--green-dark); color: #fff; border-radius: 100px;
-    text-decoration: none; font-family: 'Inter', sans-serif;
-    font-size: 16px; font-weight: 600; letter-spacing: 0.02em;
-    transition: background 0.2s;
-  }
-  .nav-cta-mobile:hover { background: #235840; }
+  /* ═══ SIDEBAR NAV END ═══ */
 
   /* HERO */
   #hero { min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; padding: 120px 60px 80px; }
@@ -528,18 +546,35 @@
   }
   .service-card:hover .service-arrow svg { transform: rotate(-45deg); }
 
-  /* TESTIMONIALS */
-  #testimonials { background: var(--green-dark); overflow: hidden; }
-  .testimonials-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; }
-  .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 60px; }
-  .testimonial-card {
-    background: rgba(255,255,255,0.08); backdrop-filter: blur(20px) saturate(180%);
-    -webkit-backdrop-filter: blur(20px) saturate(180%); border: 1px solid rgba(255,255,255,0.12);
-    border-radius: 20px; padding: 32px 28px; transition: transform 0.3s, background 0.3s;
+  /* TESTIMONIALS — vidro fosco ("One UI blur") */
+  #testimonials { background: #0C342C; overflow: hidden; position: relative; isolation: isolate; }
+  /* manchas de cor grandes e muito desfocadas, derivando devagar atrás dos cards */
+  .tst-blobs { position: absolute; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+  .tst-blobs span {
+    position: absolute; border-radius: 50%; filter: blur(90px); will-change: transform;
+    animation: tst-drift 26s ease-in-out infinite alternate;
   }
-  .testimonial-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.13); }
+  .tst-blobs span:nth-child(1) { width: 560px; height: 560px; left: -140px; top: -120px; background: rgba(227,239,38,0.28); }
+  .tst-blobs span:nth-child(2) { width: 620px; height: 620px; right: -180px; top: 20%; background: rgba(82,183,136,0.40); animation-duration: 32s; animation-delay: -8s; }
+  .tst-blobs span:nth-child(3) { width: 460px; height: 460px; left: 35%; bottom: -220px; background: rgba(116,198,157,0.30); animation-duration: 38s; animation-delay: -16s; }
+  @keyframes tst-drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    50%  { transform: translate(60px, -40px) scale(1.08); }
+    100% { transform: translate(-40px, 50px) scale(0.96); }
+  }
+  @media (prefers-reduced-motion: reduce) { .tst-blobs span { animation: none; } }
+  .testimonials-inner { max-width: 1200px; margin: 0 auto; padding: 100px 60px; position: relative; z-index: 1; }
+  .testimonials-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 60px; }
+  .testimonial-card {
+    background: rgba(255,255,255,0.08);
+    -webkit-backdrop-filter: blur(24px) saturate(1.2); backdrop-filter: blur(24px) saturate(1.2);
+    border: 1px solid rgba(255,255,255,0.18); border-radius: 28px; padding: 32px 28px;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.28), 0 12px 40px rgba(6,35,29,0.25);
+    transition: transform 0.3s, background 0.3s;
+  }
+  .testimonial-card:hover { transform: translateY(-6px); background: rgba(255,255,255,0.12); }
   .testimonial-stars { color: var(--green-mid); font-size: 14px; margin-bottom: 18px; letter-spacing: 2px; }
-  .testimonial-text { font-size: 15px; color: rgba(255,255,255,0.85); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
+  .testimonial-text { font-size: 15px; color: rgba(255,255,255,0.9); line-height: 1.8; margin-bottom: 24px; font-style: italic; }
   .testimonial-author { display: flex; align-items: center; gap: 12px; }
   .testimonial-avatar {
     width: 42px; height: 42px; border-radius: 50%;
@@ -548,7 +583,7 @@
     font-family: 'Playfair Display', serif; font-weight: 700; color: var(--green-dark); font-size: 16px; flex-shrink: 0;
   }
   .testimonial-name { font-weight: 600; color: #fff; font-size: 14px; }
-  .testimonial-role { font-size: 12px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+  .testimonial-role { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
 
   /* CONTACT */
   #contact { background: var(--bg); }
@@ -609,9 +644,6 @@
   /* SCROLL OFFSET */
   section { scroll-margin-top: 80px; }
 
-  /* NAVBAR ACTIVE LINK */
-  .nav-links a.active { color: #E3EF26; }
-  .nav-links a.active::after { width: 100%; }
 
   /* ─── MOBILE GLOBAL ──────────────────────────────────── */
   @media (max-width: 768px) {
@@ -760,12 +792,6 @@
     box-shadow: var(--shadow-md), 0 0 32px rgba(82,183,136,0.1) !important;
   }
 
-  /* CARDS — testimonials */
-  .testimonial-card {
-    border: 1px solid rgba(82,183,136,0.25) !important;
-    border-top: 2px solid rgba(82,183,136,0.5) !important;
-    box-shadow: inset 0 1px 0 rgba(82,183,136,0.1), 0 0 24px rgba(82,183,136,0.08) !important;
-  }
 
   /* CARDS — contact links */
   .contact-link {
@@ -925,11 +951,6 @@
   }
 
   @media (max-width: 900px) {
-    nav { padding: 16px 20px; }
-    nav.scrolled { padding: 12px 20px; }
-    .nav-links { display: none; }
-    .nav-cta { display: none; }
-    .nav-hamburger { display: flex; }
     .hero-inner { grid-template-columns: 1fr; gap: 32px; }
     .hero-svg-wrap { width: 280px; height: 280px; margin: 0 auto; }
     .section-inner { padding: 72px 24px; }
@@ -997,45 +1018,6 @@ body { background: #FFFDEE !important; }
   100% { transform: translateX(-50%); }
 }
 
-/* ─── NAVBAR (VERDE ESCURO) ─────────────────────────────── */
-nav {
-  background: #06231D !important;
-  backdrop-filter: none !important;
-  -webkit-backdrop-filter: none !important;
-  border-bottom: 1px solid rgba(227,239,38,0.1) !important;
-  box-shadow: 0 2px 16px rgba(0,0,0,0.25) !important;
-}
-nav.scrolled {
-  background: rgba(6,35,29,0.97) !important;
-  backdrop-filter: blur(20px) saturate(180%) !important;
-  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
-  border-bottom: 1px solid rgba(227,239,38,0.14) !important;
-  box-shadow: 0 2px 20px rgba(0,0,0,0.3) !important;
-}
-.nav-logo { color: #E3EF26 !important; font-size: 20px !important; }
-.nav-links a { color: #E2FBCE !important; }
-.nav-links a::after { background: #E3EF26 !important; }
-.nav-links a:hover { color: #E3EF26 !important; }
-.lang-opt { color: rgba(226,251,206,0.55) !important; }
-.lang-opt.active { color: #E3EF26 !important; }
-.lang-sep { color: rgba(226,251,206,0.25) !important; }
-.lang-toggle { border-color: rgba(226,251,206,0.25) !important; }
-.lang-toggle:hover { background: rgba(226,251,206,0.08) !important; border-color: rgba(226,251,206,0.6) !important; }
-.nav-cta {
-  background: rgba(227,239,38,0.15) !important;
-  backdrop-filter: blur(8px) !important;
-  -webkit-backdrop-filter: blur(8px) !important;
-  border: 1px solid rgba(227,239,38,0.35) !important;
-  border-radius: 50px !important;
-  color: #E3EF26 !important;
-  box-shadow: none !important;
-  animation: none !important;
-}
-.nav-cta:hover {
-  background: rgba(227,239,38,0.25) !important;
-  box-shadow: 0 4px 16px rgba(227,239,38,0.2) !important;
-  transform: translateY(-1px) !important;
-}
 
 /* ─── BUTTONS ───────────────────────────────────────────── */
 /* Primary CTA: yellow */
@@ -1379,14 +1361,7 @@ nav.scrolled {
   .svc-light { display: none !important; }
 }
 
-/* ─── TESTIMONIALS ──────────────────────────────────────── */
-#testimonials { background: #0C342C !important; }
-.testimonial-card {
-  background: rgba(255,253,238,0.07) !important;
-  border: 1px solid rgba(255,253,238,0.1) !important;
-  border-top: 1px solid rgba(255,253,238,0.15) !important;
-  border-radius: 28px !important;
-}
+/* ─── TESTIMONIALS (cards: ver bloco "vidro fosco" acima) ─── */
 .section-title[style*="color:#fff"] { color: #FFFDEE !important; }
 
 /* ─── CONTACT ────────────────────────────────────────────── */
@@ -1480,6 +1455,9 @@ footer { background: #06231D !important; }
   left: 50% !important; top: 0 !important; bottom: 0 !important;
   width: 2px !important;
   background: #E3EF26 !important;
+  /* sinal luminoso: brilho lima + sombra escura deslocada (descola do creme) */
+  box-shadow: 0 0 6px rgba(227,239,38,0.8), 0 0 16px rgba(227,239,38,0.45), 0 0 32px rgba(227,239,38,0.2),
+              4px 4px 10px rgba(0,0,0,0.18) !important;
   transform: translateX(-50%) scaleY(0) !important;
   transform-origin: top center !important;
   transition: transform 1.5s ease-out !important;
@@ -1511,23 +1489,27 @@ footer { background: #06231D !important; }
   position: absolute !important;
   left: 50% !important; top: 28px !important;
   width: 14px !important; height: 14px !important;
-  background: #E3EF26 !important;
+  background: radial-gradient(circle, #FFFFFF 0%, #F6FA9A 30%, #E3EF26 65%) !important;  /* núcleo claro */
   border-radius: 50% !important;
   transform: translateX(-50%) !important;
   border: 3px solid #FFFDEE !important;
-  box-shadow: 0 0 0 2px #E3EF26 !important;
+  box-shadow: 0 0 0 2px #E3EF26, 0 0 8px rgba(227,239,38,0.9), 0 0 20px rgba(227,239,38,0.55),
+              0 0 40px rgba(227,239,38,0.25), 4px 4px 10px rgba(0,0,0,0.18) !important;
   z-index: 2 !important;
+  animation: pulse-tl-glow 3s ease-in-out infinite !important;   /* pulso lento do brilho (só nos nós) */
 }
 @keyframes pulse-tl-glow {
   0%, 100% {
-    box-shadow: 0 0 0 2px #E3EF26, 0 0 0 0 rgba(227,239,38,0.15);
+    box-shadow: 0 0 0 2px #E3EF26, 0 0 8px rgba(227,239,38,0.9), 0 0 20px rgba(227,239,38,0.55),
+                0 0 40px rgba(227,239,38,0.25), 4px 4px 10px rgba(0,0,0,0.18);
   }
   50% {
-    box-shadow: 0 0 0 2px #E3EF26, 0 0 0 8px rgba(227,239,38,0);
+    box-shadow: 0 0 0 2px #E3EF26, 0 0 12px rgba(227,239,38,1), 0 0 30px rgba(227,239,38,0.75),
+                0 0 56px rgba(227,239,38,0.4), 4px 4px 10px rgba(0,0,0,0.18);
   }
 }
-.timeline-dot.current {
-  animation: pulse-tl-glow 2s ease-in-out infinite !important;
+@media (prefers-reduced-motion: reduce) {
+  .timeline-dot { animation: none !important; }
 }
 
 /* ─── 3. CARD STYLE ─────────────────────────────────────── */
@@ -1617,11 +1599,17 @@ footer { background: #06231D !important; }
   }
 }
 
-/* ─── PORTFOLIO FILTER BUTTONS ────────────────────────── */
+/* ─── PORTFOLIO FILTER BUTTONS (vidro fosco + brilho lima no ativo) ─── */
 .pf-filters {
+  position: relative; isolation: isolate;
   display: flex; flex-wrap: wrap; gap: clamp(8px,1.5vw,14px);
   justify-content: center; margin-bottom: 36px;
 }
+/* manchas desfocadas atrás da fileira: dão ao vidro algo para refratar sobre o creme liso */
+.pf-blobs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.pf-blobs span { position: absolute; border-radius: 50%; filter: blur(48px); }
+.pf-blobs span:nth-child(1) { width: 36%; height: 140%; left: 6%;  top: -20%; background: rgba(227,239,38,0.45); }
+.pf-blobs span:nth-child(2) { width: 38%; height: 140%; right: 4%; top: -10%; background: rgba(82,183,136,0.40); }
 @media (max-width: 480px) {
   .pf-filters {
     flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
@@ -1631,58 +1619,25 @@ footer { background: #06231D !important; }
   .pf-filters::-webkit-scrollbar { display: none; }
 }
 .pf-filter-btn {
+  position: relative; z-index: 1;
   font-family: 'Inter', sans-serif;
   font-size: clamp(11px,1.3vw,13px); font-weight: 600; letter-spacing: 0.04em;
   padding: clamp(7px,.8vw,9px) clamp(14px,2vw,22px);
   border-radius: 50px; cursor: pointer; flex-shrink: 0;
-  border: 1px solid rgba(82,183,136,0.4);
-  background: rgba(255,253,238,0.55);
-  backdrop-filter: blur(12px);
-  color: #076653;
-  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+  border: 1px solid rgba(45,106,79,0.25);
+  background: rgba(255,255,255,0.35);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+  color: #06231D;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.35s ease-out, transform 0.2s;
 }
-.pf-filter-btn:hover { background: rgba(82,183,136,0.15); border-color: #52B788; }
+.pf-filter-btn:hover { background: rgba(255,255,255,0.55); border-color: rgba(45,106,79,0.4); }
 .pf-filter-btn.active {
   background: #E3EF26 !important; border-color: #E3EF26 !important;
   color: #06231D !important;
-  box-shadow: 0 4px 16px rgba(227,239,38,0.35);
+  box-shadow: 0 0 0 1px #E3EF26, 0 0 18px rgba(227,239,38,0.55), 0 0 40px rgba(227,239,38,0.3);
   transform: translateY(-2px);
 }
 
-/* ─── LANGUAGE DROPDOWN ───────────────────────────────── */
-.lang-dropdown { position: relative; }
-.lang-selected {
-  display: flex; align-items: center; gap: 6px; cursor: pointer;
-  background: rgba(226,251,206,0.08);
-  border: 1.5px solid rgba(226,251,206,0.28);
-  border-radius: 100px; padding: 7px 14px;
-  font-family: 'Inter', sans-serif; font-size: 12px; font-weight: 700;
-  letter-spacing: 0.06em; color: #E3EF26; transition: all 0.2s;
-}
-.lang-selected:hover { background: rgba(226,251,206,0.15); border-color: #E2FBCE; }
-.lang-chevron {
-  width: 12px; height: 12px; stroke: currentColor; stroke-width: 2;
-  fill: none; flex-shrink: 0; transition: transform 0.25s;
-}
-.lang-dropdown.open .lang-chevron { transform: rotate(180deg); }
-.lang-menu {
-  display: none; position: absolute; top: calc(100% + 10px); right: 0;
-  background: #06231D;
-  border: 1px solid rgba(227,239,38,0.18);
-  border-radius: 16px; padding: 8px; min-width: 195px;
-  box-shadow: 0 16px 48px rgba(0,0,0,0.45);
-  z-index: 2000;
-}
-.lang-dropdown.open .lang-menu { display: flex; flex-direction: column; }
-.lang-option {
-  background: transparent; border: none;
-  padding: 10px 14px; text-align: left; cursor: pointer;
-  font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500;
-  color: #E2FBCE; border-radius: 10px; transition: background 0.15s;
-  letter-spacing: 0.02em;
-}
-.lang-option:hover { background: rgba(226,251,206,0.1); color: #E3EF26; }
-.lang-option.active { color: #E3EF26; background: rgba(227,239,38,0.1); font-weight: 600; }
 
 /* ─── CAROUSEL EMPTY STATE ────────────────────────────── */
 .cf-empty {
@@ -1851,49 +1806,37 @@ body.intro-lock{ overflow:hidden; }
 <div id="cursor-dot"></div>
 <div id="cursor-ring"></div>
 
-<!-- NAV -->
-<nav id="navbar">
-  <a href="#" class="nav-logo">TL.</a>
-  <ul class="nav-links">
-    <li><a href="#about" data-i18n="nav.about">Sobre</a></li>
-    <li><a href="#skills" data-i18n="nav.skills">Habilidades</a></li>
-    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfólio</a></li>
-    <li><a href="#experience" data-i18n="nav.experience">Experiência</a></li>
-    <li><a href="#services" data-i18n="nav.services">Serviços</a></li>
-    <li><a href="#contact" data-i18n="nav.contact">Contato</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="lang-dropdown" id="langDropdown">
-      <button class="lang-selected" id="langSelected" aria-label="Selecionar idioma">
-        <span id="langFlag">🇧🇷</span>
-        <span id="langCode">PT</span>
-        <svg class="lang-chevron" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 6 8 10 12 6"/></svg>
-      </button>
-      <div class="lang-menu" id="langMenu">
-        <button class="lang-option active" data-lang="pt">🇧🇷 PT — Português</button>
-        <button class="lang-option" data-lang="en">🇺🇸 EN — English</button>
-        <button class="lang-option" data-lang="es">🇪🇸 ES — Español</button>
-        <button class="lang-option" data-lang="zh">🇹🇼 繁中 — 中文</button>
-        <button class="lang-option" data-lang="zhs">🇨🇳 简体 — 中文</button>
-      </div>
+<!-- NAV — SIDEBAR START -->
+<header class="sb-top">
+  <a href="#hero" class="sb-logo">TL.</a>
+  <div class="sb-top-right">
+    <div class="sb-lang" role="group" aria-label="Idioma / Language">
+      <button class="lang-option active" data-lang="pt" type="button">PT</button>
+      <button class="lang-option" data-lang="en" type="button">EN</button>
     </div>
-    <a href="#contact" class="nav-cta" data-i18n="nav.cta">Me Contrate</a>
-    <button class="nav-hamburger" id="navHamburger" aria-label="Abrir menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
+    <a href="#contact" class="sb-top-cta" data-i18n="nav.cta">Me Contrate</a>
   </div>
-</nav>
-<div class="nav-mobile" id="navMobile" role="dialog" aria-label="Menu mobile">
-  <ul class="nav-mobile-links">
-    <li><a href="#about"      data-i18n="nav.about">Sobre</a></li>
-    <li><a href="#skills"     data-i18n="nav.skills">Habilidades</a></li>
-    <li><a href="#portfolio"  data-i18n="nav.portfolio">Portfólio</a></li>
-    <li><a href="#experience" data-i18n="nav.experience">Experiência</a></li>
-    <li><a href="#services"   data-i18n="nav.services">Serviços</a></li>
-    <li><a href="#contact"    data-i18n="nav.contact">Contato</a></li>
+</header>
+<aside class="sb" id="sidebar" aria-label="Navegação">
+  <a href="#hero" class="sb-logo">TL.</a>
+  <ul class="sb-nav">
+    <li><a href="#about" class="sb-link"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"/></svg><span class="sb-tip" data-i18n="nav.about">Sobre</span></a></li>
+    <li><a href="#skills" class="sb-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg><span class="sb-tip" data-i18n="nav.skills">Habilidades</span></a></li>
+    <li><a href="#portfolio" class="sb-link"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg><span class="sb-tip" data-i18n="nav.portfolio">Portfólio</span></a></li>
+    <li><a href="#experience" class="sb-link"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 12h18"/></svg><span class="sb-tip" data-i18n="nav.experience">Experiência</span></a></li>
+    <li><a href="#services" class="sb-link"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l9 5-9 5-9-5 9-5z"/><path d="M3 12.5l9 5 9-5"/><path d="M3 17l9 5 9-5"/></svg><span class="sb-tip" data-i18n="nav.services">Serviços</span></a></li>
+    <li><a href="#contact" class="sb-link"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span class="sb-tip" data-i18n="nav.contact">Contato</span></a></li>
   </ul>
-  <a href="#contact" class="nav-cta-mobile" data-i18n="nav.cta">Me Contrate</a>
-</div>
+  <div class="sb-bottom">
+    <div class="sb-lang" role="group" aria-label="Idioma / Language">
+      <button class="lang-option active" data-lang="pt" type="button">PT</button>
+      <button class="lang-option" data-lang="en" type="button">EN</button>
+    </div>
+    <a href="#contact" class="sb-cta"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></svg><span class="sb-tip" data-i18n="nav.cta">Me Contrate</span></a>
+    <img class="sb-avatar" src="toni lima.jpeg" alt="Toni Lima" width="38" height="38">
+  </div>
+</aside>
+<!-- NAV — SIDEBAR END -->
 
 <!-- HERO -->
 <section id="hero">
@@ -1973,7 +1916,7 @@ body.intro-lock{ overflow:hidden; }
           <div class="about-glass-tag" style="position:absolute;bottom:32px;left:32px;z-index:2;" data-i18n="about.tag">✦ Senior Graphic Designer · 8+ anos</div>
         </div>
         <div class="about-float-card">
-          <div class="float-num" data-count="50">0</div>
+          <div class="float-num" data-count="67">0</div>
           <div data-i18n="about.float">Projetos entregues</div>
         </div>
       </div>
@@ -1988,7 +1931,7 @@ body.intro-lock{ overflow:hidden; }
             <div class="counter-label" data-i18n="about.c1">Anos de Experiência</div>
           </div>
           <div class="counter-item reveal reveal-delay-2">
-            <div class="counter-num" data-count="50">0</div>
+            <div class="counter-num" data-count="67">0</div>
             <div class="counter-label" data-i18n="about.c2">Projetos Concluídos</div>
           </div>
           <div class="counter-item reveal reveal-delay-3">
@@ -2103,6 +2046,7 @@ body.intro-lock{ overflow:hidden; }
     <h2 class="section-title reveal reveal-delay-1" data-i18n="portfolio.title">Portfólio</h2>
     <!-- Filter buttons -->
     <div class="pf-filters">
+      <div class="pf-blobs" aria-hidden="true"><span></span><span></span></div>
       <button class="pf-filter-btn active" data-filter="all"      data-i18n="filter.all">Todos</button>
       <button class="pf-filter-btn"        data-filter="blender"  data-i18n="filter.blender">Blender</button>
       <button class="pf-filter-btn"        data-filter="esportes" data-i18n="filter.esportes">Esportes</button>
@@ -2173,7 +2117,7 @@ body.intro-lock{ overflow:hidden; }
       <div class="timeline-item reveal reveal-delay-1" data-side="right">
         <div class="timeline-dot current"></div>
         <div class="timeline-card">
-          <div class="timeline-period" data-i18n="exp.seeds.period">Out/2025 – Presente</div>
+          <div class="timeline-period" data-i18n="exp.seeds.period">Set/2025 – Presente</div>
           <h3 class="timeline-company">SEEDS COMPANY</h3>
           <div class="timeline-role" data-i18n="exp.seeds.role">Graphic Designer — Tráfego Pago &amp; Conversão</div>
           <ul class="timeline-list">
@@ -2194,9 +2138,8 @@ body.intro-lock{ overflow:hidden; }
             <li data-i18n="exp.free.i1">Los Frango: identidade visual + marketing + tráfego pago</li>
             <li data-i18n="exp.free.i2">Bellys Brechó: conteúdo visual para redes sociais</li>
             <li data-i18n="exp.free.i3">Point do Crepe: cardápios e materiais promocionais digitais</li>
-            <li data-i18n="exp.free.i4">Outthe Clouds: identidade visual e materiais de comunicação</li>
+            <li data-i18n="exp.free.i4">Outthe Clouds: identidade visual e materiais de comunicação para campanhas da marca de roupas</li>
             <li data-i18n="exp.free.i5">Planeta Celular &amp; Lima Imports: artes para redes sociais</li>
-            <li data-i18n="exp.free.i6">Out The Clouds — desenvolvimento de identidade visual e materiais de comunicação para campanhas da marca de roupas</li>
             <li data-i18n="exp.free.i7">BBC (Boff Boy Chique) — criação de artes e criativos para redes sociais da marca de roupas (meados de 2025)</li>
             <li data-i18n="exp.free.i8">BRDF Energia Solar — visualização 3D e conteúdo para redes sociais</li>
             <li data-i18n="exp.free.i9">Chef Ale Monteiro | APP COMERBEM LABS — conteúdo visual e criativos para o aplicativo</li>
@@ -2269,6 +2212,7 @@ body.intro-lock{ overflow:hidden; }
 
 <!-- TESTIMONIALS -->
 <section id="testimonials">
+  <div class="tst-blobs" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="testimonials-inner">
     <span class="section-label" style="color:var(--green-mid)" data-i18n="tst.label">Depoimentos</span>
     <h2 class="section-title" style="color:#fff;margin-top:14px" data-i18n="tst.title">O que os clientes dizem</h2>
@@ -2291,7 +2235,7 @@ body.intro-lock{ overflow:hidden; }
           <div class="testimonial-avatar">HE</div>
           <div>
             <div class="testimonial-name">Hellen Elesbão</div>
-            <div class="testimonial-role" data-i18n="tst.2.role">Fundador, Soleil Agency</div>
+            <div class="testimonial-role" data-i18n="tst.2.role">Sócia-fundadora, Seeds Company</div>
           </div>
         </div>
       </div>
@@ -2303,6 +2247,17 @@ body.intro-lock{ overflow:hidden; }
           <div>
             <div class="testimonial-name">Cibele Haddad</div>
             <div class="testimonial-role" data-i18n="tst.3.role">Diretora de Produto, Archē</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text" data-i18n="tst.4.text">"O Toni entende de design e entende de resultado, e isso é raro. Os criativos que ele produz pros nossos clientes de saúde convertem melhor e chegam no prazo, com o padrão visual que a gente quer mostrar pro mercado."</p>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">HB</div>
+          <div>
+            <div class="testimonial-name">Henrique Brandão</div>
+            <div class="testimonial-role" data-i18n="tst.4.role">Sócio-fundador, Seeds Company</div>
           </div>
         </div>
       </div>
@@ -2341,7 +2296,7 @@ body.intro-lock{ overflow:hidden; }
             <div class="contact-link-icon">
               <svg viewBox="0 0 24 24" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
             </div>
-            linkedin.com/in/tonilima
+            linkedin.com/in/josé-antônio-lima
           </a>
           <a href="https://tonilimaelesbao.myportfolio.com/work" target="_blank" rel="noopener noreferrer" class="contact-link">
             <div class="contact-link-icon">
@@ -2388,9 +2343,9 @@ body.intro-lock{ overflow:hidden; }
   <a href="#" class="footer-logo">Toni Lima.</a>
   <p class="footer-copy" data-i18n="footer.copy">© 2026 Toni Lima. Todos os direitos reservados.</p>
   <div class="footer-social">
-    <a href="#" data-i18n="footer.behance">Behance</a>
+    <a href="https://www.behance.net/eduardavesoarto" target="_blank" rel="noopener noreferrer" data-i18n="footer.behance">Behance</a>
     <a href="https://www.linkedin.com/in/jos%C3%A9-ant%C3%B4nio-lima-7a75862a3" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="#">Instagram</a>
+    <a href="https://www.instagram.com/cybertoni.com.br/" target="_blank" rel="noopener noreferrer">Instagram</a>
     <a href="https://tonilimaelesbao.myportfolio.com/work" target="_blank" rel="noopener noreferrer" class="footer-pf-link">Portfólio ↗</a>
   </div>
 </footer>
@@ -2425,15 +2380,19 @@ const t = {
     'pf.v1':'Sem o Som de Eletricidade','pf.v2':'Produção de Vídeo 01','pf.v3':'Produção de Vídeo 02',
     'pf.l1':'Live Recording','pf.a1':'Arte Pessoal 01','pf.a2':'Kill Bill','pf.a3':'Pequi do Capetoni',
     'filter.odontologia':'Odontologia','filter.seeds':'Seeds','filter.uisites':'UI de Sites',
-    'pf.c3':'Casino Design 03','pf.c4':'Banner Halloween','pf.c5':'Anúncio Jaguar7','pf.c6':'Jaguar Hero',
+    'pf.c3':'Casino Design 03','pf.c5':'Anúncio Jaguar7','pf.c6':'Jaguar Hero',
     'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
-    'pf.od1':'Odontologia 01','pf.od2':'Odontologia 02','pf.od3':'Odontologia 03','pf.od4':'Odontologia 04','pf.od5':'Odontologia 05',
+    'pf.od1':'Humanitá — Seu sorriso é seu cartão de visitas','pf.od2':'Humanitá — Prevenir custa menos',
+    'pf.od3':'Humanitá — Quanto tempo dura um implante?','pf.od4':'Humanitá — Facetas de resina: sorriso natural',
+    'pf.od5':'Humanitá — Nós devolvemos o seu sorriso','pf.od6':'Humanitá — Perdeu um dente? Implante dentário',
+    'pf.od7':'Humanitá — Facetas de resina para transformar o seu sorriso','pf.od8':'Humanitá — Seu sorriso mais branco',
+    'pf.od9':'Humanitá — Implante (personagem 3D)','pf.od10':'Humanitá — Implante dentário (vídeo)',
     'pf.sd1':'Seeds 01',
     'filter.chefale':'Chef Ale Monteiro','pf.ch1':'Chef Ale Monteiro — Português','pf.ch2':'Chef Ale Monteiro — Espanhol',
-    'pf.b4':'Mercadinho EV','pf.b5':'Tour Solar BRDF',
+    'pf.b4':'Mercadinho EV','pf.b5':'Tour Solar BRDF','pf.b6':'Hylo — Personagem 3D','pf.b7':'Poste — Animação 3D',
     'pf.a4':'Toni','pf.a5':'Toni Hunter','pf.a6':'AIGA 01',
     'pf.l2':'GIROMAX — Logo',
-    'pf.c7':'Cassino 07','pf.c8':'Cassino 08','pf.c9':'Cassino 09','pf.c10':'Cassino 10',
+    'pf.c7':'Cassino 07','pf.c9':'Cassino 09','pf.c10':'Cassino 10',
     'pf.c11':'Cassino 11','pf.c12':'Cassino 12','pf.c13':'Cassino 13','pf.c14':'Cassino 14',
     'pf.c15':'Cassino 15','pf.c16':'Cassino 16','pf.c17':'Cassino 17','pf.c18':'Cassino 18',
     'pf.c19':'Cassino 19','pf.c20':'Cassino 20','pf.c21':'Cassino 21','pf.c22':'Cassino 22','pf.c23':'Cassino 23',
@@ -2444,7 +2403,7 @@ const t = {
     'exp.locent.i2':'Animações interativas para aumentar o engajamento',
     'exp.locent.i3':'Produção e edição de vídeos institucionais e promocionais',
     'exp.locent.i4':'Conteúdo estratégico alinhado ao mercado iGaming',
-    'exp.seeds.period':'Out/2025 – Presente','exp.seeds.role':'Graphic Designer — Tráfego Pago & Conversão',
+    'exp.seeds.period':'Set/2025 – Presente','exp.seeds.role':'Graphic Designer — Tráfego Pago & Conversão',
     'exp.seeds.i1':'Desenvolvimento de visuais estratégicos para campanhas de tráfego pago com foco em atenção e conversão',
     'exp.seeds.i2':'Criação de criativos otimizados para anúncios com composição visual forte e comunicação direta',
     'exp.seeds.i3':'Thumbnails, criativos e identidades visuais alinhados aos objetivos de campanha e aquisição de clientes',
@@ -2454,9 +2413,8 @@ const t = {
     'exp.free.i1':'Los Frango: identidade visual + marketing + tráfego pago',
     'exp.free.i2':'Bellys Brechó: conteúdo visual para redes sociais',
     'exp.free.i3':'Point do Crepe: cardápios e materiais promocionais digitais',
-    'exp.free.i4':'Outthe Clouds: identidade visual e materiais de comunicação',
+    'exp.free.i4':'Outthe Clouds: identidade visual e materiais de comunicação para campanhas da marca de roupas',
     'exp.free.i5':'Planeta Celular & Lima Imports: artes para redes sociais',
-    'exp.free.i6':'Out The Clouds — desenvolvimento de identidade visual e materiais de comunicação para campanhas da marca de roupas',
     'exp.free.i8':'BRDF Energia Solar — visualização 3D e conteúdo para redes sociais',
     'exp.free.i9':'Chef Ale Monteiro | APP COMERBEM LABS — conteúdo visual e criativos para o aplicativo',
     'exp.free.i7':'BBC (Boff Boy Chique) — criação de artes e criativos para redes sociais da marca de roupas (meados de 2025)',
@@ -2470,9 +2428,11 @@ const t = {
     'tst.1.text':'"O Toni transformou completamente nossa presença online. O site superou todas as expectativas — bonito, rápido e perfeitamente alinhado à nossa marca."',
     'tst.1.role':'CEO, Verdura Studio',
     'tst.2.text':'"Trabalhar com o Toni foi uma revelação. A atenção à tipografia e aos detalhes é extraordinária. Nossa identidade visual agora é exatamente quem somos."',
-    'tst.2.role':'Fundador, Soleil Agency',
+    'tst.2.role':'Sócia-fundadora, Seeds Company',
     'tst.3.text':'"A combinação de sensibilidade criativa e habilidade técnica é rara. O Toni entregou um produto que nossos usuários adoram e nossa equipe tem orgulho."',
     'tst.3.role':'Diretora de Produto, Archē',
+    'tst.4.text':'"O Toni entende de design e entende de resultado, e isso é raro. Os criativos que ele produz pros nossos clientes de saúde convertem melhor e chegam no prazo, com o padrão visual que a gente quer mostrar pro mercado."',
+    'tst.4.role':'Sócio-fundador, Seeds Company',
     'contact.label':'Entre em Contato','contact.title':'Vamos construir algo incrível',
     'contact.intro':'Tem um projeto em mente? Adoraria ouvir sobre ele. Preencha o formulário ou fale diretamente comigo — estou sempre aberto a novas colaborações.',
     'form.name':'Nome','form.name.ph':'Seu nome','form.email':'E-mail','form.email.ph':'seu@email.com',
@@ -2509,15 +2469,19 @@ const t = {
     'pf.v1':'Sem o Som de Eletricidade','pf.v2':'Video Production 01','pf.v3':'Video Production 02',
     'pf.l1':'Live Recording','pf.a1':'Personal Art 01','pf.a2':'Kill Bill','pf.a3':'Pequi do Capetoni',
     'filter.odontologia':'Dentistry','filter.seeds':'Seeds','filter.uisites':'Website UI',
-    'pf.c3':'Casino Design 03','pf.c4':'Halloween Banner','pf.c5':'Jaguar7 Ad','pf.c6':'Jaguar Hero',
+    'pf.c3':'Casino Design 03','pf.c5':'Jaguar7 Ad','pf.c6':'Jaguar Hero',
     'pf.e4':'Copa Brasil x Haiti','pf.e5':'Sports Design 04',
-    'pf.od1':'Dentistry 01','pf.od2':'Dentistry 02','pf.od3':'Dentistry 03','pf.od4':'Dentistry 04','pf.od5':'Dentistry 05',
+    'pf.od1':'Humanitá — Your smile is your business card','pf.od2':'Humanitá — Prevention costs less',
+    'pf.od3':'Humanitá — How long does an implant last?','pf.od4':'Humanitá — Resin veneers: a natural smile',
+    'pf.od5':'Humanitá — We give your smile back','pf.od6':'Humanitá — Lost a tooth? Dental implant',
+    'pf.od7':'Humanitá — Resin veneers to transform your smile','pf.od8':'Humanitá — A whiter smile',
+    'pf.od9':'Humanitá — Implant (3D character)','pf.od10':'Humanitá — Dental implant (video)',
     'pf.sd1':'Seeds 01',
     'filter.chefale':'Chef Ale Monteiro','pf.ch1':'Chef Ale Monteiro — Portuguese','pf.ch2':'Chef Ale Monteiro — Spanish',
-    'pf.b4':'Mercadinho EV','pf.b5':'Solar Tour BRDF',
+    'pf.b4':'Mercadinho EV','pf.b5':'Solar Tour BRDF','pf.b6':'Hylo — 3D Character','pf.b7':'Poste — 3D Animation',
     'pf.a4':'Toni','pf.a5':'Toni Hunter','pf.a6':'AIGA 01',
     'pf.l2':'GIROMAX — Logo',
-    'pf.c7':'Casino 07','pf.c8':'Casino 08','pf.c9':'Casino 09','pf.c10':'Casino 10',
+    'pf.c7':'Casino 07','pf.c9':'Casino 09','pf.c10':'Casino 10',
     'pf.c11':'Casino 11','pf.c12':'Casino 12','pf.c13':'Casino 13','pf.c14':'Casino 14',
     'pf.c15':'Casino 15','pf.c16':'Casino 16','pf.c17':'Casino 17','pf.c18':'Casino 18',
     'pf.c19':'Casino 19','pf.c20':'Casino 20','pf.c21':'Casino 21','pf.c22':'Casino 22','pf.c23':'Casino 23',
@@ -2528,7 +2492,7 @@ const t = {
     'exp.locent.i2':'Interactive animations to boost engagement',
     'exp.locent.i3':'Production and editing of institutional and promotional videos',
     'exp.locent.i4':'Strategic content aligned with iGaming market trends',
-    'exp.seeds.period':'Oct/2025 – Present','exp.seeds.role':'Graphic Designer — Paid Traffic & Conversion',
+    'exp.seeds.period':'Sep/2025 – Present','exp.seeds.role':'Graphic Designer — Paid Traffic & Conversion',
     'exp.seeds.i1':'Developing strategic visuals for paid traffic campaigns focused on capturing attention and driving conversion',
     'exp.seeds.i2':'Creating optimized ad creatives with strong visual composition and clear communication with the target audience',
     'exp.seeds.i3':'Thumbnails, ad creatives, and visual identities aligned with campaign goals and customer acquisition',
@@ -2538,9 +2502,8 @@ const t = {
     'exp.free.i1':'Los Frango: visual identity + marketing strategies + paid traffic',
     'exp.free.i2':'Bellys Brechó: visual content for social media',
     'exp.free.i3':'Point do Crepe: menus and digital promotional materials',
-    'exp.free.i4':'Outthe Clouds: visual identity and communication materials',
+    'exp.free.i4':'Outthe Clouds: visual identity and communication materials for the clothing brand campaigns',
     'exp.free.i5':'Planeta Celular & Lima Imports: social media artwork and graphics',
-    'exp.free.i6':'Out The Clouds — visual identity development and communication materials for the clothing brand campaigns',
     'exp.free.i8':'BRDF Energia Solar — 3D visualization and social media content',
     'exp.free.i9':'Chef Ale Monteiro | APP COMERBEM LABS — visual content and creatives for the app',
     'exp.free.i7':'BBC (Boff Boy Chique) — artwork and creatives for the clothing brand\'s social media (mid 2025)',
@@ -2554,9 +2517,11 @@ const t = {
     'tst.1.text':'"Toni completely transformed our online presence. The website exceeded every expectation — beautiful, fast, and perfectly aligned with our brand."',
     'tst.1.role':'CEO, Verdura Studio',
     'tst.2.text':'"Working with Toni was a revelation. The attention to typography and detail is extraordinary. Our brand identity is now exactly who we are."',
-    'tst.2.role':'Founder, Soleil Agency',
+    'tst.2.role':'Co-founder, Seeds Company',
     'tst.3.text':'"The combination of creative sensibility and technical skill is rare. Toni delivered a product that our users love and our team is proud of."',
     'tst.3.role':'Product Director, Archē',
+    'tst.4.text':'"Toni understands design and he understands results — that\'s rare. The creatives he produces for our healthcare clients convert better and arrive on time, with the visual standard we want to show the market."',
+    'tst.4.role':'Co-founder, Seeds Company',
     'contact.label':'Get In Touch','contact.title':'Let\'s build something great',
     'contact.intro':'Have a project in mind? I\'d love to hear about it. Fill in the form or reach out directly — I\'m always open to new collaborations.',
     'form.name':'Name','form.name.ph':'Your name','form.email':'Email','form.email.ph':'your@email.com',
@@ -2727,20 +2692,10 @@ function applyLang(lang) {
   currentLang = lang;
 }
 
-// ── Language dropdown ─────────────────────────────────────────────────────────
-const langDropdown = document.getElementById('langDropdown');
-if (langDropdown) {
-  document.getElementById('langSelected').addEventListener('click', e => {
-    e.stopPropagation();
-    langDropdown.classList.toggle('open');
-  });
-  document.addEventListener('click', e => {
-    if (!langDropdown.contains(e.target)) langDropdown.classList.remove('open');
-  });
-  document.querySelectorAll('.lang-option').forEach(btn => {
-    btn.addEventListener('click', () => { applyLang(btn.dataset.lang); langDropdown.classList.remove('open'); });
-  });
-}
+// ── Language switch (PT / EN — sidebar e barra do topo) ───────────────────────
+document.querySelectorAll('.lang-option').forEach(btn => {
+  btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+});
 
 // ─── CUSTOM CURSOR (desktop only) ─────────────────────────────────────────────
 if (!('ontouchstart' in window) && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
@@ -2760,16 +2715,11 @@ if (!('ontouchstart' in window) && window.matchMedia('(hover: hover) and (pointe
   });
 }
 
-// ─── NAVBAR SCROLL ────────────────────────────────────────────────────────────
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
-});
-
-// ─── NAVBAR ACTIVE SECTION ────────────────────────────────────────────────────
+// ─── SIDEBAR ACTIVE SECTION (scroll-spy) ────────────────────────────────────────────────────
 (function() {
   const navActiveObs = new IntersectionObserver(entries => {
     entries.forEach(e => {
-      const link = document.querySelector(`.nav-links a[href="#${e.target.id}"]`);
+      const link = document.querySelector(`.sb-link[href="#${e.target.id}"]`);
       if (link) link.classList.toggle('active', e.isIntersecting);
     });
   }, { threshold: 0.3, rootMargin: '-80px 0px -30% 0px' });
@@ -2843,6 +2793,8 @@ const cfAllData = [
   { type:'video', src:'blender/WhatsApp%20Video%202026-03-23%20at%2023.04.03.mp4', filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b3',  name:'Blender Animation 03' },
   { type:'video', src:'blender/mercadinho_ev_v1.mp4',                              filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b4',  name:'Mercadinho EV' },
   { type:'video', src:'blender/tour_solar_BRDF_v1_1.mp4',                          filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b5',  name:'Tour Solar BRDF' },
+  { type:'video', src:'blender/hylo_%20start.mp4',          poster:'posters/b6.jpg',  filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b6',  name:'Hylo — Personagem 3D' },
+  { type:'video', src:'blender/poste_%20agora%20vai-2.mp4', poster:'posters/b7.jpg',  filterCat:'blender',  catKey:'filter.blender',  cat:'Blender',      nameKey:'pf.b7',  name:'Poste — Animação 3D' },
   // ── SPORTS ───────────────────────────────────────────────────────────────────
   { type:'image', src:'esportes/390ef3cf-be20-4599-be11-4cac4bd4800a_rw_1200.png', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e1',  name:'Sports Design 01' },
   { type:'image', src:'esportes/7397d1e3-72d8-4f78-92ee-75857362c0bd_rw_1200.jpg', filterCat:'esportes', catKey:'filter.esportes', cat:'Esportes',     nameKey:'pf.e2',  name:'Sports Design 02' },
@@ -2867,11 +2819,9 @@ const cfAllData = [
   { type:'image', src:'cassino/37ab616b-126c-4ec7-ad65-c891e75578d0_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c1',  name:'Casino Design 01' },
   { type:'image', src:'cassino/e69f33a2-0699-4400-aaee-526ac4bd564e_rw_1200.png', filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c2',  name:'Casino Design 02' },
   { type:'image', src:'cassino/ChatGPT%20Image%2017%20de%20jun.%20de%202026,%2012_34_23.png',    filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c3',  name:'Casino Design 03' },
-  { type:'video', src:'cassino/Halloween_casino_banner_animation_202605191820.mp4',              filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c4',  name:'Halloween Banner' },
   { type:'video', src:'cassino/JAGUAR7_ad_with_jaguar_202606061357.mp4',                         filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c5',  name:'Jaguar7 Ad' },
   { type:'video', src:'cassino/Jaguar_character_in_hero_pose_202606061358.mp4',                  filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c6',  name:'Jaguar Hero' },
   { type:'image', src:'cassino/1.jpeg',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c7',  name:'Cassino 07' },
-  { type:'video', src:'cassino/67.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c8',  name:'Cassino 08' },
   { type:'video', src:'cassino/71.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c9',  name:'Cassino 09' },
   { type:'video', src:'cassino/72.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c10', name:'Cassino 10' },
   { type:'video', src:'cassino/76.mp4',                                            filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c11', name:'Cassino 11' },
@@ -2888,11 +2838,16 @@ const cfAllData = [
   { type:'video', src:'cassino/103.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c22', name:'Cassino 22' },
   { type:'video', src:'cassino/109.mp4',                                           filterCat:'cassino',  catKey:'filter.cassino',  cat:'Cassino',      nameKey:'pf.c23', name:'Cassino 23' },
   // ── ODONTOLOGIA ──────────────────────────────────────────────────────────────
-  { type:'image', src:'Odontologia/Premium_dental_clinic_Instagram_Feed_202606112025.jpeg',     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od1', name:'Dentistry 01' },
-  { type:'image', src:'Odontologia/Create_a_modern,_premium_Instagram_202605181614%20(1).jpeg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od2', name:'Dentistry 02' },
-  { type:'image', src:'Odontologia/Create_a_modern,_premium_Instagram_202605181641%20(1).jpeg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od3', name:'Dentistry 03' },
-  { type:'image', src:'Odontologia/Add_a_new_line_of_202606111740.jpeg',                         filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od4', name:'Dentistry 04' },
-  { type:'image', src:'Odontologia/Image_editing_task_on_the_202606111803.jpeg',                 filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od5', name:'Dentistry 05' },
+  { type:'image', src:'Odontologia/1%20A.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od1',  name:'Humanitá — Seu sorriso é seu cartão de visitas' },
+  { type:'image', src:'Odontologia/1%20B.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od2',  name:'Humanitá — Prevenir custa menos' },
+  { type:'image', src:'Odontologia/2%20A.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od3',  name:'Humanitá — Quanto tempo dura um implante?' },
+  { type:'image', src:'Odontologia/3%20A.jpg',                                     filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od4',  name:'Humanitá — Facetas de resina: sorriso natural' },
+  { type:'video', src:'Odontologia/A%2001.mp4',             poster:'posters/od5.jpg',  filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od5',  name:'Humanitá — Nós devolvemos o seu sorriso' },
+  { type:'image', src:'Odontologia/B-01.png',                                      filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od6',  name:'Humanitá — Perdeu um dente? Implante dentário' },
+  { type:'image', src:'Odontologia/C%2002.jpeg',                                   filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od7',  name:'Humanitá — Facetas de resina para transformar o seu sorriso' },
+  { type:'image', src:'Odontologia/C%2002.png',                                    filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od8',  name:'Humanitá — Seu sorriso mais branco' },
+  { type:'video', src:'Odontologia/humanita%20implante.mp4', poster:'posters/od9.jpg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od9',  name:'Humanitá — Implante (personagem 3D)' },
+  { type:'video', src:'Odontologia/video%20implante.mp4',   poster:'posters/od10.jpg', filterCat:'odontologia', catKey:'filter.odontologia', cat:'Odontologia', nameKey:'pf.od10', name:'Humanitá — Implante dentário (vídeo)' },
   // ── SEEDS ────────────────────────────────────────────────────────────────────
   { type:'image', src:'seeds/Gemini_Generated_Image_eu7qkgeu7qkgeu7q.png',                       filterCat:'seeds',    catKey:'filter.seeds',    cat:'Seeds',        nameKey:'pf.sd1', name:'Seeds 01' },
   // ── UI DE SITES ──────────────────────────────────────────────────────────────
@@ -2904,6 +2859,38 @@ const cfAllData = [
   { type:'video', src:'Chef%20Ale%20Monteiro/02%20PTBR.mp4',                       filterCat:'chefale',  catKey:'filter.chefale',  cat:'Chef Ale Monteiro', nameKey:'pf.ch1', name:'Chef Ale Monteiro — Português' },
   { type:'video', src:'Chef%20Ale%20Monteiro/01%20ESP.mp4',                        filterCat:'chefale',  catKey:'filter.chefale',  cat:'Chef Ale Monteiro', nameKey:'pf.ch2', name:'Chef Ale Monteiro — Espanhol' },
 ];
+
+// ── Categorias OCULTAS de "Todos" (dados, sem flag por item) ──────────────────
+// Toda categoria listada aqui fica fora de "Todos", da rotação, da sequência
+// prev/next do lightbox em "Todos" e do contador de "Todos". O botão da
+// categoria continua normal e mostra todos os itens dela ao ser clicado.
+// Arquivos novos dessa categoria herdam isso automaticamente.
+const HIDDEN_FROM_ALL = ['cassino'];
+// "Todos" roda em ordem aleatória — embaralhada UMA vez por carregamento da página
+function cfShuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+// ── DESTAQUES (por nameKey) ───────────────────────────────────────────────────
+// "Todos": o PRIMEIRO card ao carregar é um destes, sorteado; o resto segue
+// aleatório. Filtro de categoria: os destaques vêm primeiro (ordem sorteada
+// entre eles), depois as demais peças da categoria. O lightbox segue a mesma
+// sequência (usa cfActiveData).
+const FEATURED_FIRST = ['pf.b6', 'pf.b7'];
+const cfIsFeatured = x => FEATURED_FIRST.includes(x.nameKey);
+const cfAllOrder = (() => {
+  const order = cfShuffle(cfAllData.filter(x => !HIDDEN_FROM_ALL.includes(x.filterCat)));
+  const feats = order.filter(cfIsFeatured);
+  if (!feats.length) return order;
+  const first = feats[Math.floor(Math.random() * feats.length)];
+  return [first].concat(order.filter(x => x !== first));
+})();
+function cfDataFor(filter) {
+  if (filter === 'all') return cfAllOrder;
+  const list = cfAllData.filter(x => x.filterCat === filter);
+  return cfShuffle(list.filter(cfIsFeatured)).concat(list.filter(x => !cfIsFeatured(x)));
+}
 
 // ── State ─────────────────────────────────────────────────────────────────────
 let cfCurrent      = 0;
@@ -3056,9 +3043,13 @@ function fanUpdate(ms) {
 function fanUpdateSub() {
   if (!fanSubEl || !cfActiveData.length) return;
   const lang = typeof currentLang !== 'undefined' ? currentLang : 'pt';
+  // Rótulo = FILTRO ativo + total desse filtro. (Antes usava a categoria do card
+  // central com o total geral — daí "BLENDER · 58 WORKS" em "Todos".)
   const item = cfActiveData[cfCurrent];
-  const cat  = (t[lang] && t[lang][item.catKey]) ? t[lang][item.catKey] : item.cat;
-  const text = `${cat} · ${cfActiveData.length} works`;
+  const key  = cfActiveFilter === 'all' ? 'filter.all' : item.catKey;
+  const cat  = (t[lang] && t[lang][key]) ? t[lang][key] : (cfActiveFilter === 'all' ? 'Todos' : item.cat);
+  const unit = lang === 'en' ? 'works' : 'trabalhos';
+  const text = `${cat} · ${cfActiveData.length} ${unit}`;
   if (fanSubEl.textContent === text) return;
   fanSubEl.classList.remove('fan-sub-flip');
   void fanSubEl.offsetWidth;
@@ -3144,6 +3135,7 @@ function cfBuildCarousel(data, instant) {
       const vid = document.createElement('video');
       // PERF: preload='none' + src adiado → nenhum vídeo baixa no carregamento da página
       vid.dataset.src = item.src; vid.muted = true; vid.loop = true;
+      if (item.poster) vid.poster = item.poster;   // capa JPG leve (campo opcional nos dados)
       vid.setAttribute('playsinline',''); vid.preload = 'none';
       vid.width = 260; vid.height = 360;
       media.appendChild(vid);
@@ -3227,7 +3219,7 @@ document.querySelectorAll('.pf-filter-btn').forEach(btn => {
     });
     cfAutoStop();
     setTimeout(() => {
-      cfBuildCarousel(cfActiveFilter === 'all' ? cfAllData : cfAllData.filter(x => x.filterCat === cfActiveFilter));
+      cfBuildCarousel(cfDataFor(cfActiveFilter));
     }, 300);
   });
 });
@@ -3329,7 +3321,7 @@ window.addEventListener('resize', () => {
   const obs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !cfBuilt) {
       cfBuilt = true; obs.disconnect();
-      cfBuildCarousel(cfAllData, false);
+      cfBuildCarousel(cfDataFor('all'), false);
     }
   }, { threshold: 0.3 });
   obs.observe(sec);
@@ -3337,7 +3329,7 @@ window.addEventListener('resize', () => {
   requestAnimationFrame(() => {
     if (cfBuilt) return;
     if (sec.getBoundingClientRect().top < window.innerHeight) {
-      cfBuilt = true; obs.disconnect(); cfBuildCarousel(cfAllData, false);
+      cfBuilt = true; obs.disconnect(); cfBuildCarousel(cfDataFor('all'), false);
     }
   });
 })();
@@ -3376,29 +3368,6 @@ document.querySelectorAll('.service-card').forEach(card => {
     card.style.setProperty('--mouse-y', (e.clientY - r.top)  + 'px');
   });
 });
-
-// ─── HAMBURGER MENU ───────────────────────────────────────────────────────────
-(function() {
-  const hamburger  = document.getElementById('navHamburger');
-  const mobileMenu = document.getElementById('navMobile');
-  if (!hamburger || !mobileMenu) return;
-  function closeMenu() {
-    hamburger.classList.remove('open');
-    hamburger.setAttribute('aria-expanded', 'false');
-    mobileMenu.classList.remove('open');
-    document.body.style.overflow = '';
-  }
-  hamburger.addEventListener('click', () => {
-    const opening = !hamburger.classList.contains('open');
-    hamburger.classList.toggle('open');
-    hamburger.setAttribute('aria-expanded', String(opening));
-    mobileMenu.classList.toggle('open', opening);
-    document.body.style.overflow = opening ? 'hidden' : '';
-  });
-  mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', closeMenu));
-  mobileMenu.addEventListener('click', e => { if (e.target === mobileMenu) closeMenu(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeMenu(); });
-})();
 
 // ─── TIMELINE LINE DRAW ON SCROLL ─────────────────────────────────────────────
 (function () {
