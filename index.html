@@ -141,6 +141,23 @@
   }
   .sb-cta svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .sb-cta:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(227,239,38,0.5); }
+  /* Anel cromático girando ao redor do "Me Contrate": pseudo-elementos
+     mascarados numa faixa fina + brilho difuso. O botão continua lima sólido. */
+  @keyframes sb-ring-spin { to { transform: rotate(360deg); } }
+  .sb-cta::before, .sb-cta::after {
+    content: ''; position: absolute; border-radius: 50%; pointer-events: none;
+    background: conic-gradient(from 0deg, #22D3EE, #E040FB, #FFE62E, #FFFFFF, #22D3EE);
+    animation: sb-ring-spin 4s linear infinite;
+  }
+  .sb-cta::before {   /* faixa de ~2px, um pouco fora do círculo */
+    inset: -5px;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+            mask: radial-gradient(farthest-side, transparent calc(100% - 3px), #000 calc(100% - 2px));
+  }
+  .sb-cta::after {    /* rastro de luz: mesmas cores, desfocado, atrás do botão */
+    inset: -7px; z-index: -1; filter: blur(7px); opacity: 0.55;
+  }
+  @media (prefers-reduced-motion: reduce) { .sb-cta::before, .sb-cta::after { animation: none; } }
   .sb-avatar { width: 38px; height: 38px; border-radius: 50%; object-fit: cover; object-position: center top; border: 2px solid rgba(227,239,38,0.5); display: block; }
   .sb-top { display: none; }   /* barra fina do topo: só no mobile */
   @media (max-width: 900px) {
@@ -1575,11 +1592,17 @@ footer { background: #06231D !important; }
   }
 }
 
-/* ─── PORTFOLIO FILTER BUTTONS ────────────────────────── */
+/* ─── PORTFOLIO FILTER BUTTONS (vidro fosco + brilho lima no ativo) ─── */
 .pf-filters {
+  position: relative; isolation: isolate;
   display: flex; flex-wrap: wrap; gap: clamp(8px,1.5vw,14px);
   justify-content: center; margin-bottom: 36px;
 }
+/* manchas desfocadas atrás da fileira: dão ao vidro algo para refratar sobre o creme liso */
+.pf-blobs { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+.pf-blobs span { position: absolute; border-radius: 50%; filter: blur(48px); }
+.pf-blobs span:nth-child(1) { width: 36%; height: 140%; left: 6%;  top: -20%; background: rgba(227,239,38,0.45); }
+.pf-blobs span:nth-child(2) { width: 38%; height: 140%; right: 4%; top: -10%; background: rgba(82,183,136,0.40); }
 @media (max-width: 480px) {
   .pf-filters {
     flex-wrap: nowrap; overflow-x: auto; justify-content: flex-start;
@@ -1589,21 +1612,22 @@ footer { background: #06231D !important; }
   .pf-filters::-webkit-scrollbar { display: none; }
 }
 .pf-filter-btn {
+  position: relative; z-index: 1;
   font-family: 'Inter', sans-serif;
   font-size: clamp(11px,1.3vw,13px); font-weight: 600; letter-spacing: 0.04em;
   padding: clamp(7px,.8vw,9px) clamp(14px,2vw,22px);
   border-radius: 50px; cursor: pointer; flex-shrink: 0;
-  border: 1px solid rgba(82,183,136,0.4);
-  background: rgba(255,253,238,0.55);
-  backdrop-filter: blur(12px);
-  color: #076653;
-  transition: background 0.25s, border-color 0.25s, box-shadow 0.25s, transform 0.2s;
+  border: 1px solid rgba(45,106,79,0.25);
+  background: rgba(255,255,255,0.35);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+  color: #06231D;
+  transition: background 0.25s, border-color 0.25s, box-shadow 0.35s ease-out, transform 0.2s;
 }
-.pf-filter-btn:hover { background: rgba(82,183,136,0.15); border-color: #52B788; }
+.pf-filter-btn:hover { background: rgba(255,255,255,0.55); border-color: rgba(45,106,79,0.4); }
 .pf-filter-btn.active {
   background: #E3EF26 !important; border-color: #E3EF26 !important;
   color: #06231D !important;
-  box-shadow: 0 4px 16px rgba(227,239,38,0.35);
+  box-shadow: 0 0 0 1px #E3EF26, 0 0 18px rgba(227,239,38,0.55), 0 0 40px rgba(227,239,38,0.3);
   transform: translateY(-2px);
 }
 
@@ -2015,6 +2039,7 @@ body.intro-lock{ overflow:hidden; }
     <h2 class="section-title reveal reveal-delay-1" data-i18n="portfolio.title">Portfólio</h2>
     <!-- Filter buttons -->
     <div class="pf-filters">
+      <div class="pf-blobs" aria-hidden="true"><span></span><span></span></div>
       <button class="pf-filter-btn active" data-filter="all"      data-i18n="filter.all">Todos</button>
       <button class="pf-filter-btn"        data-filter="blender"  data-i18n="filter.blender">Blender</button>
       <button class="pf-filter-btn"        data-filter="esportes" data-i18n="filter.esportes">Esportes</button>
@@ -2815,6 +2840,23 @@ const cfAllData = [
   { type:'video', src:'Chef%20Ale%20Monteiro/01%20ESP.mp4',                        filterCat:'chefale',  catKey:'filter.chefale',  cat:'Chef Ale Monteiro', nameKey:'pf.ch2', name:'Chef Ale Monteiro — Espanhol' },
 ];
 
+// ── Categorias OCULTAS de "Todos" (dados, sem flag por item) ──────────────────
+// Toda categoria listada aqui fica fora de "Todos", da rotação, da sequência
+// prev/next do lightbox em "Todos" e do contador de "Todos". O botão da
+// categoria continua normal e mostra todos os itens dela ao ser clicado.
+// Arquivos novos dessa categoria herdam isso automaticamente.
+const HIDDEN_FROM_ALL = ['cassino'];
+// "Todos" roda em ordem aleatória — embaralhada UMA vez por carregamento da página
+function cfShuffle(arr) {
+  const a = arr.slice();
+  for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+  return a;
+}
+const cfAllOrder = cfShuffle(cfAllData.filter(x => !HIDDEN_FROM_ALL.includes(x.filterCat)));
+function cfDataFor(filter) {
+  return filter === 'all' ? cfAllOrder : cfAllData.filter(x => x.filterCat === filter);
+}
+
 // ── State ─────────────────────────────────────────────────────────────────────
 let cfCurrent      = 0;
 let cfActiveFilter = 'all';
@@ -2966,9 +3008,13 @@ function fanUpdate(ms) {
 function fanUpdateSub() {
   if (!fanSubEl || !cfActiveData.length) return;
   const lang = typeof currentLang !== 'undefined' ? currentLang : 'pt';
+  // Rótulo = FILTRO ativo + total desse filtro. (Antes usava a categoria do card
+  // central com o total geral — daí "BLENDER · 58 WORKS" em "Todos".)
   const item = cfActiveData[cfCurrent];
-  const cat  = (t[lang] && t[lang][item.catKey]) ? t[lang][item.catKey] : item.cat;
-  const text = `${cat} · ${cfActiveData.length} works`;
+  const key  = cfActiveFilter === 'all' ? 'filter.all' : item.catKey;
+  const cat  = (t[lang] && t[lang][key]) ? t[lang][key] : (cfActiveFilter === 'all' ? 'Todos' : item.cat);
+  const unit = lang === 'en' ? 'works' : 'trabalhos';
+  const text = `${cat} · ${cfActiveData.length} ${unit}`;
   if (fanSubEl.textContent === text) return;
   fanSubEl.classList.remove('fan-sub-flip');
   void fanSubEl.offsetWidth;
@@ -3137,7 +3183,7 @@ document.querySelectorAll('.pf-filter-btn').forEach(btn => {
     });
     cfAutoStop();
     setTimeout(() => {
-      cfBuildCarousel(cfActiveFilter === 'all' ? cfAllData : cfAllData.filter(x => x.filterCat === cfActiveFilter));
+      cfBuildCarousel(cfDataFor(cfActiveFilter));
     }, 300);
   });
 });
@@ -3239,7 +3285,7 @@ window.addEventListener('resize', () => {
   const obs = new IntersectionObserver(entries => {
     if (entries[0].isIntersecting && !cfBuilt) {
       cfBuilt = true; obs.disconnect();
-      cfBuildCarousel(cfAllData, false);
+      cfBuildCarousel(cfDataFor('all'), false);
     }
   }, { threshold: 0.3 });
   obs.observe(sec);
@@ -3247,7 +3293,7 @@ window.addEventListener('resize', () => {
   requestAnimationFrame(() => {
     if (cfBuilt) return;
     if (sec.getBoundingClientRect().top < window.innerHeight) {
-      cfBuilt = true; obs.disconnect(); cfBuildCarousel(cfAllData, false);
+      cfBuilt = true; obs.disconnect(); cfBuildCarousel(cfDataFor('all'), false);
     }
   });
 })();
