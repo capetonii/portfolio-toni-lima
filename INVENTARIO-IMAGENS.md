@@ -175,14 +175,23 @@
 
 ---
 
-## Como adicionar novas mídias
+## Como adicionar novas mídias (redesign — out/2026)
 
 1. Coloque o arquivo na pasta da categoria (ou crie uma pasta nova).
-2. Adicione uma entrada em `cfAllData` no `index.html`:
-   `{ type:'image'|'video', src:'pasta/arquivo.ext', filterCat:'<slug>',
-      catKey:'filter.<slug>', cat:'<Nome>', nameKey:'pf.<id>', name:'<Nome>' }`
-3. **Espaços no `src` viram `%20`** (parênteses e vírgulas ficam literais).
-4. Adicione `nameKey` e `catKey` nos objetos `pt` **e** `en` do `const t`.
-   (es/zh/zhs fazem fallback automático para PT — opcional.)
-5. Categoria nova → adicionar também o `<button class="pf-filter-btn" data-filter="<slug>">`.
-6. A mídia é carregada sob demanda por `fanEnsureMedia()` — nada a fazer.
+2. Gere a capa leve `thumbs/<id>.jpg` (maior lado ≤ 960 px) com o ffmpeg local
+   (`F:\artes pessoais\hylo\video e projeto\tools\ffmpeg.exe`):
+   ```
+   ffmpeg -ss 1.2 -i "<arquivo>" -frames:v 1 -vf "scale='if(gt(iw,ih),min(960,iw),-2)':'if(gt(iw,ih),-2,min(960,ih))'" -q:v 5 thumbs/<id>.jpg
+   ```
+   (para imagem, sem o `-ss 1.2`).
+3. Adicione uma entrada no array `MEDIA` do `index.html`:
+   `{ type:'image'|'video', src:'pasta/arquivo.ext', thumb:'thumbs/<id>.jpg', w:<largura>, h:<altura>,
+      filterCat:'<slug>', catKey:'filter.<slug>', cat:'<Nome>', nameKey:'pf.<id>', name:'<Nome>' }`
+   — `w`/`h` = dimensões da capa gerada (definem a proporção na grade, sem corte).
+4. **Espaços no `src` viram `%20`** (parênteses e vírgulas ficam literais).
+5. Adicione `nameKey` (e `catKey`, se novo) nos objetos `pt` **e** `en` do `const t`.
+6. Categoria nova → adicionar `<button type="button" data-filter="<slug>" aria-pressed="false">` em `#filters`.
+7. Para virar destaque: incluir a chave (sem `pf.`) em `FEATURED_ROWS`.
+8. Vídeos só são baixados no hover ou no lightbox — nada a fazer.
+
+> Capas atuais: 58 JPGs em `thumbs/` (~5,2 MB no total), geradas em 09/10/2026.

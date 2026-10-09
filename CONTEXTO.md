@@ -1,5 +1,8 @@
 # TONI LIMA PORTFOLIO — MASTER CONTEXT DOCUMENT
-Version: 1.0 | Last updated: current session
+Version: 2.0 (REDESIGN) | Last updated: 09/10/2026 — branch `redesign`
+
+> O código (`index.html`) é sempre a fonte da verdade. Este documento descreve o
+> estado após o redesign de out/2026.
 
 ---
 
@@ -12,35 +15,33 @@ Version: 1.0 | Last updated: current session
 - Email: josealima.15@gmail.com
 - WhatsApp: +55 (61) 99675-3348
 - Experience: 8+ years in the audiovisual industry
-- Specialties: video editing, motion graphics,
-  visual identity, iGaming banners, thumbnails
+- Projects delivered: 67
+- Specialties: video editing, motion graphics, visual identity, iGaming banners, thumbnails
+
+### Links oficiais (sempre https, target="_blank", rel="noopener noreferrer")
+- LinkedIn: https://www.linkedin.com/in/jos%C3%A9-ant%C3%B4nio-lima-7a75862a3 (texto: linkedin.com/in/josé-antônio-lima)
+- Behance: https://www.behance.net/eduardavesoarto
+- Instagram: https://www.instagram.com/cybertoni.com.br/
+- Portfólio externo: https://tonilimaelesbao.myportfolio.com/work
 
 ---
 
-## 💼 WORK EXPERIENCE
+## 💼 WORK EXPERIENCE (no site: mais recente primeiro)
 
-### LOCENT TECHNOLOGY (iGaming)
-- Role: Senior Graphic Designer
-- Period: October/2022 – present
-- Activities:
-  • Banners for iGaming platforms and social media
-  • Interactive animations for engagement
-  • Institutional and promotional videos
-  • Strategic content aligned with iGaming market
+### SEEDS COMPANY — Set/2025 – presente
+- Graphic Designer — Tráfego Pago & Conversão
 
-### FREELANCER
-- Role: Graphic Designer
-- Period: February/2018 – October/2022
-- Clients:
-  • Los Frango — visual identity + marketing + paid traffic
-  • Bellys Brechó — social media content
-  • Point do Crepe — menus and digital materials
-  • Outthe Clouds — visual identity and communication
-  • Planeta Celular e Lima Imports — artwork and graphics
+### LOCENT TECHNOLOGY (iGaming) — Ago/2024 – Set/2025
+- Senior Graphic Designer · iGaming
+
+### FREELANCER — Fev/2018 – Set/2025
+- Los Frango · Bellys Brechó · Point do Crepe · Outthe Clouds (uma linha só) ·
+  Planeta Celular & Lima Imports · BBC (Boff Boy Chique) · BRDF Energia Solar ·
+  Chef Ale Monteiro | APP COMERBEM LABS
 
 ---
 
-## 🎓 COURSES AND CERTIFICATIONS
+## 🎓 COURSES AND CERTIFICATIONS (ainda NÃO exibidos no site)
 
 - Technical Course in Marketing and Social Media
 - Educational Robotics for Educators
@@ -48,287 +49,168 @@ Version: 1.0 | Last updated: current session
 
 ---
 
-## 🛠️ TECHNICAL SKILLS
+## 🛠️ SKILLS (no site, agrupadas — SEM porcentagens)
 
-- Adobe Photoshop
-- Adobe Illustrator
-- Adobe Premiere Pro
-- Adobe After Effects
-- Banner and promotional material design
-- Motion graphics and animations
-- Photography and image composition
-- Digital tablet
-- Drone Piloting (UAV)
-- Web development (HTML, CSS, JS)
+- a. Software: Photoshop, Illustrator, Premiere Pro, After Effects, Blender
+- b. Ofício: Design de Banners, Motion Graphics, Fotografia & Composição, Pilotagem de Drone (UAV)
+- c. IA aplicada: Manipulação com IA, Programando com IA, Sites com IA
+- d. Áreas de atuação: Identidade visual & branding, iGaming, Thumbnails, Edição de vídeo, Sites
 
 ---
 
-## 🎨 SITE VISUAL IDENTITY — ABSOLUTE RULES
+## 💬 DEPOIMENTOS (todos reais — manter texto, nomes e cargos exatos)
 
-### Color palette (NEVER CHANGE)
-- Main background:   #F5F0E8  (warm beige)
-- Dark green:        #2D6A4F  (primary accent)
-- Medium green:      #52B788  (secondary accent)
-- Primary text:      #1A1A1A
-- Secondary text:    #6B6B6B
-- Glassmorphism:     rgba(255,255,255,0.05)
-- Footer bg:         #1A1A1A
-
-### Typography (NEVER CHANGE)
-- Headings:   Playfair Display (Google Fonts)
-- Body:       Inter (Google Fonts)
-- Hero:       72px | letter-spacing: -0.03em
-- Sections:   48px
-- Subtitle:   24px
-- Body:       16px | line-height: 1.7
+1. Henrique Brandão — Sócio-fundador, Seeds Company (EN: Co-founder, Seeds Company)
+   ⚠️ aguardando aprovação do Henrique antes do merge para produção
+2. Hellen Elesbão — Sócia-fundadora, Seeds Company (EN: Co-founder, Seeds Company)
+3. Ana Monteiro — CEO, Verdura Studio
+4. Cibele Haddad — Diretora de Produto, Archē
 
 ---
 
-## 📐 COMPLETE SITE STRUCTURE
+## 🎨 IDENTIDADE VISUAL (redesign 2026)
 
-### 1. NAVBAR
-- Logo "TONI LIMA" in Playfair Display
-- Links: About | Skills | Portfolio | Experience | Contact
-- PT | EN toggle button (dynamic language switch)
-- "Hire Me" button with green border + fill on hover
-- Behavior: transparent → frosted glass on scroll
-- Active section indicator with animated underline
+A regra antiga "paleta/fontes travadas" foi RELAXADA no redesign, mas a identidade
+continua: verde profundo + acento lima + papel creme + computador retrô 3D + intro.
 
-### 2. HERO
-- Oversized title mixing normal and italic weight
-- Typewriter effect on subtitle
-- Animated "Available for projects" badge
-- Primary button: "View Projects"
-- Secondary button: "WhatsApp me"
-- Floating decorative geometric shapes
-- Soft mouse parallax effect
-- Animated SVG path drawing on screen
-- Aurora effect (animated radial gradient background)
+### Tokens (CSS custom properties em `:root`)
+| Token | Valor | Uso |
+|---|---|---|
+| `--paper` | `#FBF8EE` | fundo principal (creme) |
+| `--paper-2` | `#F2EEDF` | fundo alternado (Sobre, Serviços) |
+| `--ink` | `#0B231D` | texto principal |
+| `--ink-2` | `#3F544D` | texto de apoio (sólido, sem transparência) |
+| `--ink-3` | `#5B6B64` | metadados |
+| `--deep` | `#06231D` | seções escuras, rodapé, botão escuro |
+| `--forest` | `#0C342C` | verde escuro auxiliar |
+| `--green` | `#076653` | acento verde (itálicos, números, linhas) |
+| `--lime` | `#E3EF26` | acento lima — com parcimônia (CTA, "Atual", detalhes no escuro) |
 
-### 3. ABOUT
-- Asymmetric 60/40 layout
-- Real photo: toni lima.jpeg (already integrated)
-- Photo with border-radius 24px and deep shadow
-- Full professional summary
-- Animated counters on scroll enter:
-  • 8+ Years of experience
-  • 50+ Projects delivered
-  • 10+ Clients served
-- "Download CV" button with icon
+- `#DFDBD2` é usado SOMENTE no fundo da intro e da moldura do vídeo do hero.
+- Lima NUNCA como cor de texto sobre fundo claro (contraste insuficiente).
 
-### 4. SKILLS
-- Cards grid with icon + tool name
-- Animated progress bar on scroll enter
-- Green gradient fill (#2D6A4F → #52B788)
-- Tools: Photoshop, Illustrator, Premiere,
-  After Effects, HTML, CSS, JS, Figma
-
-### 5. PORTFOLIO — 3D COVERFLOW CAROUSEL
-- 3 cards visible simultaneously
-- Center card: 260x360px, fully visible
-- Side cards: 200x280px, rotateY 3D, opacity 0.6
-- Far cards: opacity 0.3
-- CSS perspective: 1000px
-- Glowing border on center card:
-  1px solid rgba(82,183,136,0.5)
-- Dark gradient overlay at card base
-- Project name + category in card footer
-- < > arrows with glassmorphism
-- Position dot indicators
-- Mobile swipe support (touch events)
-- Autoplay every 4 seconds (pause on hover)
-- Infinite loop
-- Elegant green/beige gradient placeholders
-- Code comments showing where to swap images
-
-### 6. SERVICES — GLASSMORPHISM CARDS
-- Background: rgba(45, 106, 79, 0.6)
-- Glassmorphism: backdrop-filter blur(16px)
-- Border: 1px solid rgba(82, 183, 136, 0.25)
-- Border-radius: 24px | Padding: 28px
-- Green top line: border-top 2px solid #52B788
-- Glossy 3D icon with green glow (48-56px)
-- Title: white, Playfair Display, bold, 22px
-- Text: white opacity 0.7, Inter, 14px
-- Circular arrow at bottom right (#52B788)
-- Hover: translateY -6px + brighter border +
-  box-shadow 0 20px 60px rgba(45,106,79,0.4)
-
-### 7. EXPERIENCE
-- Vertical timeline with central green line
-- Alternating left/right cards
-- Pulsing green dot on current role
-- Company + role + period + description
-- Scroll entrance animation
-
-### 8. TESTIMONIALS
-- Cards with circular photo, name, role, stars
-- Testimonial text in italic
-- Smooth autoplay carousel
-- Placeholders ready for real testimonials
-
-### 9. CONTACT
-- Animated float label inputs
-- Fields: Name, Email, Service, Message
-- Submit button with animated loading state
-- Direct WhatsApp link: +55 (61) 99675-3348
-- Email: josealima.15@gmail.com
-- Social media icons with colored hover
-
-### 10. FOOTER
-- Dark background: #1A1A1A
-- Green gradient top divider
-- Toni Lima copyright
-- Quick links to sections
-- Social icons
+### Tipografia (Google Fonts)
+- Display/títulos: **Fraunces** (serifa com eixo óptico; itálico leve em verde)
+- Texto: **Inter**
+- Metadados: **JetBrains Mono** (índices "01", datas, categorias — eco da tela
+  `c:\designer\toni_lima` do computador retrô)
 
 ---
 
-## ✨ IMPLEMENTED VISUAL EFFECTS
+## 📐 ESTRUTURA DO SITE (ordem atual)
 
-### Global
-- Custom cursor (smooth trailing circle)
-- Subtle noise texture (SVG filter)
-- Scroll reveal: fade + translateY(30px) via
-  Intersection Observer
-- Blurred light orbs behind sections
-- Subtle dot grid pattern on background
-- Organic SVG wave dividers between sections
-- Section divider: transparent→green→transparent gradient
+1. **NAV** — "Toni Lima." · links · PT / EN · "Me Contrate". Translúcida ao rolar. Mobile: menu em tela cheia verde.
+2. **HERO** — "O que eu crio / fala antes de você ler." (sem efeito de digitação; as palavras
+   entrega/performa/inspira/conecta viraram uma linha estática em mono), apresentação,
+   "Disponível para projetos" discreto, botões Ver Projetos + WhatsApp, vídeo do computador
+   retrô 3D com legenda `c:\designer\toni_lima`.
+3. **01 PORTFÓLIO** — (a) 9 DESTAQUES em linhas justificadas (mesma altura por linha, largura
+   proporcional ao formato real → nada é cortado); (b) ARQUIVO COMPLETO com filtros por categoria
+   (contagem em cada filtro), grade em colunas, prévia de vídeo no hover, lightbox com
+   setas/teclado/swipe. "Todos" mostra 16 itens intercalando categorias + botão "Ver todos (58)".
+4. **02 SOBRE** — foto, textos, 2 números (8+ anos · 67 projetos), faixa tipográfica
+   "Marcas com quem trabalhei" (só nomes reais, sem logos).
+5. **03 HABILIDADES** — seção escura, 4 grupos.
+6. **04 EXPERIÊNCIA** — linhas editoriais (data · empresa/cargo · atividades), mais recente primeiro.
+7. **05 SERVIÇOS** — lista numerada 01–05; clicar pré-seleciona o serviço no formulário.
+8. **06 DEPOIMENTOS** — seção escura, 4 depoimentos em 2 colunas.
+9. **07 CONTATO** — canais diretos (e-mail, WhatsApp, LinkedIn, Behance, Instagram, portfólio
+   externo) + formulário que ABRE O WHATSAPP com a mensagem pronta (nome, serviço, mensagem, e-mail opcional).
+10. **RODAPÉ** — assinatura grande, links, copyright, voltar ao topo.
 
-### Cards
-- Glassmorphism: backdrop-filter blur(20px) saturate(180%)
-- Subtle green rgba borders
-- Green inner glow
-- 3D hover lift with deep shadow
+### Removido no redesign (era decoração, não informação)
+Cursor customizado, barras de porcentagem, faixas "marquee" (as palavras foram para
+"Áreas de atuação"), contadores animados, contadores "10 clientes" e "100% satisfação"
+(removidos a pedido do dono), aurora/partículas/brilhos pulsantes, carrossel em leque,
+ondas SVG, estrelas e avatares de iniciais nos depoimentos, 4 camadas de CSS com `!important`.
+Não existe botão "Download CV" (o documento antigo citava, mas nunca existiu no site).
 
-### Buttons
-- Shimmer (light sweep) on hover
-- Pulsing border glow on primary buttons
-- Colored shadow: green rgba box-shadow
-- Soft internal gradient
+---
 
-### Typography
-- Numbers/stats with subtle green glow
-- Badges with dark background + green border
+## ✨ MOVIMENTO (poucos e intencionais)
+
+- Reveal sutil ao rolar (opacidade + 16px), uma vez só.
+- Prévia de vídeo ao passar o mouse nas peças (só com mouse).
+- Sublinhado animado na navegação e nos filtros.
+- Parallax leve no computador 3D (só mouse).
+- `prefers-reduced-motion`: sem reveal, sem prévias, sem loop do vídeo do hero e SEM intro.
 
 ---
 
 ## 🌐 PT/EN TRANSLATION SYSTEM
 
-- PT | EN toggle in navbar
-- All strings in JSON object in JavaScript
-- Dynamic swap without page reload
-- Preference saved in localStorage
-- Default language: Portuguese
-- ALL new changes must include PT and EN versions
+- Objeto `const t` no JS. **PT e EN completos, paridade obrigatória** (mesmas chaves).
+- ES / 繁中 / 简体 continuam no dicionário mas estão OCULTOS (`LANGS_ON = ['pt','en']`)
+  até a tradução completa. Para reativar: adicionar os botões no seletor e o código em `LANGS_ON`.
+- Atributos: `data-i18n` (texto), `data-i18n-html`, `data-i18n-ph` (placeholder), `data-i18n-aria` (aria-label).
+- Preferência salva em localStorage. Padrão: português.
 
 ---
 
 ## ⚙️ TECHNICAL REQUIREMENTS
 
-- Single file: index.html
-- CSS custom properties (--color-*, --font-*)
-- Vanilla JavaScript (no frameworks)
-- Intersection Observer for scroll animations
-- Mobile-first responsive
-- Google Fonts only (no external CDN)
-- No jQuery, React, Vue or similar
+- Arquivo único: `index.html` (CSS + JS embutidos). Vanilla JS, sem frameworks.
+- Mídias do portfólio: array `MEDIA` (antigo `cfAllData`) com `src` (original, usado no
+  lightbox), `thumb` (JPG leve em `thumbs/`, usado na grade e como capa do vídeo) e `w/h` reais.
+- Destaques: `FEATURED_ROWS` (chaves sem o prefixo `pf.`).
+- Nenhum vídeo do portfólio é baixado até o visitante passar o mouse ou abrir o lightbox.
+- Capas geradas com o ffmpeg local: `F:\artes pessoais\hylo\video e projeto\tools\ffmpeg.exe`.
+- Ver `INVENTARIO-IMAGENS.md` → "Como adicionar novas mídias".
 
 ---
 
 ## 📋 RULES FOR NEXT SESSIONS
 
-1. ALWAYS read this file before any change
-2. NEVER change colors, fonts or base structure
-3. ALWAYS maintain responsiveness
-4. ALWAYS add PT and EN versions for new text
-5. NEVER create separate files (everything in index.html)
-6. ALWAYS test hover, animations and mobile before finishing
-7. When adding new section, follow existing visual pattern
+1. ALWAYS read this file before any change.
+2. Redesign: trabalhar SÓ no branch `redesign`; produção (`main`) só muda quando o dono disser "merge".
+3. NUNCA apagar informação do site sem perguntar ao dono.
+4. ALWAYS add PT and EN versions for new text.
+5. NEVER create separate CSS/JS files (everything in index.html). Pastas de mídia são permitidas.
+6. ALWAYS test desktop + mobile (390px), filtros, lightbox, PT/EN e 404 antes de finalizar.
+7. Depoimentos são reais — manter texto, nomes e cargos exatos.
 
 ---
 
 ## 🚧 PLANNED IMPROVEMENTS
 
-- [ ] Add real project images to the carousel
-- [ ] Fill testimonials with real client reviews
-- [ ] Add more projects to the portfolio
-- [ ] Create individual project page (modal or new page)
-- [ ] Integrate contact form with backend or EmailJS
-- [ ] Add custom favicon
-- [ ] Optimize performance (lazy loading on images)
-- [ ] Add complete SEO meta tags
-- [ ] Create optional dark mode
+- [ ] Títulos reais nas peças (hoje muitos são genéricos: "Cassino 08", "Odontologia 02")
+- [ ] Traduzir ES / 繁中 / 简体 por completo e reativar no seletor
+- [ ] Recomprimir vídeos muito pesados (tour_solar_BRDF ~99 MB, Chef Ale ~85 MB cada)
+- [ ] Renomear arquivos com nomes de ferramenta ("ChatGPT Image…", "Gemini_Generated…")
+- [ ] Considerar exibir os cursos/certificações
+- [ ] SEO: og:image dedicada (hoje usa o poster do hero), canonical
 
 ---
 
 ## 🎬 INTRO / TELA DE ABERTURA (recurso opcional e reversível)
 
-Overlay em tela cheia que toca um vídeo ao abrir o site, começa mudo (com botão
-de som), e some com fade quando o vídeo termina. É uma ADIÇÃO isolada — o site
-funciona 100% com ela desligada ou removida.
+Overlay em tela cheia que toca um vídeo ao abrir o site, começa mudo (com botão de som
+PT/EN) e some com fade após ~3,3 s. O site funciona 100% com ela desligada.
+Visitantes com "reduzir movimento" ativado no sistema entram direto (sem intro).
 
-- Vídeo: `imagem inicial/Retro_computer_idle_animation_202606191622.mp4` (~10s)
-  - No HTML o caminho usa `%20` nos espaços: `imagem%20inicial/...`
-  - A pasta `imagem inicial/` precisa ir junto no commit/deploy (senão dá 404 →
-    a rede de segurança revela o site mesmo assim).
-- Tudo vive em 3 blocos marcados em `index.html`:
+- Vídeo: `imagem inicial/Retro_computer_character after 2.mp4` (~3,2 s)
+  - Poster: `imagem inicial/intro-poster.jpg`
+  - No HTML os espaços viram `%20`.
+- Blocos marcados em `index.html`:
   - HTML: `<!-- INTRO START -->` … `<!-- INTRO END -->` (logo após `<body>`)
   - CSS:  `/* INTRO START */` … `/* INTRO END */` (no fim do `<style>`)
   - JS:   `/* INTRO START */` … `/* INTRO END */` (no fim do `<script>`)
 
-### Como DESLIGAR (mantendo o código)
-No bloco JS da intro, troque o interruptor:
-`const INTRO_ENABLED = true;`  →  `const INTRO_ENABLED = false;`
-O overlay nasce `display:none`; com o interruptor em false ele nunca aparece e o
-site abre direto. Nada mais precisa ser mexido.
+### Como DESLIGAR
+`const INTRO_ENABLED = true;` → `false` no bloco JS da intro.
 
 ### Como REMOVER de vez
-Apague os 3 blocos entre os marcadores `INTRO START`/`INTRO END` (HTML, CSS e JS).
-Opcionalmente, apague a pasta `imagem inicial/`. O site continua idêntico.
+Apagar os 3 blocos entre os marcadores (e, opcionalmente, a pasta `imagem inicial/`).
 
-### Trocar enquadramento do vídeo
-No CSS `.intro-video`, a propriedade `object-fit: contain` (mostra o vídeo
-inteiro, centralizado, sem cortes — pode deixar faixas) pode virar `cover`
-(preenche a tela, mas corta as bordas). É a única linha a mudar.
-
-O fundo do overlay e das faixas é `#DFDBD2` (bege claro amostrado do próprio
-fundo do vídeo), para as faixas ficarem imperceptíveis e o vídeo parecer
-flutuando centralizado.
-
-Observação: `#DFDBD2` é usado SOMENTE no fundo da intro — não faz parte da paleta
-do site (que permanece inalterada).
+### Enquadramento
+`.intro-video { object-fit: contain }` → `cover` para preencher cortando as bordas.
 
 ---
 
-## 🎥 VÍDEO 3D NO CABEÇALHO (hero) — reversível
+## 🎥 VÍDEO 3D NO CABEÇALHO (hero)
 
-O objeto decorativo SVG do hero (grade + curvas, à direita do título) foi
-SUBSTITUÍDO por um vídeo em loop, na MESMA posição. É reversível.
-
-- Vídeo: `video 3d cabeçario/video para o cabeçario.mp4` (760×600, ~19 MB)
-  - No HTML o caminho é codificado: `video%203d%20cabe%C3%A7ario/...`
-  - Poster (1º frame): `video 3d cabeçario/poster.jpg`
-  - A pasta `video 3d cabeçario/` (vídeo + poster) precisa ir junto no commit/deploy.
-- Atributos: `muted autoplay loop playsinline preload="metadata"`.
-- O container `.hero-video-wrap` usa `aspect-ratio: 760/600` e o vídeo usa
-  `object-fit: contain` → mostra o quadro INTEIRO, sem cortar e sem distorcer.
-  `background: transparent` → objeto flutuando, sem card/borda.
-- Responsivo: mesma regra do elemento antigo (420px no desktop, 280px no mobile).
-- O parallax do mouse continua agindo sobre `#hero-visual` (intocado).
-
-### Marcadores
-- HTML: `<!-- HERO VIDEO START -->` … `<!-- HERO VIDEO END -->` (dentro de `#hero-visual`)
-- CSS:  `/* HERO VIDEO START */` … `/* HERO VIDEO END */` (logo após `.hero-svg`)
-- JS: nenhuma alteração foi necessária.
-
-### Como VOLTAR ao objeto decorativo antigo
-Dentro de `<!-- HERO VIDEO START/END -->` no HTML: descomente o bloco
-`<div class="hero-svg-wrap">…</div>` (que está logo acima do vídeo) e apague o
-`<div class="hero-video-wrap">…</div>`. A CSS antiga do SVG foi mantida intacta,
-então o original volta a funcionar na hora. (Opcional: apagar o bloco CSS
-`/* HERO VIDEO START/END */` e a pasta `video 3d cabeçario/`.)
-
-Nota de performance: o vídeo tem ~19 MB e fica acima da dobra (autoplay) → pode
-reduzir um pouco a nota de Performance até ser recomprimido.
+- Vídeo: `video 3d cabeçario/video para o cabeçario.mp4` (760×600, ~19 MB) + `poster.jpg`.
+- Só começa a baixar após o `load` da página e quando está visível (LCP = poster).
+- Moldura `.hero-video-wrap` com `aspect-ratio: 760/600`, fundo `#DFDBD2`, `object-fit: contain`.
+- Marcadores: HTML `<!-- HERO VIDEO START/END -->`, CSS e JS `/* HERO VIDEO START/END */`.
+- O antigo objeto SVG decorativo saiu no redesign (continua no histórico do git, branch `main`).
